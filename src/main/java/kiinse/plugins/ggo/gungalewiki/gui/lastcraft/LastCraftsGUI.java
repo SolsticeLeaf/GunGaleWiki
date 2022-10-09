@@ -1,20 +1,22 @@
-package kiinse.plugins.ggo.gungalewiki.gui.bookmarks;
+package kiinse.plugins.ggo.gungalewiki.gui.lastcraft;
 
 import kiinse.plugins.ggo.darkwaterapi.api.DarkWaterJavaPlugin;
 import kiinse.plugins.ggo.darkwaterapi.core.gui.DarkGUI;
+import kiinse.plugins.ggo.gungalewiki.database.interfaces.PluginData;
 import kiinse.plugins.ggo.gungalewiki.gui.GUIData;
 import kiinse.plugins.ggo.gungalewiki.gui.items.BackItem;
+import kiinse.plugins.ggo.gungalewiki.gui.items.CustomItem;
 import org.jetbrains.annotations.NotNull;
 
-public class BookmarksGUI extends DarkGUI {
+public class LastCraftsGUI extends DarkGUI {
 
     private final GUIData guiData;
-    public final int page;
+    private final PluginData pluginData;
 
-    public BookmarksGUI(@NotNull GUIData guiData, int page) {
+    public LastCraftsGUI(@NotNull GUIData guiData) {
         super(guiData.getGunGaleWiki());
         this.guiData = guiData;
-        this.page = page;
+        this.pluginData = guiData.getGunGaleWiki().getPluginData();
     }
 
     @Override
@@ -23,5 +25,10 @@ public class BookmarksGUI extends DarkGUI {
             delete();
             guiData.getPrevGui().open(player);
         })));
+
+        int pos = 9;
+        for (var item : pluginData.getPlayerLastSeen(guiData.getPlayer())) {
+            setItem(new CustomItem(item, pos, pluginData, new GUIData(guiData.getPlayer(), guiData.getGunGaleWiki(), this)));
+        }
     }
 }

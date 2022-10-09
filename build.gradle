@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'kiinse.plugins.ggo'
-version = '1.0.0-alpha.1'
+version = '1.0.0-alpha.2'
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -19,11 +19,11 @@ repositories {
 dependencies {
     implementation 'org.json:json:20220924'
     implementation 'org.jetbrains:annotations:23.0.0'
-
+    implementation 'com.zaxxer:HikariCP:5.0.1'
+    implementation 'com.github.LoneDev6:API-ItemsAdder:3.2.3-r8'
 
     compileOnly 'kiinse.plugins.ggo.darkwaterapi:darkwater-core:3.1.4'
     compileOnly 'org.purpurmc.purpur:purpur-api:1.19.2-R0.1-SNAPSHOT'
-    compileOnly 'dev.lone:api-itemsadder:3.2.3-r8'
 }
 
 tasks.withType(Jar) {

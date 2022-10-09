@@ -5,6 +5,12 @@ import kiinse.plugins.ggo.darkwaterapi.api.files.messages.MessagesUtils;
 import kiinse.plugins.ggo.darkwaterapi.api.utilities.ItemStackUtils;
 import kiinse.plugins.ggo.darkwaterapi.core.files.messages.DarkMessagesUtils;
 import kiinse.plugins.ggo.darkwaterapi.core.utilities.DarkItemUtils;
+import kiinse.plugins.ggo.gungalewiki.database.DataUtils;
+import kiinse.plugins.ggo.gungalewiki.database.Database;
+import kiinse.plugins.ggo.gungalewiki.database.interfaces.HikariDatabase;
+import kiinse.plugins.ggo.gungalewiki.database.interfaces.PluginData;
+import kiinse.plugins.ggo.gungalewiki.database.utils.DatabaseSettings;
+import kiinse.plugins.ggo.gungalewiki.enums.Config;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.ButtonsData;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.interfaces.FiltersButtons;
 import org.jetbrains.annotations.NotNull;
@@ -12,6 +18,8 @@ import org.jetbrains.annotations.NotNull;
 public final class GunGaleWiki extends DarkWaterJavaPlugin {
 
     private static GunGaleWiki instance;
+    private HikariDatabase database;
+    private PluginData pluginData;
     private FiltersButtons buttons;
     private ItemStackUtils itemStackUtils;
     private MessagesUtils messagesUtils;
@@ -19,6 +27,14 @@ public final class GunGaleWiki extends DarkWaterJavaPlugin {
     @Override
     public void onStart() throws Exception {
         instance = this;
+        var config = getConfiguration();
+        this.database = new Database(this, new DatabaseSettings()
+                .setHost(config.getString(Config.DB_HOST))
+                .setPort(config.getString(Config.DB_PORT))
+                .setDbName(config.getString(Config.DB_NAME))
+                .setLogin(config.getString(Config.DB_LOGIN))
+                .setPassword(config.getString(Config.DB_PASSWORD)));
+        this.pluginData = new DataUtils(database.getConnection(), this).loadFromDB();
         buttons = new ButtonsData(this).load();
         itemStackUtils = new DarkItemUtils(this);
         messagesUtils = new DarkMessagesUtils(this);
@@ -26,7 +42,12 @@ public final class GunGaleWiki extends DarkWaterJavaPlugin {
 
     @Override
     public void onStop() throws Exception {
+        pluginData.saveToDB();
+        database.closeConnection();
+    }
 
+    public @NotNull PluginData getPluginData() {
+        return pluginData;
     }
 
     public @NotNull FiltersButtons getFilterButtons() {

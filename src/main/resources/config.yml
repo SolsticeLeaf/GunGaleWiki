@@ -7,4 +7,11 @@ button.categories:
 button.nextpage:
 button.prevpage:
 
+
+db.host: localhost
+db.port: 3307
+db.name: gungalewiki
+db.login: mysql
+db.password: mysql
+
 config.version: 1

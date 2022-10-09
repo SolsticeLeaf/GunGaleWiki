@@ -3,25 +3,29 @@ package kiinse.plugins.ggo.gungalewiki.gui.items;
 import kiinse.plugins.ggo.darkwaterapi.api.DarkWaterJavaPlugin;
 import kiinse.plugins.ggo.darkwaterapi.api.gui.GuiAction;
 import kiinse.plugins.ggo.darkwaterapi.api.gui.GuiItem;
+import kiinse.plugins.ggo.darkwaterapi.core.gui.DarkGUI;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class BackItem implements GuiItem {
 
-    private final DarkWaterJavaPlugin plugin;
+    private final GuiAction action;
+    private final int slot;
 
-    public BackItem(@NotNull DarkWaterJavaPlugin plugin) {
-        this.plugin = plugin;
+    public BackItem(int slot, @NotNull GuiAction action) {
+        this.slot = slot;
+        this.action = action;
     }
 
     @Override
     public int slot() {
-        return 0;
+        return slot;
     }
 
     @Override
     public @NotNull ItemStack itemStack() {
         return null;
+        //TODO: Ну тут да
     }
 
     @Override
@@ -31,6 +35,6 @@ public class BackItem implements GuiItem {
 
     @Override
     public @NotNull GuiAction action() {
-        return null;
+        return action;
     }
 }

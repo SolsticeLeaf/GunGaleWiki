@@ -1,17 +1,17 @@
 package kiinse.plugins.ggo.gungalewiki.gui.items;
 
-import kiinse.plugins.ggo.darkwaterapi.api.DarkWaterJavaPlugin;
 import kiinse.plugins.ggo.darkwaterapi.api.gui.GuiAction;
 import kiinse.plugins.ggo.darkwaterapi.api.gui.GuiItem;
+import kiinse.plugins.ggo.gungalewiki.gui.GUIData;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class BookmarkItem implements GuiItem {
 
-    private final DarkWaterJavaPlugin plugin;
+    private final GUIData guiData;
 
-    public BookmarkItem(@NotNull DarkWaterJavaPlugin plugin) {
-        this.plugin = plugin;
+    public BookmarkItem(@NotNull GUIData guiData) {
+        this.guiData = guiData;
     }
 
     @Override

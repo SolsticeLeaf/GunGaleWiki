@@ -1,27 +1,21 @@
-package kiinse.plugins.ggo.gungalewiki.gui.bookmarks;
+package kiinse.plugins.ggo.gungalewiki.gui.craft;
 
 import kiinse.plugins.ggo.darkwaterapi.api.DarkWaterJavaPlugin;
 import kiinse.plugins.ggo.darkwaterapi.core.gui.DarkGUI;
 import kiinse.plugins.ggo.gungalewiki.gui.GUIData;
-import kiinse.plugins.ggo.gungalewiki.gui.items.BackItem;
 import org.jetbrains.annotations.NotNull;
 
-public class BookmarksGUI extends DarkGUI {
+public class ThisItemCraftGUI extends DarkGUI {
 
     private final GUIData guiData;
-    public final int page;
 
-    public BookmarksGUI(@NotNull GUIData guiData, int page) {
+    public ThisItemCraftGUI(@NotNull GUIData guiData) {
         super(guiData.getGunGaleWiki());
         this.guiData = guiData;
-        this.page = page;
     }
 
     @Override
     protected void inventory(@NotNull DarkWaterJavaPlugin darkWaterJavaPlugin) {
-        setItem(new BackItem(49, ((clickType, player) -> {
-            delete();
-            guiData.getPrevGui().open(player);
-        })));
+
     }
 }

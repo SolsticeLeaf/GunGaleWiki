@@ -11,7 +11,7 @@ public class MainGUI extends DarkGUI {
     // 53 slots
     private final Player player;
 
-    protected MainGUI(@NotNull DarkWaterJavaPlugin plugin, @NotNull Player player) {
+    public MainGUI(@NotNull DarkWaterJavaPlugin plugin, @NotNull Player player) {
         super(plugin);
         this.player = player;
     }
@@ -19,6 +19,5 @@ public class MainGUI extends DarkGUI {
     @Override
     protected void inventory(@NotNull DarkWaterJavaPlugin darkWaterJavaPlugin) {
         setItem(new PlayerHead(player));
-
     }
 }

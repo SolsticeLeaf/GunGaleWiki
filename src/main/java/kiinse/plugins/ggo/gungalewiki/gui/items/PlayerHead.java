@@ -37,6 +37,6 @@ public class PlayerHead implements GuiItem {
 
     @Override
     public @NotNull GuiAction action() {
-        return player -> {};
+        return (type, player) -> {};
     }
 }

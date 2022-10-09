@@ -9,5 +9,10 @@ public enum Config implements YamlKeys {
     BUTTON_BOOKMARKS,
     BUTTON_CATEGORIES,
     BUTTON_NEXTPAGE,
-    BUTTON_PREVPAGE
+    BUTTON_PREVPAGE,
+    DB_HOST,
+    DB_PORT,
+    DB_LOGIN,
+    DB_PASSWORD,
+    DB_NAME
 }
