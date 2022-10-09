@@ -1,0 +1,10 @@
+player.head.cmd: 00000
+
+button.back:
+button.lastcrafts:
+button.bookmarks:
+button.categories:
+button.nextpage:
+button.prevpage:
+
+config.version: 1

@@ -1,0 +1,29 @@
+name: GunGaleWiki
+version: '${version}'
+main: kiinse.plugins.ggo.gungalewiki.GunGaleWiki
+api-version: 1.19
+prefix: GGW
+depend: [ GGODarkWaterAPI, ItemsAdder ]
+authors: [ kiinse ]
+commands:
+  recipes:
+    description: Opens recipes menu
+    permission: gungalewiki.menu
+    usage: /<command>
+  craft:
+    description: Opens recipes menu
+    permission: gungalewiki.menu
+    usage: /<command>
+  crafts:
+    description: Opens recipes menu
+    permission: gungalewiki.menu
+    usage: /<command>
+permissions:
+  gungalewiki.menu:
+    description: Allows /recipes, /craft, /crafts commands
+    default: op
+  gungalewiki.*:
+    description: All perms
+    default: op
+    children:
+      gungalewiki.menu: true

@@ -1,0 +1,14 @@
+package kiinse.plugins.ggo.gungalewiki.files.buttons.interfaces;
+
+import kiinse.plugins.ggo.gungalewiki.enums.Button;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+
+public interface FiltersButtons {
+
+    FiltersButtons load() throws IOException, InvalidConfigurationException;
+
+    @NotNull FiltersButton getButton(@NotNull Button button);
+}
