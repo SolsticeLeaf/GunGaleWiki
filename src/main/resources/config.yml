@@ -1,17 +1,36 @@
-player.head.cmd: 00000
+player.head.cmd: 0 # CustomModelData головы на главной странице
 
-button.back:
-button.lastcrafts:
-button.bookmarks:
-button.categories:
-button.nextpage:
-button.prevpage:
+button.back.material: YELLOW_STAINED_GLASS_PANE # Материал кнопки назад
+button.back.cmd: 0 # CustomModelData кнопки назад
 
+button.lastcrafts.material: GREEN_STAINED_GLASS_PANE # Материал кнопки последних просмотренных крафтов
+button.lastcrafts.cmd: 0 # CustomModelData кнопки последних просмотренных крафтов
 
+button.bookmarks.material: GREEN_STAINED_GLASS_PANE # Материал кнопки закладок
+button.bookmarks.cmd: 0 # CustomModelData кнопки закладок
+
+button.nextpage.material: BLUE_STAINED_GLASS_PANE # Материал кнопки следующей страницы
+button.nextpage.cmd: 0 # CustomModelData кнопки следующей страницы
+
+button.prevpage.material: BLUE_STAINED_GLASS_PANE # Материал кнопки предыдущей страницы
+button.prevpage.cmd: 0 # CustomModelData кнопки предыдущей страницы
+
+button.home.material: RED_STAINED_GLASS_PANE # Материал кнопки домой
+button.home.cmd: 0 # CustomModelData кнопки домой
+
+menu.lastcraft.name: last crafts # Название меню с последними крафтами
+menu.main.name: Main # Название главного меню
+menu.fromitem.name: Crafts from this item # Название меню с просмотром того, что делается из выбранного предмета
+menu.thisitem.name: This item craft # Название меню с крафтом выбранного предмета
+menu.bookmarks.name: Bookmarks # Название меню закладок
+
+# Данные подключения к бд
 db.host: localhost
 db.port: 3307
 db.name: gungalewiki
-db.login: mysql
-db.password: mysql
+db.login: mariadb
+db.password: mariadb
 
+
+# Версия конфига, не трогать, моё!
 config.version: 1

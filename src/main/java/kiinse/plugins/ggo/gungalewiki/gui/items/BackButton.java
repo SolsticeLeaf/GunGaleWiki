@@ -1,27 +1,30 @@
 package kiinse.plugins.ggo.gungalewiki.gui.items;
 
+import kiinse.plugins.ggo.darkwaterapi.api.DarkWaterJavaPlugin;
 import kiinse.plugins.ggo.darkwaterapi.api.gui.GuiAction;
 import kiinse.plugins.ggo.darkwaterapi.api.gui.GuiItem;
-import kiinse.plugins.ggo.gungalewiki.gui.GUIData;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class PrevPageItem implements GuiItem {
+public class BackButton implements GuiItem {
 
-    private final GUIData guiData;
+    private final GuiAction action;
+    private final int slot;
 
-    public PrevPageItem(@NotNull GUIData guiData) {
-        this.guiData = guiData;
+    public BackButton(int slot, @NotNull GuiAction action) {
+        this.slot = slot;
+        this.action = action;
     }
 
     @Override
     public int slot() {
-        return 0;
+        return slot;
     }
 
     @Override
     public @NotNull ItemStack itemStack() {
         return null;
+        //TODO: Ну тут да
     }
 
     @Override
@@ -31,6 +34,6 @@ public class PrevPageItem implements GuiItem {
 
     @Override
     public @NotNull GuiAction action() {
-        return null;
+        return action;
     }
 }

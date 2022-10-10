@@ -1,5 +1,8 @@
-button.name: button2
+button.material: GREEN_STAINED_GLASS_PANE # Материал кнопки
+button.cmd: 0 # CustomModelData кнопки
+menu.name: Filter 2 # Название меню фильтра
 
+# Предметы фильтра
 button.items:
   - item1
   - item2

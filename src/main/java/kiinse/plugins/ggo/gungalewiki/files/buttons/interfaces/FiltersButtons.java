@@ -1,5 +1,6 @@
 package kiinse.plugins.ggo.gungalewiki.files.buttons.interfaces;
 
+import kiinse.plugins.ggo.darkwaterapi.api.files.locale.PlayerLocale;
 import kiinse.plugins.ggo.gungalewiki.enums.Button;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.jetbrains.annotations.NotNull;
@@ -10,5 +11,5 @@ public interface FiltersButtons {
 
     FiltersButtons load() throws IOException, InvalidConfigurationException;
 
-    @NotNull FiltersButton getButton(@NotNull Button button);
+    @NotNull FiltersButton getButton(@NotNull Button button, @NotNull PlayerLocale playerLocale);
 }

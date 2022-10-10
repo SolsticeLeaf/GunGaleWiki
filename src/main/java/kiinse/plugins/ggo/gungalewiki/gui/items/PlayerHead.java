@@ -25,9 +25,10 @@ public class PlayerHead implements GuiItem {
     @Override
     public @NotNull ItemStack itemStack() {
         var ggw = GunGaleWiki.getInstance();
-        var head = ggw.getItemStackUtils().getPlayerHead(usedPlayer);
-        head.setCustomModelData(ggw.getConfiguration().getInt(Config.PLAYER_HEAD_CMD));
-        return head;
+        return ggw.getItemStackUtils().getPlayerHead(usedPlayer, skullMeta -> {
+            var cmd = ggw.getConfiguration().getInt(Config.PLAYER_HEAD_CMD);
+            if (cmd != 0) skullMeta.setCustomModelData(cmd);
+        });
     }
 
     @Override

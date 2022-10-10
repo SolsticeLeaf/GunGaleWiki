@@ -19,7 +19,7 @@ public class Database implements HikariDatabase {
         this.plugin = plugin;
         plugin.sendLog("Connecting to database...");
         try (var ds = new HikariDataSource()) {
-            ds.setJdbcUrl("jdbc:mysql://" + settings.getHost() + ":" + settings.getPort() + "/" + settings.getDbName());
+            ds.setJdbcUrl("jdbc:mariadb://" + settings.getHost() + ":" + settings.getPort() + "/" + settings.getDbName());
             ds.setUsername(settings.getLogin());
             ds.setPassword(settings.getPassword());
             ds.getConnection();
@@ -48,7 +48,7 @@ public class Database implements HikariDatabase {
             source.close();
             plugin.sendLog("Database connection closed");
         } else {
-            plugin.sendLog(Level.WARNING, "Database connection alredy closed");
+            plugin.sendLog(Level.WARNING, "Database connection already closed");
         }
         return this;
     }

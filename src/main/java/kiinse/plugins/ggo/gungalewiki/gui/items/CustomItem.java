@@ -3,11 +3,14 @@ package kiinse.plugins.ggo.gungalewiki.gui.items;
 import dev.lone.itemsadder.api.CustomStack;
 import kiinse.plugins.ggo.darkwaterapi.api.gui.GuiAction;
 import kiinse.plugins.ggo.darkwaterapi.api.gui.GuiItem;
+import kiinse.plugins.ggo.darkwaterapi.core.gui.DarkGUI;
 import kiinse.plugins.ggo.darkwaterapi.core.utilities.DarkPlayerUtils;
+import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.database.interfaces.PluginData;
-import kiinse.plugins.ggo.gungalewiki.gui.GUIData;
-import kiinse.plugins.ggo.gungalewiki.gui.craft.FromThisItemCraftGUI;
-import kiinse.plugins.ggo.gungalewiki.gui.craft.ThisItemCraftGUI;
+import kiinse.plugins.ggo.gungalewiki.enums.Config;
+import kiinse.plugins.ggo.gungalewiki.gui.menus.BookMarksGUI;
+import kiinse.plugins.ggo.gungalewiki.gui.menus.FromThisItemCraftGUI;
+import kiinse.plugins.ggo.gungalewiki.gui.menus.ThisItemCraftGUI;
 import org.bukkit.Sound;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
@@ -18,15 +21,15 @@ public class CustomItem implements GuiItem {
     private final String item;
     private final CustomStack customStack;
     private final PluginData pluginData;
-    private final GUIData prevGui;
+    private final DarkGUI fromGui;
     private final int pos;
 
-    public CustomItem(@NotNull String item, int pos, @NotNull PluginData pluginData, @NotNull GUIData prevGui) {
+    public CustomItem(@NotNull String item, int pos, @NotNull PluginData pluginData, @NotNull DarkGUI fromGui) {
         this.customStack = CustomStack.getInstance(item);
         this.item = item;
         this.pos = pos;
         this.pluginData = pluginData;
-        this.prevGui = prevGui;
+        this.fromGui = fromGui;
     }
 
     @Override
@@ -48,18 +51,34 @@ public class CustomItem implements GuiItem {
     public @NotNull GuiAction action() {
         return (clickType, player) -> {
             if (clickType == ClickType.SHIFT_LEFT) {
-                pluginData.addToPlayerBookmarks(player, item);
-                DarkPlayerUtils.playSound(player, Sound.BLOCK_AMETHYST_BLOCK_CHIME);
+                if (pluginData.hasPlayerItemInBookmarks(player, item)) {
+                    pluginData.removeFromPlayerBookmarks(player, item);
+                } else {
+                    pluginData.addToPlayerBookmarks(player, item);
+                }
+                // TODO: Добавить оповещение игрока
+                if (fromGui instanceof BookMarksGUI prev) {
+                    prev.delete();
+                    prev.open(player);
+                }
                 return;
             }
+            var gunGaleWiki = GunGaleWiki.getInstance();
+            var config = gunGaleWiki.getConfiguration();
             if (clickType == ClickType.LEFT) {
-                prevGui.getPrevGui().delete();
-                new ThisItemCraftGUI(prevGui).open(player);
+                fromGui.delete();
+                new ThisItemCraftGUI(gunGaleWiki, player, itemStack())
+                        .setName(config.getString(Config.MENU_THISITEM_NAME))
+                        .setSize(53)
+                        .open(player);
                 return;
             }
             if (clickType == ClickType.RIGHT) {
-                prevGui.getPrevGui().delete();
-                new FromThisItemCraftGUI(prevGui).open(player);
+                fromGui.delete();
+                new FromThisItemCraftGUI(gunGaleWiki, player, itemStack())
+                        .setName(config.getString(Config.MENU_FROMITEM_NAME))
+                        .setSize(53)
+                        .open(player);
             }
         };
     }
