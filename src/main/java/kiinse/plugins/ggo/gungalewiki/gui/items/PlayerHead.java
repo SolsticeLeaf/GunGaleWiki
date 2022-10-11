@@ -1,8 +1,8 @@
 package kiinse.plugins.ggo.gungalewiki.gui.items;
 
-import kiinse.plugins.ggo.darkwaterapi.api.gui.GuiAction;
-import kiinse.plugins.ggo.darkwaterapi.api.gui.GuiItem;
-import kiinse.plugins.ggo.darkwaterapi.core.utilities.DarkPlayerUtils;
+import kiinse.plugins.ggo.gungaleapi.api.gui.GuiAction;
+import kiinse.plugins.ggo.gungaleapi.api.gui.GuiItem;
+import kiinse.plugins.ggo.gungaleapi.core.utilities.DarkPlayerUtils;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.enums.Config;
 import org.bukkit.entity.Player;

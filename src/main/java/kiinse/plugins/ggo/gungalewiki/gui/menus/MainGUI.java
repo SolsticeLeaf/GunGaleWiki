@@ -1,7 +1,7 @@
 package kiinse.plugins.ggo.gungalewiki.gui.menus;
 
-import kiinse.plugins.ggo.darkwaterapi.api.DarkWaterJavaPlugin;
-import kiinse.plugins.ggo.darkwaterapi.core.gui.DarkGUI;
+import kiinse.plugins.ggo.gungaleapi.api.GunGaleJavaPlugin;
+import kiinse.plugins.ggo.gungaleapi.core.gui.DarkGUI;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.enums.Button;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.interfaces.FiltersButtons;
@@ -36,7 +36,7 @@ public class MainGUI extends DarkGUI {
     }
 
     @Override
-    protected void inventory(@NotNull DarkWaterJavaPlugin darkWaterJavaPlugin) {
+    protected void inventory(@NotNull GunGaleJavaPlugin darkWaterJavaPlugin) {
         setItem(new PlayerHead(player));
         for (var pos : new int[] {0, 1, 2, 9, 10, 11}) {
             setItem(new LastCraftsButton(getPlayerLocale(), gunGaleWiki, this, pos));

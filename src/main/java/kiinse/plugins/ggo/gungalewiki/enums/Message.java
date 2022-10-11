@@ -1,6 +1,6 @@
 package kiinse.plugins.ggo.gungalewiki.enums;
 
-import kiinse.plugins.ggo.darkwaterapi.api.files.messages.MessagesKeys;
+import kiinse.plugins.ggo.gungaleapi.api.files.messages.MessagesKeys;
 
 public enum Message implements MessagesKeys {
     BUTTON_BACK_NAME,

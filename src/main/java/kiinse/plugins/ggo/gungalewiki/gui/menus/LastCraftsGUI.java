@@ -1,7 +1,7 @@
 package kiinse.plugins.ggo.gungalewiki.gui.menus;
 
-import kiinse.plugins.ggo.darkwaterapi.api.DarkWaterJavaPlugin;
-import kiinse.plugins.ggo.darkwaterapi.core.gui.DarkGUI;
+import kiinse.plugins.ggo.gungaleapi.api.GunGaleJavaPlugin;
+import kiinse.plugins.ggo.gungaleapi.core.gui.DarkGUI;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.database.interfaces.PluginData;
 import kiinse.plugins.ggo.gungalewiki.gui.items.BackButton;
@@ -21,7 +21,7 @@ public class LastCraftsGUI extends DarkGUI {
     }
 
     @Override
-    protected void inventory(@NotNull DarkWaterJavaPlugin darkWaterJavaPlugin) {
+    protected void inventory(@NotNull GunGaleJavaPlugin darkWaterJavaPlugin) {
         setItem(new BackButton(49, ((clickType, player) -> {
             delete();
             //TODO: Сделать открытие предыдущего

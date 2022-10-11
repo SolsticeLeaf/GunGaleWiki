@@ -1,8 +1,7 @@
 package kiinse.plugins.ggo.gungalewiki.gui.items;
 
-import kiinse.plugins.ggo.darkwaterapi.api.DarkWaterJavaPlugin;
-import kiinse.plugins.ggo.darkwaterapi.api.gui.GuiAction;
-import kiinse.plugins.ggo.darkwaterapi.api.gui.GuiItem;
+import kiinse.plugins.ggo.gungaleapi.api.gui.GuiAction;
+import kiinse.plugins.ggo.gungaleapi.api.gui.GuiItem;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 

@@ -1,8 +1,8 @@
 package kiinse.plugins.ggo.gungalewiki.files.buttons;
 
-import kiinse.plugins.ggo.darkwaterapi.api.DarkWaterJavaPlugin;
-import kiinse.plugins.ggo.darkwaterapi.api.files.filemanager.FilesManager;
-import kiinse.plugins.ggo.darkwaterapi.api.files.locale.PlayerLocale;
+import kiinse.plugins.ggo.gungaleapi.api.GunGaleJavaPlugin;
+import kiinse.plugins.ggo.gungaleapi.api.files.filemanager.FilesManager;
+import kiinse.plugins.ggo.gungaleapi.api.files.locale.PlayerLocale;
 import kiinse.plugins.ggo.gungalewiki.enums.Button;
 import kiinse.plugins.ggo.gungalewiki.enums.Directory;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.interfaces.FiltersButton;
@@ -18,9 +18,9 @@ import java.util.HashMap;
 public class ButtonsData extends FilesManager implements FiltersButtons {
 
     private final HashMap<Button, YamlConfiguration> buttons = new HashMap<>();
-    private final DarkWaterJavaPlugin plugin;
+    private final GunGaleJavaPlugin plugin;
 
-    public ButtonsData(@NotNull DarkWaterJavaPlugin plugin) {
+    public ButtonsData(@NotNull GunGaleJavaPlugin plugin) {
         super(plugin);
         this.plugin = plugin;
     }

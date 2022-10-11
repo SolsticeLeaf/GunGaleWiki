@@ -1,6 +1,6 @@
 package kiinse.plugins.ggo.gungalewiki.database;
 
-import kiinse.plugins.ggo.darkwaterapi.api.DarkWaterJavaPlugin;
+import kiinse.plugins.ggo.gungaleapi.api.GunGaleJavaPlugin;
 import kiinse.plugins.ggo.gungalewiki.database.interfaces.PluginData;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -13,9 +13,9 @@ public class DataUtils implements PluginData {
     private final HashMap<UUID, List<String>> bookmarks = new HashMap<>();
     private final HashMap<UUID, List<String>> lastseen = new HashMap<>();
     private final Connection connection;
-    private final DarkWaterJavaPlugin plugin;
+    private final GunGaleJavaPlugin plugin;
 
-    public DataUtils(@NotNull Connection connection, @NotNull DarkWaterJavaPlugin plugin) {
+    public DataUtils(@NotNull Connection connection, @NotNull GunGaleJavaPlugin plugin) {
         this.connection = connection;
         this.plugin = plugin;
     }

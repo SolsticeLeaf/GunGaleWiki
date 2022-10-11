@@ -1,7 +1,7 @@
 package kiinse.plugins.ggo.gungalewiki.gui.menus;
 
-import kiinse.plugins.ggo.darkwaterapi.api.DarkWaterJavaPlugin;
-import kiinse.plugins.ggo.darkwaterapi.core.gui.DarkGUI;
+import kiinse.plugins.ggo.gungaleapi.api.GunGaleJavaPlugin;
+import kiinse.plugins.ggo.gungaleapi.core.gui.DarkGUI;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -21,7 +21,7 @@ public class ThisItemCraftGUI extends DarkGUI {
     }
 
     @Override
-    protected void inventory(@NotNull DarkWaterJavaPlugin darkWaterJavaPlugin) {
+    protected void inventory(@NotNull GunGaleJavaPlugin darkWaterJavaPlugin) {
         //TODO: Нахимичить проверку на вид рецепта, ибо может быть рецепт в печке
     }
 }

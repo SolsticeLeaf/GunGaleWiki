@@ -1,8 +1,8 @@
 package kiinse.plugins.ggo.gungalewiki.files.buttons;
 
-import kiinse.plugins.ggo.darkwaterapi.api.DarkWaterJavaPlugin;
-import kiinse.plugins.ggo.darkwaterapi.api.files.locale.PlayerLocale;
-import kiinse.plugins.ggo.darkwaterapi.core.utilities.DarkItemUtils;
+import kiinse.plugins.ggo.gungaleapi.api.GunGaleJavaPlugin;
+import kiinse.plugins.ggo.gungaleapi.api.files.locale.PlayerLocale;
+import kiinse.plugins.ggo.gungaleapi.core.utilities.DarkItemUtils;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.enums.Button;
 import kiinse.plugins.ggo.gungalewiki.enums.Message;
@@ -26,7 +26,7 @@ public class FiltersButtonImpl implements FiltersButton {
     private final List<String> items;
 
     public FiltersButtonImpl(@NotNull YamlConfiguration yamlConfiguration,
-                             @NotNull DarkWaterJavaPlugin plugin,
+                             @NotNull GunGaleJavaPlugin plugin,
                              @NotNull PlayerLocale playerLocale,
                              @NotNull Button button) {
         var messages = plugin.getMessages();

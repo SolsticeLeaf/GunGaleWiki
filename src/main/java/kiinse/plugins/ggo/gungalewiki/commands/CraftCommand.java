@@ -1,16 +1,15 @@
 package kiinse.plugins.ggo.gungalewiki.commands;
 
-import kiinse.plugins.ggo.darkwaterapi.api.DarkWaterJavaPlugin;
-import kiinse.plugins.ggo.darkwaterapi.api.commands.Command;
-import kiinse.plugins.ggo.darkwaterapi.api.commands.CommandContext;
+import kiinse.plugins.ggo.gungaleapi.api.GunGaleJavaPlugin;
+import kiinse.plugins.ggo.gungaleapi.api.commands.Command;
+import kiinse.plugins.ggo.gungaleapi.api.commands.CommandContext;
+import kiinse.plugins.ggo.gungaleapi.api.commands.DarkCommand;
 import org.jetbrains.annotations.NotNull;
 
-public class CraftCommand {
+public class CraftCommand extends DarkCommand {
 
-    private final DarkWaterJavaPlugin plugin;
-
-    public CraftCommand(@NotNull DarkWaterJavaPlugin plugin) {
-        this.plugin = plugin;
+    public CraftCommand(@NotNull GunGaleJavaPlugin plugin) {
+        super(plugin);
     }
 
     @Command(command = "recipes",

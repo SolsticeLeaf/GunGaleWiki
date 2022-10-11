@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'kiinse.plugins.ggo'
+group = 'kiinse.plugins.ggo.gungalewiki'
 version = '1.0.0-alpha.3'
 java.sourceCompatibility = JavaVersion.VERSION_17
 
@@ -23,7 +23,7 @@ dependencies {
     implementation 'com.zaxxer:HikariCP:5.0.1'
     implementation 'com.github.LoneDev6:API-ItemsAdder:3.2.3-r8'
 
-    compileOnly 'kiinse.plugins.ggo.darkwaterapi:darkwater-core:3.1.6'
+    compileOnly 'kiinse.plugins.ggo.gungaleapi:gungale-core:3.1.7'
     compileOnly 'org.purpurmc.purpur:purpur-api:1.19.2-R0.1-SNAPSHOT'
 }
 

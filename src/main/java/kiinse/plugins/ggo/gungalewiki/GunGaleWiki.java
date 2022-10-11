@@ -1,10 +1,10 @@
 package kiinse.plugins.ggo.gungalewiki;
 
-import kiinse.plugins.ggo.darkwaterapi.api.DarkWaterJavaPlugin;
-import kiinse.plugins.ggo.darkwaterapi.api.files.messages.MessagesUtils;
-import kiinse.plugins.ggo.darkwaterapi.api.utilities.ItemStackUtils;
-import kiinse.plugins.ggo.darkwaterapi.core.files.messages.DarkMessagesUtils;
-import kiinse.plugins.ggo.darkwaterapi.core.utilities.DarkItemUtils;
+import kiinse.plugins.ggo.gungaleapi.api.GunGaleJavaPlugin;
+import kiinse.plugins.ggo.gungaleapi.api.files.messages.MessagesUtils;
+import kiinse.plugins.ggo.gungaleapi.api.utilities.ItemStackUtils;
+import kiinse.plugins.ggo.gungaleapi.core.files.messages.DarkMessagesUtils;
+import kiinse.plugins.ggo.gungaleapi.core.utilities.DarkItemUtils;
 import kiinse.plugins.ggo.gungalewiki.database.DataUtils;
 import kiinse.plugins.ggo.gungalewiki.database.Database;
 import kiinse.plugins.ggo.gungalewiki.database.interfaces.HikariDatabase;
@@ -13,9 +13,10 @@ import kiinse.plugins.ggo.gungalewiki.database.utils.DatabaseSettings;
 import kiinse.plugins.ggo.gungalewiki.enums.Config;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.ButtonsData;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.interfaces.FiltersButtons;
+import kiinse.plugins.ggo.gungalewiki.initialize.RegisterCommands;
 import org.jetbrains.annotations.NotNull;
 
-public final class GunGaleWiki extends DarkWaterJavaPlugin {
+public final class GunGaleWiki extends GunGaleJavaPlugin {
 
     private static GunGaleWiki instance;
     private HikariDatabase database;
@@ -38,6 +39,7 @@ public final class GunGaleWiki extends DarkWaterJavaPlugin {
         buttons = new ButtonsData(this).load();
         itemStackUtils = new DarkItemUtils(this);
         messagesUtils = new DarkMessagesUtils(this);
+        new RegisterCommands(this);
     }
 
     @Override

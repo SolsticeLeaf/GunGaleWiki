@@ -1,11 +1,10 @@
 package kiinse.plugins.ggo.gungalewiki.gui.items;
 
-import kiinse.plugins.ggo.darkwaterapi.api.files.filemanager.YamlFile;
-import kiinse.plugins.ggo.darkwaterapi.api.files.locale.PlayerLocale;
-import kiinse.plugins.ggo.darkwaterapi.api.gui.GuiAction;
-import kiinse.plugins.ggo.darkwaterapi.api.gui.GuiItem;
-import kiinse.plugins.ggo.darkwaterapi.core.gui.DarkGUI;
-import kiinse.plugins.ggo.darkwaterapi.core.utilities.DarkItemUtils;
+import kiinse.plugins.ggo.gungaleapi.api.files.filemanager.YamlFile;
+import kiinse.plugins.ggo.gungaleapi.api.files.locale.PlayerLocale;
+import kiinse.plugins.ggo.gungaleapi.api.gui.GuiAction;
+import kiinse.plugins.ggo.gungaleapi.api.gui.GuiItem;
+import kiinse.plugins.ggo.gungaleapi.core.gui.DarkGUI;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.enums.Config;
 import kiinse.plugins.ggo.gungalewiki.enums.Message;

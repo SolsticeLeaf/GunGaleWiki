@@ -1,7 +1,7 @@
 package kiinse.plugins.ggo.gungalewiki.database;
 
 import com.zaxxer.hikari.HikariDataSource;
-import kiinse.plugins.ggo.darkwaterapi.api.DarkWaterJavaPlugin;
+import kiinse.plugins.ggo.gungaleapi.api.GunGaleJavaPlugin;
 import kiinse.plugins.ggo.gungalewiki.database.interfaces.HikariDatabase;
 import kiinse.plugins.ggo.gungalewiki.database.utils.DatabaseSettings;
 import org.jetbrains.annotations.NotNull;
@@ -13,9 +13,9 @@ import java.util.logging.Level;
 public class Database implements HikariDatabase {
 
     private final HikariDataSource source ;
-    private final DarkWaterJavaPlugin plugin;
+    private final GunGaleJavaPlugin plugin;
 
-    public Database(@NotNull DarkWaterJavaPlugin plugin, @NotNull DatabaseSettings settings) throws IllegalStateException {
+    public Database(@NotNull GunGaleJavaPlugin plugin, @NotNull DatabaseSettings settings) throws IllegalStateException {
         this.plugin = plugin;
         plugin.sendLog("Connecting to database...");
         try (var ds = new HikariDataSource()) {
