@@ -1,8 +1,14 @@
 button.material: GREEN_STAINED_GLASS_PANE # Материал кнопки
 button.cmd: 0 # CustomModelData кнопки
-menu.name: Filter 6 # Название меню фильтра
+menu.name: Алмазные 2 # Название меню фильтра
 
 # Предметы фильтра
 button.items:
-  - item1
-  - item2
+  - diamond_knife
+  - diamond_scimitar
+  - diamond_cutlass
+  - diamond_trowel
+  - diamond_spade
+  - diamond_star
+  - diamond_cinquedea
+  - diamond_gladius

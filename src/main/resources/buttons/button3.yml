@@ -1,8 +1,11 @@
 button.material: BLUE_STAINED_GLASS_PANE # Материал кнопки
 button.cmd: 0 # CustomModelData кнопки
-menu.name: Filter 3 # Название меню фильтра
+menu.name: Платиновые # Название меню фильтра
 
 # Предметы фильтра
 button.items:
-  - item1
-  - item2
+  - platinum_sword
+  - platinum_axe
+  - platinum_hoe
+  - platinum_pickaxe
+  - platinum_shovel

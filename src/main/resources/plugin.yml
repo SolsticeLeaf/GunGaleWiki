@@ -3,13 +3,18 @@ version: '${version}'
 main: kiinse.plugins.ggo.gungalewiki.GunGaleWiki
 api-version: 1.19
 prefix: GGW
-depend: [ GGODarkWaterAPI, ItemsAdder ]
+depend: [ GunGaleAPI, ItemsAdder ]
 authors: [ kiinse ]
+website: https://kiinse.me
 commands:
   recipes:
     description: Opens recipes menu
     permission: gungalewiki.menu
     usage: /<command>
+  recipes reset:
+    description: Reset and opens recipes menu
+    permission: gungalewiki.menu
+    usage: /<command> [reser]
   craft:
     description: Opens recipes menu
     permission: gungalewiki.menu

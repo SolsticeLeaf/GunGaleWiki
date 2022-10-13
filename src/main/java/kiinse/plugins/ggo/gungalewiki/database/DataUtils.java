@@ -6,24 +6,28 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 public class DataUtils implements PluginData {
 
     private final HashMap<UUID, List<String>> bookmarks = new HashMap<>();
-    private final HashMap<UUID, List<String>> lastseen = new HashMap<>();
-    private final Connection connection;
+    private final HashMap<UUID, List<String>> lastSeen = new HashMap<>();
     private final GunGaleJavaPlugin plugin;
 
     public DataUtils(@NotNull Connection connection, @NotNull GunGaleJavaPlugin plugin) {
-        this.connection = connection;
+        this.plugin = plugin;
+    }
+
+    public DataUtils(@NotNull GunGaleJavaPlugin plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public @NotNull PluginData loadFromDB() {
         return null;
-        //TODO: Реализовать загрузку и сейв
     }
 
     @Override
@@ -34,15 +38,15 @@ public class DataUtils implements PluginData {
     @Override
     public @NotNull List<String> getPlayerBookmarks(@NotNull Player player) {
         var uuid = player.getUniqueId();
-        if (!bookmarks.containsKey(uuid)) bookmarks.put(uuid, new ArrayList<>());
-        return bookmarks.get(uuid);
+        if (bookmarks.containsKey(uuid)) return bookmarks.get(uuid);
+        return new ArrayList<>();
     }
 
     @Override
     public @NotNull List<String> getPlayerLastSeen(@NotNull Player player) {
         var uuid = player.getUniqueId();
-        if (!lastseen.containsKey(uuid)) lastseen.put(uuid, new ArrayList<>());
-        return lastseen.get(uuid);
+        if (lastSeen.containsKey(uuid)) return lastSeen.get(uuid);
+        return new ArrayList<>();
     }
 
     @Override
@@ -54,7 +58,7 @@ public class DataUtils implements PluginData {
     public @NotNull PluginData addToPlayerBookmarks(@NotNull Player player, @NotNull String item) {
         var marks = getPlayerBookmarks(player);
         marks.add(item);
-        updateBookmarks(player.getUniqueId(), marks);
+        bookmarks.put(player.getUniqueId(), marks);
         return this;
     }
 
@@ -62,7 +66,7 @@ public class DataUtils implements PluginData {
     public @NotNull PluginData removeFromPlayerBookmarks(@NotNull Player player, @NotNull String item) {
         var marks = getPlayerBookmarks(player);
         marks.remove(item);
-        updateBookmarks(player.getUniqueId(), marks);
+        bookmarks.put(player.getUniqueId(), marks);
         return this;
     }
 
@@ -70,6 +74,7 @@ public class DataUtils implements PluginData {
     public @NotNull PluginData addToPlayerLastSeen(@NotNull Player player, @NotNull String item) {
         //TODO: Оптимизировать
         var playerLastSeen = getPlayerLastSeen(player);
+        playerLastSeen.remove(item);
         if (playerLastSeen.size() >= 35) {
             var newArr = new ArrayList<String>();
             for (var i = 1; i < playerLastSeen.size(); i++) {
@@ -78,17 +83,8 @@ public class DataUtils implements PluginData {
             playerLastSeen = newArr;
         }
         playerLastSeen.add(item);
-        updateLastSeen(player.getUniqueId(), playerLastSeen);
+        lastSeen.put(player.getUniqueId(), playerLastSeen);
         return this;
     }
 
-    private void updateLastSeen(@NotNull UUID player, @NotNull List<String> list) {
-        lastseen.remove(player);
-        lastseen.put(player, list);
-    }
-
-    private void updateBookmarks(@NotNull UUID player, @NotNull List<String> list) {
-        bookmarks.remove(player);
-        bookmarks.put(player, list);
-    }
 }

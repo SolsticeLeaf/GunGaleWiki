@@ -1,35 +1,32 @@
 package kiinse.plugins.ggo.gungalewiki.gui.menus;
 
-import kiinse.plugins.ggo.gungaleapi.api.GunGaleJavaPlugin;
-import kiinse.plugins.ggo.gungaleapi.core.gui.DarkGUI;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
-import kiinse.plugins.ggo.gungalewiki.database.interfaces.PluginData;
+import kiinse.plugins.ggo.gungalewiki.enums.PageType;
+import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.items.BackButton;
 import kiinse.plugins.ggo.gungalewiki.gui.items.CustomItem;
-import org.bukkit.entity.Player;
+import kiinse.plugins.ggo.gungalewiki.managers.pagemanager.PageManager;
 import org.jetbrains.annotations.NotNull;
 
-public class LastCraftsGUI extends DarkGUI {
+public class LastCraftsGUI extends CreatedGui {
 
-    private final PluginData pluginData;
-    private final Player openedPlayer;
-
-    public LastCraftsGUI(@NotNull GunGaleWiki gunGaleWiki, @NotNull Player player) {
-        super(gunGaleWiki);
-        this.pluginData = gunGaleWiki.getPluginData();
-        this.openedPlayer = player;
+    public LastCraftsGUI() {
+        super(GunGaleWiki.getInstance());
     }
 
     @Override
-    protected void inventory(@NotNull GunGaleJavaPlugin darkWaterJavaPlugin) {
-        setItem(new BackButton(49, ((clickType, player) -> {
-            delete();
-            //TODO: Сделать открытие предыдущего
-        })));
+    public void onOpenInventory(@NotNull GunGaleWiki gunGaleWiki) {
+        if (getPageManager() == null) {
+            setPageManager(new PageManager(PageType.BOOKMARK).setItems(gunGaleWiki.getPluginData().getPlayerLastSeen(getPlayer())));
+        }
+
+        var pluginData = gunGaleWiki.getPluginData();
+        setCreatedItem(new BackButton(getPlayerLocale(), gunGaleWiki, 49, this));
 
         int pos = 9;
-        for (var item : pluginData.getPlayerLastSeen(openedPlayer)) {
-            setItem(new CustomItem(item, pos, pluginData, this));
+        for (var item : pluginData.getPlayerLastSeen(getPlayer())) {
+            setCreatedItem(new CustomItem(item, pos, pluginData, this));
+            pos++;
         }
     }
 }

@@ -11,13 +11,12 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
 public class ButtonsData extends FilesManager implements FiltersButtons {
 
-    private final HashMap<Button, YamlConfiguration> buttons = new HashMap<>();
+    private final HashMap<Button, FiltersButtonImpl> buttons = new HashMap<>();
     private final GunGaleJavaPlugin plugin;
 
     public ButtonsData(@NotNull GunGaleJavaPlugin plugin) {
@@ -32,14 +31,13 @@ public class ButtonsData extends FilesManager implements FiltersButtons {
         for (var file : listFilesInDirectory(Directory.BUTTONS)) {
             var yaml = new YamlConfiguration();
             yaml.load(file);
-            var fileName = file.getName().split(File.separator);
-            buttons.put(Button.valueOf(fileName[fileName.length-1].split("\\.")[0].toUpperCase()), yaml);
+            buttons.put(Button.valueOf(file.getName().split("\\.")[0].toUpperCase()), new FiltersButtonImpl(yaml));
         }
         return this;
     }
 
     @Override
     public @NotNull FiltersButton getButton(@NotNull Button button, @NotNull PlayerLocale playerLocale) {
-        return new FiltersButtonImpl(buttons.get(button), plugin, playerLocale, button);
+        return buttons.get(button).get(plugin, button, playerLocale);
     }
 }

@@ -1,32 +1,58 @@
 package kiinse.plugins.ggo.gungalewiki.gui.menus;
 
-import kiinse.plugins.ggo.gungaleapi.api.GunGaleJavaPlugin;
-import kiinse.plugins.ggo.gungaleapi.core.gui.DarkGUI;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
+import kiinse.plugins.ggo.gungalewiki.enums.Gui;
+import kiinse.plugins.ggo.gungalewiki.enums.PageType;
+import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
+import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.items.BackButton;
-import org.bukkit.entity.Player;
+import kiinse.plugins.ggo.gungalewiki.gui.items.CustomItem;
+import kiinse.plugins.ggo.gungalewiki.gui.items.NextPageButton;
+import kiinse.plugins.ggo.gungalewiki.gui.items.PrevPageButton;
+import kiinse.plugins.ggo.gungalewiki.managers.pagemanager.PageManager;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+public class ItemsGUI extends CreatedGui {
 
-public class ItemsGUI extends DarkGUI {
-
-    private final GunGaleWiki gunGaleWiki;
-    private final Player openedPlayer;
-    public final List<String> items;
-
-    public ItemsGUI(@NotNull GunGaleWiki gunGaleWiki, @NotNull Player player, @NotNull List<String> items) {
-        super(gunGaleWiki);
-        this.gunGaleWiki = gunGaleWiki;
-        this.openedPlayer = player;
-        this.items = items;
+    public ItemsGUI() {
+        super(GunGaleWiki.getInstance());
     }
 
     @Override
-    protected void inventory(@NotNull GunGaleJavaPlugin darkWaterJavaPlugin) {
-        setItem(new BackButton(49, ((clickType, player) -> {
+    public void onOpenInventory(@NotNull GunGaleWiki gunGaleWiki) {
+        if (getPageManager() == null) {
+            setPageManager(new PageManager(PageType.ITEMS));
+        }
+
+        var pluginData = gunGaleWiki.getPluginData();
+        var i = 9;
+        for (var item : getPageManager().getPageList(getPage())) {
+            setCreatedItem(new CustomItem(item, i, pluginData, this));
+            i++;
+        }
+
+        if (getPageManager().hasPage(getPage() + 1)) setCreatedItem(new NextPageButton(getPlayerLocale(), gunGaleWiki, 50, ((clickType, player) -> {
             delete();
-            //TODO: Сделать открытие предыдущего
+            new GuiBuilder(player)
+                    .setPage(getPage() + 1)
+                    .getGui(Gui.ITEMS)
+                    .setLastGui(getLastGui())
+                    .setPageManager(getPageManager())
+                    .setName(getName())
+                    .open(player);
+        })));
+
+        setCreatedItem(new BackButton(getPlayerLocale(), gunGaleWiki, 49, this));
+
+        if (getPageManager().hasPage(getPage() - 1)) setCreatedItem(new PrevPageButton(getPlayerLocale(), gunGaleWiki, 48, ((clickType, player) -> {
+            delete();
+            new GuiBuilder(player)
+                    .setPage(getPage() - 1)
+                    .getGui(Gui.ITEMS)
+                    .setLastGui(getLastGui())
+                    .setPageManager(getPageManager())
+                    .setName(getName())
+                    .open(player);
         })));
     }
 }

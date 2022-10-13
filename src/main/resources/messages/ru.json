@@ -1,4 +1,6 @@
 {
+  "bookmark_added": "&6Предмет &b{ITEM}&6 был &aдобавлен &6в закладки!",
+  "bookmark_removed": "&6Предмет &b{ITEM}&6 был &cубран&6 из закладок!",
   "button_back_name": "Назад",
   "button_back_lore": [
     "Строка описания 1",
@@ -47,43 +49,55 @@
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "button_remove_home_name": "Главная страница",
-  "button_remove_home_lore": [
+  "button_home_name": "Главная страница",
+  "button_home_lore": [
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "button_filter_button1_name": "Фильтр 1",
+  "furnace_coal_name": "Уголь",
+  "furnace_coal_lore": [
+    "Строка описания 1",
+    "Строка описания 2",
+    "Строка описания 3"
+  ],
+  "furnace_fire_name": "Огонь",
+  "furnace_fire_lore": [
+    "Строка описания 1",
+    "Строка описания 2",
+    "Строка описания 3"
+  ],
+  "button_filter_button1_name": "Фильтр 1 | Хлорофитовые",
   "button_filter_button1_lore": [
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "button_filter_button2_name": "Фильтр 2",
+  "button_filter_button2_name": "Фильтр 2 | Стальные",
   "button_filter_button2_lore": [
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "button_filter_button3_name": "Фильтр 3",
+  "button_filter_button3_name": "Фильтр 3 | Платиновые",
   "button_filter_button3_lore": [
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "button_filter_button4_name": "Фильтр 4",
+  "button_filter_button4_name": "Фильтр 4 | Мистериумные",
   "button_filter_button4_lore": [
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "button_filter_button5_name": "Фильтр 5",
+  "button_filter_button5_name": "Фильтр 5 | Ледяные, Киянки, Медные, Звёздные, алмазное",
   "button_filter_button5_lore": [
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "button_filter_button6_name": "Фильтр 6",
+  "button_filter_button6_name": "Фильтр 6 | Алмазные 2",
   "button_filter_button6_lore": [
     "Строка описания 1",
     "Строка описания 2",

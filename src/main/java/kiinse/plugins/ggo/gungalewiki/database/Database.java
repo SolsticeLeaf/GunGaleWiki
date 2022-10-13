@@ -12,7 +12,7 @@ import java.util.logging.Level;
 
 public class Database implements HikariDatabase {
 
-    private final HikariDataSource source ;
+    private final HikariDataSource source;
     private final GunGaleJavaPlugin plugin;
 
     public Database(@NotNull GunGaleJavaPlugin plugin, @NotNull DatabaseSettings settings) throws IllegalStateException {

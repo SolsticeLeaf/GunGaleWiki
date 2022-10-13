@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'kiinse.plugins.ggo.gungalewiki'
-version = '1.0.0-alpha.3'
+version = '1.0.0-beta.1'
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -21,9 +21,9 @@ dependencies {
     implementation 'org.json:json:20220924'
     implementation 'org.jetbrains:annotations:23.0.0'
     implementation 'com.zaxxer:HikariCP:5.0.1'
-    implementation 'com.github.LoneDev6:API-ItemsAdder:3.2.3-r8'
 
-    compileOnly 'kiinse.plugins.ggo.gungaleapi:gungale-core:3.1.7'
+    compileOnly 'com.github.LoneDev6:api-itemsadder:3.2.3-r8'
+    compileOnly 'kiinse.plugins.ggo.gungaleapi:gungale-core:3.1.8'
     compileOnly 'org.purpurmc.purpur:purpur-api:1.19.2-R0.1-SNAPSHOT'
 }
 

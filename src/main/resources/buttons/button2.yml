@@ -1,8 +1,11 @@
 button.material: GREEN_STAINED_GLASS_PANE # Материал кнопки
 button.cmd: 0 # CustomModelData кнопки
-menu.name: Filter 2 # Название меню фильтра
+menu.name: Стальные # Название меню фильтра
 
 # Предметы фильтра
 button.items:
-  - item1
-  - item2
+  - steel_sword
+  - steel_axe
+  - steel_hoe
+  - steel_pickaxe
+  - steel_shovel

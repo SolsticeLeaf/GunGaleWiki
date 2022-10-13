@@ -18,24 +18,25 @@ import java.util.List;
 
 public class FiltersButtonImpl implements FiltersButton {
 
-    private final String name;
     private final String menuName;
     private final int cmd;
     private final Material material;
-    private final List<Component> lore;
     private final List<String> items;
+    private String name;
+    private List<Component> lore;
 
-    public FiltersButtonImpl(@NotNull YamlConfiguration yamlConfiguration,
-                             @NotNull GunGaleJavaPlugin plugin,
-                             @NotNull PlayerLocale playerLocale,
-                             @NotNull Button button) {
-        var messages = plugin.getMessages();
-        this.name = messages.getStringMessage(playerLocale, Message.valueOf("BUTTON_FILTER_" + button + "_NAME"));
-        this.lore = messages.getComponentList(playerLocale, Message.valueOf("BUTTON_FILTER_" + button + "_LORE"));
+    public FiltersButtonImpl(@NotNull YamlConfiguration yamlConfiguration) {
         this.menuName = yamlConfiguration.getString("menu.name");
         this.items = yamlConfiguration.getStringList("button.items");
         this.cmd = yamlConfiguration.getInt("button.cmd");
         this.material = Material.valueOf(yamlConfiguration.getString("button.material"));
+    }
+
+    public @NotNull FiltersButton get(@NotNull GunGaleJavaPlugin plugin, @NotNull Button button, @NotNull PlayerLocale playerLocale) {
+        var messages = plugin.getMessages();
+        this.name = messages.getStringMessage(playerLocale, Message.valueOf("BUTTON_FILTER_" + button + "_NAME"));
+        this.lore = messages.getComponentList(playerLocale, Message.valueOf("BUTTON_FILTER_" + button + "_LORE"));
+        return this;
     }
 
     @Override
@@ -46,8 +47,8 @@ public class FiltersButtonImpl implements FiltersButton {
                               getLore(),
                               1,
                               itemMeta -> {
-                    if (getCMD() != 0) itemMeta.setCustomModelData(getCMD());
-                });
+                                  if (getCMD() != 0) itemMeta.setCustomModelData(getCMD());
+                              });
     }
 
     @Override

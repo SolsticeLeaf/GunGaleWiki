@@ -6,6 +6,12 @@ button.back.cmd: 0 # CustomModelData кнопки назад
 button.lastcrafts.material: GREEN_STAINED_GLASS_PANE # Материал кнопки последних просмотренных крафтов
 button.lastcrafts.cmd: 0 # CustomModelData кнопки последних просмотренных крафтов
 
+button.add.bookmarks.material: GREEN_STAINED_GLASS_PANE # Материал кнопки закладок (Добавление в меню крафта)
+button.add.bookmarks.cmd: 0 # CustomModelData кнопки закладок (Убирание в меню крафта)
+
+button.remove.bookmarks.material: RED_STAINED_GLASS_PANE # Материал кнопки закладок
+button.remove.bookmarks.cmd: 0 # CustomModelData кнопки закладок
+
 button.bookmarks.material: GREEN_STAINED_GLASS_PANE # Материал кнопки закладок
 button.bookmarks.cmd: 0 # CustomModelData кнопки закладок
 
@@ -18,11 +24,20 @@ button.prevpage.cmd: 0 # CustomModelData кнопки предыдущей ст�
 button.home.material: RED_STAINED_GLASS_PANE # Материал кнопки домой
 button.home.cmd: 0 # CustomModelData кнопки домой
 
-menu.lastcraft.name: last crafts # Название меню с последними крафтами
+furnace.coal.material: COAL # Материал угля в печке
+furnace.coal.cmd: 0 # CustomModelData угля в печке
+furnace.fire.material: CAMPFIRE # Материал огонька в печке
+furnace.fire.cmd: 0 # CustomModelData огонька в печке
+
+menu.lastcrafts.name: last crafts # Название меню с последними крафтами
 menu.main.name: Main # Название главного меню
 menu.fromitem.name: Crafts from this item # Название меню с просмотром того, что делается из выбранного предмета
-menu.thisitem.name: This item craft # Название меню с крафтом выбранного предмета
+menu.workbench.name: WorkBench # Название меню с крафтом выбранного предмета в верстаке
+menu.furnace.name: Furnace # Название меню с крафтом выбранного предмета в печке
 menu.bookmarks.name: Bookmarks # Название меню закладок
+
+bookmark.added.sound: BLOCK_AMETHYST_BLOCK_CHIME # Sound Когда предмет добавлен в закладки
+bookmark.removed.sound: BLOCK_AMETHYST_BLOCK_HIT # Sound Когда предмет убран из закладок
 
 # Данные подключения к бд
 db.host: localhost

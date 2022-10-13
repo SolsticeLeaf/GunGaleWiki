@@ -2,10 +2,12 @@ package kiinse.plugins.ggo.gungalewiki.gui.items;
 
 import kiinse.plugins.ggo.gungaleapi.api.gui.GuiAction;
 import kiinse.plugins.ggo.gungaleapi.api.gui.GuiItem;
-import kiinse.plugins.ggo.gungaleapi.core.gui.DarkGUI;
-import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
+import kiinse.plugins.ggo.gungalewiki.enums.Gui;
+import kiinse.plugins.ggo.gungalewiki.enums.PageType;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.interfaces.FiltersButton;
-import kiinse.plugins.ggo.gungalewiki.gui.menus.ItemsGUI;
+import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
+import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
+import kiinse.plugins.ggo.gungalewiki.managers.pagemanager.PageManager;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,17 +15,14 @@ import java.util.List;
 
 public class FilterButton implements GuiItem {
 
-    private final GunGaleWiki gunGaleWiki;
     private final ItemStack itemStack;
     private final String menuName;
-    private final DarkGUI lastGui;
+    private final CreatedGui lastGui;
     private final List<String> items;
     private final int slot;
 
     public FilterButton(@NotNull FiltersButton filtersButton,
-                        @NotNull GunGaleWiki gunGaleWiki,
-                        @NotNull DarkGUI lastGui, int slot) {
-        this.gunGaleWiki = gunGaleWiki;
+                        @NotNull CreatedGui lastGui, int slot) {
         this.menuName = filtersButton.getMenuName();
         this.lastGui = lastGui;
         this.slot = slot;
@@ -50,9 +49,11 @@ public class FilterButton implements GuiItem {
     public @NotNull GuiAction action() {
         return ((clickType, player) -> {
             lastGui.delete();
-            new ItemsGUI(gunGaleWiki, player, items)
+            new GuiBuilder(player)
+                    .getGui(Gui.ITEMS)
+                    .setPageManager(new PageManager(PageType.ITEMS).setItems(items))
+                    .setLastGui(lastGui)
                     .setName(menuName)
-                    .setSize(53)
                     .open(player);
         });
     }

@@ -4,11 +4,14 @@ import kiinse.plugins.ggo.gungaleapi.api.files.filemanager.YamlFile;
 import kiinse.plugins.ggo.gungaleapi.api.files.locale.PlayerLocale;
 import kiinse.plugins.ggo.gungaleapi.api.gui.GuiAction;
 import kiinse.plugins.ggo.gungaleapi.api.gui.GuiItem;
-import kiinse.plugins.ggo.gungaleapi.core.gui.DarkGUI;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.enums.Config;
+import kiinse.plugins.ggo.gungalewiki.enums.Gui;
 import kiinse.plugins.ggo.gungalewiki.enums.Message;
-import kiinse.plugins.ggo.gungalewiki.gui.menus.BookMarksGUI;
+import kiinse.plugins.ggo.gungalewiki.enums.PageType;
+import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
+import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
+import kiinse.plugins.ggo.gungalewiki.managers.pagemanager.PageManager;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -17,13 +20,13 @@ public class BookMarkButton implements GuiItem {
 
     private final GunGaleWiki gunGaleWiki;
     private final ItemStack itemStack;
-    private final DarkGUI lastGui;
+    private final CreatedGui lastGui;
     private final YamlFile config;
     private final int slot;
 
     public BookMarkButton(@NotNull PlayerLocale playerLocale,
                           @NotNull GunGaleWiki gunGaleWiki,
-                          @NotNull DarkGUI lastGui, int slot) {
+                          @NotNull CreatedGui lastGui, int slot) {
         this.gunGaleWiki = gunGaleWiki;
         this.lastGui = lastGui;
         this.config = gunGaleWiki.getConfiguration();
@@ -60,9 +63,12 @@ public class BookMarkButton implements GuiItem {
     public @NotNull GuiAction action() {
         return ((clickType, player) -> {
             lastGui.delete();
-            // TODO: вставить лист предметов
-            new BookMarksGUI(gunGaleWiki, player)
-                    .setSize(53)
+            new GuiBuilder(player)
+                    .setPage(1)
+                    .getGui(Gui.BOOKMARKS)
+                    .setLastGui(lastGui)
+                    .setPageManager(new PageManager(PageType.BOOKMARK).setItems(gunGaleWiki.getPluginData().getPlayerBookmarks(player)))
+                    .setName(gunGaleWiki.getConfiguration().getString(Config.MENU_BOOKMARKS_NAME))
                     .open(player);
         });
     }
