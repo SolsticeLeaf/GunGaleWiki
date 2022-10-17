@@ -5,8 +5,10 @@ import kiinse.plugins.ggo.gungalewiki.enums.PageType;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.items.BackButton;
 import kiinse.plugins.ggo.gungalewiki.gui.items.CustomItem;
-import kiinse.plugins.ggo.gungalewiki.managers.pagemanager.PageManager;
+import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collections;
 
 public class LastCraftsGUI extends CreatedGui {
 
@@ -16,16 +18,16 @@ public class LastCraftsGUI extends CreatedGui {
 
     @Override
     public void onOpenInventory(@NotNull GunGaleWiki gunGaleWiki) {
+        var userData = gunGaleWiki.getPluginData().getUserData(getPlayer());
         if (getPageManager() == null) {
-            setPageManager(new PageManager(PageType.BOOKMARK).setItems(gunGaleWiki.getPluginData().getPlayerLastSeen(getPlayer())));
+            setPageManager(new PageManager(PageType.BOOKMARK).setItems(userData.getLastSeen()));
         }
-
-        var pluginData = gunGaleWiki.getPluginData();
         setCreatedItem(new BackButton(getPlayerLocale(), gunGaleWiki, 49, this));
-
+        var list = userData.getLastSeen();
+        Collections.reverse(list);
         int pos = 9;
-        for (var item : pluginData.getPlayerLastSeen(getPlayer())) {
-            setCreatedItem(new CustomItem(item, pos, pluginData, this));
+        for (var item : list) {
+            setCreatedItem(new CustomItem(item, pos, userData, this));
             pos++;
         }
     }

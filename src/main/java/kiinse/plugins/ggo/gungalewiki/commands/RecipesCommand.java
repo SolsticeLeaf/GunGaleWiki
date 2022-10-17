@@ -5,8 +5,10 @@ import kiinse.plugins.ggo.gungaleapi.api.commands.Command;
 import kiinse.plugins.ggo.gungaleapi.api.commands.CommandContext;
 import kiinse.plugins.ggo.gungaleapi.api.commands.DarkCommand;
 import kiinse.plugins.ggo.gungaleapi.core.utilities.DarkPlayerUtils;
-import kiinse.plugins.ggo.gungalewiki.gui.GuiUtils;
+import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.logging.Level;
 
 public class RecipesCommand extends DarkCommand {
 
@@ -18,6 +20,10 @@ public class RecipesCommand extends DarkCommand {
              disallowNonPlayer = true,
              permission = "gungalewiki.menu")
     public void recipes(@NotNull CommandContext context) {
-        GuiUtils.getMainGui(DarkPlayerUtils.getPlayer(context.getSender())).open(context.getSender());
+        try {
+            GunGaleWiki.getInstance().getPluginData().getUserData(DarkPlayerUtils.getPlayer(context.getSender())).getLastGui().open(context.getSender());
+        } catch (Exception e) {
+            getPlugin().sendLog(Level.WARNING, "Error on gui open: " + e.getMessage());
+        }
     }
 }

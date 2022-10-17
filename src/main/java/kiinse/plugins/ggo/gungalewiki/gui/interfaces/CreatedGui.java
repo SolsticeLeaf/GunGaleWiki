@@ -5,7 +5,7 @@ import kiinse.plugins.ggo.gungaleapi.api.gui.GuiItem;
 import kiinse.plugins.ggo.gungaleapi.core.gui.DarkGUI;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.enums.Gui;
-import kiinse.plugins.ggo.gungalewiki.managers.pagemanager.PageManager;
+import kiinse.plugins.ggo.gungalewiki.pagemanager.interfaces.WikiPageManager;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,9 +15,9 @@ public abstract class CreatedGui extends DarkGUI {
     private final GunGaleWiki gunGaleWiki;
     private Gui gui;
     private CreatedGui lastGui;
-    private PageManager pageManager;
+    private WikiPageManager pageManager;
     private Player player;
-    private int page = 1;
+    private int page = 0;
     private String item;
 
     protected CreatedGui(@NotNull GunGaleWiki gunGaleWiki) {
@@ -36,11 +36,11 @@ public abstract class CreatedGui extends DarkGUI {
     }
 
     @Nullable
-    public PageManager getPageManager() {
+    public WikiPageManager getPageManager() {
         return pageManager;
     }
 
-    public @NotNull CreatedGui setPageManager(@NotNull PageManager pageManager) {
+    public @NotNull CreatedGui setPageManager(@NotNull WikiPageManager pageManager) {
         this.pageManager = pageManager;
         return this;
     }
@@ -54,11 +54,6 @@ public abstract class CreatedGui extends DarkGUI {
         return this;
     }
 
-    public @NotNull CreatedGui setCreateGuiName(@NotNull String name) {
-        super.setName(name);
-        return this;
-    }
-
     protected @NotNull Player getPlayer() {
         return player;
     }
@@ -68,27 +63,27 @@ public abstract class CreatedGui extends DarkGUI {
         return this;
     }
 
+    public @NotNull Gui getType() {
+        return gui;
+    }
+
     public @NotNull CreatedGui setType(@NotNull Gui gui) {
         this.gui = gui;
         return this;
-    }
-
-    public @NotNull Gui getType() {
-        return gui;
     }
 
     protected @NotNull GunGaleWiki getGunGaleWiki() {
         return gunGaleWiki;
     }
 
-    public @NotNull CreatedGui setLastGui(@NotNull CreatedGui lastGui) {
-        this.lastGui = lastGui;
-        return this;
-    }
-
     @NotNull
     public CreatedGui getLastGui() {
         return lastGui;
+    }
+
+    public @NotNull CreatedGui setLastGui(@NotNull CreatedGui lastGui) {
+        this.lastGui = lastGui;
+        return this;
     }
 
     public void setCreatedItem(@NotNull GuiItem guiItem) {
@@ -100,8 +95,12 @@ public abstract class CreatedGui extends DarkGUI {
         return this;
     }
 
+    public void onDelete() {}
+
     @Override
-    protected void inventory(@NotNull GunGaleJavaPlugin darkWaterJavaPlugin) {
+    protected void inventory(@NotNull GunGaleJavaPlugin gunGaleJavaPlugin) {
+        var pluginData = gunGaleWiki.getPluginData();
+        pluginData.saveData(pluginData.getUserData(player).saveLastGui(this));
         onOpenInventory(gunGaleWiki);
     }
 

@@ -8,9 +8,10 @@ public enum Gui {
     FURNACE(FurnaceGUI.class),
     WORKBENCH(WorkBenchGUI.class),
     HOME(MainGUI.class),
-    LAST_SEEN(LastCraftsGUI.class),
+    LASTSEEN(LastCraftsGUI.class),
     ITEMS(ItemsGUI.class),
-    FROM_THIS_ITEM_CRAFT(FromThisItemCraftGUI.class),
+    FROMITEM(FromThisItemCraftGUI.class),
+    ORE(OreGUI.class),
     BOOKMARKS(BookMarksGUI.class);
 
     private final Class<? extends CreatedGui> darkGUI;

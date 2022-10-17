@@ -7,19 +7,25 @@ button.lastcrafts.material: GREEN_STAINED_GLASS_PANE # Материал кноп
 button.lastcrafts.cmd: 0 # CustomModelData кнопки последних просмотренных крафтов
 
 button.add.bookmarks.material: GREEN_STAINED_GLASS_PANE # Материал кнопки закладок (Добавление в меню крафта)
-button.add.bookmarks.cmd: 0 # CustomModelData кнопки закладок (Убирание в меню крафта)
+button.add.bookmarks.cmd: 0 # CustomModelData кнопки закладок (Добавление в меню крафта)
 
-button.remove.bookmarks.material: RED_STAINED_GLASS_PANE # Материал кнопки закладок
-button.remove.bookmarks.cmd: 0 # CustomModelData кнопки закладок
+button.remove.bookmarks.material: RED_STAINED_GLASS_PANE # Материал кнопки закладок (Убирание в меню крафта)
+button.remove.bookmarks.cmd: 0 # CustomModelData кнопки закладок (Убирание в меню крафта)
 
 button.bookmarks.material: GREEN_STAINED_GLASS_PANE # Материал кнопки закладок
 button.bookmarks.cmd: 0 # CustomModelData кнопки закладок
 
-button.nextpage.material: BLUE_STAINED_GLASS_PANE # Материал кнопки следующей страницы
-button.nextpage.cmd: 0 # CustomModelData кнопки следующей страницы
+button.nextpage.allow.material: BLUE_STAINED_GLASS_PANE # Материал кнопки следующей страницы (Когда кнопка доступна)
+button.nextpage.allow.cmd: 0 # CustomModelData кнопки следующей страницы (Когда кнопка доступна)
 
-button.prevpage.material: BLUE_STAINED_GLASS_PANE # Материал кнопки предыдущей страницы
-button.prevpage.cmd: 0 # CustomModelData кнопки предыдущей страницы
+button.nextpage.disallow.material: BLUE_STAINED_GLASS_PANE # Материал кнопки следующей страницы (Когда кнопка недоступна)
+button.nextpage.disallow.cmd: 0 # CustomModelData кнопки следующей страницы (Когда кнопка недоступна)
+
+button.prevpage.allow.material: BLUE_STAINED_GLASS_PANE # Материал кнопки предыдущей страницы (Когда кнопка доступна)
+button.prevpage.allow.cmd: 0 # CustomModelData кнопки предыдущей страницы (Когда кнопка доступна)
+
+button.prevpage.disallow.material: BLUE_STAINED_GLASS_PANE # Материал кнопки предыдущей страницы (Когда кнопка недоступна)
+button.prevpage.disallow.cmd: 0 # CustomModelData кнопки предыдущей страницы (Когда кнопка недоступна)
 
 button.home.material: RED_STAINED_GLASS_PANE # Материал кнопки домой
 button.home.cmd: 0 # CustomModelData кнопки домой
@@ -29,8 +35,9 @@ furnace.coal.cmd: 0 # CustomModelData угля в печке
 furnace.fire.material: CAMPFIRE # Материал огонька в печке
 furnace.fire.cmd: 0 # CustomModelData огонька в печке
 
-menu.lastcrafts.name: last crafts # Название меню с последними крафтами
-menu.main.name: Main # Название главного меню
+menu.ores.name: Drop from ore # Название меню с рудами
+menu.lastseen.name: last crafts # Название меню с последними крафтами
+menu.home.name: Main # Название главного меню
 menu.fromitem.name: Crafts from this item # Название меню с просмотром того, что делается из выбранного предмета
 menu.workbench.name: WorkBench # Название меню с крафтом выбранного предмета в верстаке
 menu.furnace.name: Furnace # Название меню с крафтом выбранного предмета в печке
@@ -39,13 +46,7 @@ menu.bookmarks.name: Bookmarks # Название меню закладок
 bookmark.added.sound: BLOCK_AMETHYST_BLOCK_CHIME # Sound Когда предмет добавлен в закладки
 bookmark.removed.sound: BLOCK_AMETHYST_BLOCK_HIT # Sound Когда предмет убран из закладок
 
-# Данные подключения к бд
-db.host: localhost
-db.port: 3307
-db.name: gungalewiki
-db.login: mariadb
-db.password: mariadb
-
+ggcore.use: false  # Использование GGCore
 
 # Версия конфига, не трогать, моё!
-config.version: 1
+config.version: 3

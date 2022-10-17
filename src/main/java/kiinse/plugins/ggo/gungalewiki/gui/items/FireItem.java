@@ -21,7 +21,7 @@ public class FireItem implements GuiItem {
         var messages = gunGaleWiki.getMessages();
         this.itemStack = gunGaleWiki.getItemStackUtils()
                                     .getItemStack(Material.valueOf(config.getString(Config.FURNACE_FIRE_MATERIAL)),
-                                                  messages.getStringMessage(playerLocale, Message.FURNACE_FIRE_NAME),
+                                                  messages.getComponentMessage(playerLocale, Message.FURNACE_FIRE_NAME),
                                                   messages.getComponentList(playerLocale, Message.FURNACE_FIRE_LORE),
                                                   1,
                                                   itemMeta -> {
@@ -38,11 +38,6 @@ public class FireItem implements GuiItem {
     @Override
     public @NotNull ItemStack itemStack() {
         return itemStack;
-    }
-
-    @Override
-    public @NotNull String name() {
-        return itemStack.getDisplayName();
     }
 
     @Override

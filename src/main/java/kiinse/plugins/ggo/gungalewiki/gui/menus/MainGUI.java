@@ -14,7 +14,6 @@ import java.util.HashMap;
 
 public class MainGUI extends CreatedGui {
 
-    // 53 slots
     private final FiltersButtons filtersButtons;
     private final HashMap<Button, int[]> filters = new HashMap<>();
 
@@ -41,7 +40,7 @@ public class MainGUI extends CreatedGui {
         for (var set : filters.entrySet()) {
             var button = filtersButtons.getButton(set.getKey(), getPlayerLocale());
             for (var pos : set.getValue()) {
-                setCreatedItem(new FilterButton(button, this, pos));
+                setCreatedItem(new FilterButton(set.getKey(), button, this, pos));
             }
         }
     }

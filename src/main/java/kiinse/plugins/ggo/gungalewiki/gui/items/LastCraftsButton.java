@@ -11,7 +11,7 @@ import kiinse.plugins.ggo.gungalewiki.enums.Message;
 import kiinse.plugins.ggo.gungalewiki.enums.PageType;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
-import kiinse.plugins.ggo.gungalewiki.managers.pagemanager.PageManager;
+import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +35,7 @@ public class LastCraftsButton implements GuiItem {
         this.itemStack = gunGaleWiki.getItemStackUtils()
                                     .getItemStack(
                                             Material.valueOf(config.getString(Config.BUTTON_LASTCRAFTS_MATERIAL)),
-                                            messages.getStringMessage(playerLocale, Message.BUTTON_LAST_CRAFTS_NAME),
+                                            messages.getComponentMessage(playerLocale, Message.BUTTON_LAST_CRAFTS_NAME),
                                             messages.getComponentList(playerLocale, Message.BUTTON_LAST_CRAFTS_LORE),
                                             1,
                                             itemMeta -> {
@@ -55,20 +55,15 @@ public class LastCraftsButton implements GuiItem {
     }
 
     @Override
-    public @NotNull String name() {
-        return itemStack.getDisplayName();
-    }
-
-    @Override
     public @NotNull GuiAction action() {
         return ((clickType, player) -> {
             lastGui.delete();
             new GuiBuilder(player)
-                    .setPage(1)
-                    .getGui(Gui.LAST_SEEN)
-                    .setPageManager(new PageManager(PageType.LAST_SEEN).setItems(gunGaleWiki.getPluginData().getPlayerLastSeen(player)))
+                    .setPage(0)
+                    .getGui(Gui.LASTSEEN)
+                    .setPageManager(new PageManager(PageType.LAST_SEEN).setItems(gunGaleWiki.getPluginData().getUserData(player).getLastSeen()))
                     .setLastGui(lastGui)
-                    .setName(gunGaleWiki.getConfiguration().getString(Config.MENU_LASTCRAFTS_NAME))
+                    .setName(gunGaleWiki.getConfiguration().getString(Config.MENU_LASTSEEN_NAME))
                     .open(player);
         });
     }

@@ -1,67 +1,67 @@
 {
-  "bookmark_added": "&6Предмет &b{ITEM}&6 был &aдобавлен &6в закладки!",
-  "bookmark_removed": "&6Предмет &b{ITEM}&6 был &cубран&6 из закладок!",
-  "button_back_name": "Назад",
+  "prefix": "<gold>[<cyan>Wiki<gold>]<white>:</white> ",
+  "bookmark_added": "<gold>Предмет <aqua>{ITEM} <gold>был <green>добавлен <gold>в закладки!",
+  "bookmark_removed": "<gold>Предмет <aqua>{ITEM} <gold>был <red>убран <gold>из закладок!",
+  "ore_drop": "<gradient:gold:yellow>Выпадает в размере: <green>{AMOUNT}",
+  "description": [
+    "<gradient:green:dark_green>ЛКМ <gradient:gold:yellow> - Посмотреть крафт этого предмета",
+    "<gradient:green:dark_green>ПКМ <gradient:gold:yellow> - Посмотреть крафт из этого предмета"
+  ],
+  "button_back_name": "<gradient:red:dark_red>Назад",
   "button_back_lore": [
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "button_last_crafts_name": "Последние крафты",
+  "button_last_crafts_name": "<gradient:gold:yellow>Последние крафты",
   "button_last_crafts_lore": [
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "button_bookmarks_name": "Закладки",
+  "button_bookmarks_name": "<gradient:gold:yellow>Закладки",
   "button_bookmarks_lore": [
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "button_categories_name": "Категории",
-  "button_categories_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "button_next_page_name": "Следующая страница",
+  "button_next_page_name": "<gradient:green:dark_green>Следующая страница",
   "button_next_page_lore": [
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "button_prev_page_name": "Предыдущая страница",
+  "button_prev_page_name": "<gradient:green:dark_green>Предыдущая страница",
   "button_prev_page_lore": [
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "button_add_bookmarks_name": "Добавить в закладки",
+  "button_add_bookmarks_name": "<gradient:green:dark_green>Добавить в закладки",
   "button_add_bookmarks_lore": [
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "button_remove_bookmarks_name": "Убрать из закладок",
+  "button_remove_bookmarks_name": "<gradient:red:dark_red>Убрать из закладок",
   "button_remove_bookmarks_lore": [
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "button_home_name": "Главная страница",
+  "button_home_name": "<gradient:gold:yellow>Главная страница",
   "button_home_lore": [
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "furnace_coal_name": "Уголь",
+  "furnace_coal_name": "<gradient:white:gray>Уголь",
   "furnace_coal_lore": [
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
   ],
-  "furnace_fire_name": "Огонь",
+  "furnace_fire_name": "<gradient:red:dark_red>Огонь",
   "furnace_fire_lore": [
     "Строка описания 1",
     "Строка описания 2",
@@ -102,5 +102,20 @@
     "Строка описания 1",
     "Строка описания 2",
     "Строка описания 3"
+  ],
+  "hlor_sword": [
+    "<gradient:red:gold>Тест1"
+  ],
+  "hlor_axe": [
+    "<gradient:green:blue>Тест2"
+  ],
+  "hlor_hoe": [
+    "<gradient:red:gold>Тест3"
+  ],
+  "hlor_pickaxe": [
+    "<gradient:green:blue>Тест4"
+  ],
+  "hlor_shovel": [
+    "<gradient:red:gold>Тест5"
   ]
 }

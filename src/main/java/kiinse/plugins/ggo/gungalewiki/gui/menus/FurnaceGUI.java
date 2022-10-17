@@ -2,11 +2,11 @@ package kiinse.plugins.ggo.gungalewiki.gui.menus;
 
 import dev.lone.itemsadder.api.CustomStack;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
-import kiinse.plugins.ggo.gungalewiki.enums.Config;
-import kiinse.plugins.ggo.gungalewiki.enums.Gui;
-import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
+import kiinse.plugins.ggo.gungalewiki.enums.PageType;
+import kiinse.plugins.ggo.gungalewiki.gui.GuiUtils;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.items.*;
+import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,19 +18,24 @@ public class FurnaceGUI extends CreatedGui {
 
     @Override
     public void onOpenInventory(@NotNull GunGaleWiki gunGaleWiki) {
-        assert getPageManager() != null;
         assert getItem() != null;
-        getGunGaleWiki().getPluginData().addToPlayerLastSeen(getPlayer(), getItem());
+        if (getPageManager() == null) {
+            setPageManager(new PageManager(PageType.CRAFT).setRecipes(GuiUtils.getRecipes(getItem())));
+        }
+
+        var pluginData = gunGaleWiki.getPluginData();
+        var userData = pluginData.getUserData(getPlayer());
+        userData.addToLastSeen(getItem());
+        pluginData.saveData(userData);
         var config = gunGaleWiki.getConfiguration();
         var recipe = getPageManager().getPageRecipe(getPage());
-        var pluginData = gunGaleWiki.getPluginData();
 
         if (recipe != null) {
             var input = ((FurnaceRecipe) recipe).getInput();
             var custom = CustomStack.byItemStack(input);
 
             if (custom != null) {
-                setCreatedItem(new CustomItem(custom, 11, pluginData, this));
+                setCreatedItem(new CustomItem(custom, 11, userData, this));
             } else {
                 setCreatedItem(new StandartItem(11, input));
             }
@@ -38,38 +43,14 @@ public class FurnaceGUI extends CreatedGui {
 
         setCreatedItem(new FireItem(20, gunGaleWiki, getPlayerLocale()));
         setCreatedItem(new CoalItem(29, gunGaleWiki, getPlayerLocale()));
-        setCreatedItem(new CustomItem(getItem(), 24, pluginData, this));
+        setCreatedItem(new CustomItem(getItem(), 24, userData, this));
+        setCreatedItem(new CustomItem(getItem(), 24, userData, this));
+        setCreatedItem(GuiUtils.nextCraftPageButton(getPageManager(), getPage(), getPlayerLocale(), gunGaleWiki, this, config));
+        setCreatedItem(new AddToBookMarkButton(51, getPlayerLocale(), gunGaleWiki, this, getPlayer(), getItem()));
+        setCreatedItem(GuiUtils.prevCraftPageButton(getPageManager(), getPage(), getPlayerLocale(), gunGaleWiki, this, config));
+        setCreatedItem(new HomeButton(getPlayerLocale(), gunGaleWiki, 47, this));
 
-
-        if (getPageManager().hasPage(getPage() + 1)) setCreatedItem(new NextPageButton(getPlayerLocale(), gunGaleWiki, 52, ((clickType, player) -> {
-            var isFurnace = getPageManager().getPageRecipe(getPage() + 1) instanceof FurnaceRecipe;
-            delete();
-            new GuiBuilder(player)
-                    .setPage(getPage() + 1)
-                    .getGui(isFurnace ? Gui.FURNACE : Gui.WORKBENCH)
-                    .setLastGui(getLastGui())
-                    .setPageManager(getPageManager())
-                    .setStringItem(getItem())
-                    .setName(config.getString(isFurnace ? Config.MENU_FURNACE_NAME : Config.MENU_WORKBENCH_NAME))
-                    .open(player);
-        })));
-
-        setItem(new AddToBookMarkButton(51, getPlayerLocale(), gunGaleWiki, this, getPlayer(), getItem()));
-
-        if (getPageManager().hasPage(getPage() - 1)) setCreatedItem(new PrevPageButton(getPlayerLocale(), gunGaleWiki, 50, ((clickType, player) -> {
-            var isFurnace = getPageManager().getPageRecipe(getPage() - 1) instanceof FurnaceRecipe;
-            delete();
-            new GuiBuilder(player)
-                    .setPage(getPage() - 1)
-                    .getGui(isFurnace ? Gui.FURNACE : Gui.WORKBENCH)
-                    .setLastGui(getLastGui())
-                    .setPageManager(getPageManager())
-                    .setStringItem(getItem())
-                    .setName(config.getString(isFurnace ? Config.MENU_FURNACE_NAME : Config.MENU_WORKBENCH_NAME))
-                    .open(player);
-        })));
-
-        for (var i : new int[]{45, 46, 47}) {
+        for (var i : new int[]{45, 46}) {
             setCreatedItem(new BackButton(getPlayerLocale(), gunGaleWiki, i, this));
         }
     }

@@ -11,10 +11,6 @@ commands:
     description: Opens recipes menu
     permission: gungalewiki.menu
     usage: /<command>
-  recipes reset:
-    description: Reset and opens recipes menu
-    permission: gungalewiki.menu
-    usage: /<command> [reser]
   craft:
     description: Opens recipes menu
     permission: gungalewiki.menu

@@ -6,33 +6,38 @@ import kiinse.plugins.ggo.gungaleapi.api.gui.GuiItem;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.enums.Config;
 import kiinse.plugins.ggo.gungalewiki.enums.Message;
+import kiinse.plugins.ggo.gungalewiki.gui.GuiUtils;
+import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class CoalItem implements GuiItem {
+public class HomeButton implements GuiItem {
 
+    private final CreatedGui gui;
     private final ItemStack itemStack;
-    private final int pos;
+    private final int slot;
 
-    public CoalItem(int pos, @NotNull GunGaleWiki gunGaleWiki, @NotNull PlayerLocale playerLocale) {
-        this.pos = pos;
+    public HomeButton(@NotNull PlayerLocale playerLocale,
+                      @NotNull GunGaleWiki gunGaleWiki, int slot, @NotNull CreatedGui gui) {
+        this.gui = gui;
+        this.slot = slot;
         var config = gunGaleWiki.getConfiguration();
         var messages = gunGaleWiki.getMessages();
         this.itemStack = gunGaleWiki.getItemStackUtils()
-                                    .getItemStack(Material.valueOf(config.getString(Config.FURNACE_COAL_MATERIAL)),
-                                                  messages.getComponentMessage(playerLocale, Message.FURNACE_COAL_NAME),
-                                                  messages.getComponentList(playerLocale, Message.FURNACE_COAL_LORE),
+                                    .getItemStack(Material.valueOf(config.getString(Config.BUTTON_HOME_MATERIAL)),
+                                                  messages.getComponentMessage(playerLocale, Message.BUTTON_HOME_NAME),
+                                                  messages.getComponentList(playerLocale, Message.BUTTON_HOME_LORE),
                                                   1,
                                                   itemMeta -> {
-                                                      var cmd = config.getInt(Config.FURNACE_COAL_CMD);
+                                                      var cmd = config.getInt(Config.BUTTON_HOME_CMD);
                                                       if (cmd != 0) itemMeta.setCustomModelData(cmd);
                                                   });
     }
 
     @Override
     public int slot() {
-        return pos;
+        return slot;
     }
 
     @Override
@@ -42,7 +47,9 @@ public class CoalItem implements GuiItem {
 
     @Override
     public @NotNull GuiAction action() {
-        return (clickType, player) -> {};
+        return ((clickType, player) -> {
+            gui.delete();
+            GuiUtils.getMainGui(player).open(player);
+        });
     }
 }
-

@@ -5,5 +5,6 @@ public enum PageType {
     BOOKMARK,
     ITEMS,
     LAST_SEEN,
-    FROM_THIS_ITEM
+    FROM_THIS_ITEM,
+    DROP
 }

@@ -30,7 +30,7 @@ public class BackButton implements GuiItem {
         this.itemStack = gunGaleWiki.getItemStackUtils()
                                     .getItemStack(
                                             Material.valueOf(config.getString(Config.BUTTON_BACK_MATERIAL)),
-                                            messages.getStringMessage(playerLocale, Message.BUTTON_BACK_NAME),
+                                            messages.getComponentMessage(playerLocale, Message.BUTTON_BACK_NAME),
                                             messages.getComponentList(playerLocale, Message.BUTTON_BACK_LORE),
                                             1,
                                             itemMeta -> {
@@ -47,11 +47,6 @@ public class BackButton implements GuiItem {
     @Override
     public @NotNull ItemStack itemStack() {
         return itemStack;
-    }
-
-    @Override
-    public @NotNull String name() {
-        return itemStack.getDisplayName();
     }
 
     @Override

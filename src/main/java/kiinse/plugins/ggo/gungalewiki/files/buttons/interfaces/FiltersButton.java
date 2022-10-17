@@ -11,7 +11,7 @@ public interface FiltersButton {
 
     @NotNull ItemStack getItemStack();
 
-    @NotNull String getName();
+    @NotNull Component getName();
 
     @NotNull String getMenuName();
 

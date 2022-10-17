@@ -1,0 +1,9 @@
+ores:
+  - star_ore:star:1
+  - ruby_ore:ruby:1-3
+  - mystical_ore:mystical_raw:1
+  - silver_ore:silver_raw:1
+  - platinum_ore:platinum_raw:1
+  - deepslate_mystical_ore:mystical_raw:1
+  - deepslate_hlor_ore:hlor_raw:1
+  - deepslate_ruby_ore:ruby:1

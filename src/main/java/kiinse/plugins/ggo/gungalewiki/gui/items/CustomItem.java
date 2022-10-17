@@ -1,25 +1,25 @@
 package kiinse.plugins.ggo.gungalewiki.gui.items;
 
 import dev.lone.itemsadder.api.CustomStack;
-import dev.lone.itemsadder.api.ItemsAdder;
 import kiinse.plugins.ggo.gungaleapi.api.gui.GuiAction;
 import kiinse.plugins.ggo.gungaleapi.api.gui.GuiItem;
 import kiinse.plugins.ggo.gungaleapi.core.files.messages.DarkMessagesUtils;
 import kiinse.plugins.ggo.gungaleapi.core.utilities.DarkPlayerUtils;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
-import kiinse.plugins.ggo.gungalewiki.database.interfaces.PluginData;
+import kiinse.plugins.ggo.gungalewiki.data.interfaces.UserData;
 import kiinse.plugins.ggo.gungalewiki.enums.*;
+import kiinse.plugins.ggo.gungalewiki.gui.GuiUtils;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.menus.BookMarksGUI;
 import kiinse.plugins.ggo.gungalewiki.gui.menus.FurnaceGUI;
 import kiinse.plugins.ggo.gungalewiki.gui.menus.WorkBenchGUI;
-import kiinse.plugins.ggo.gungalewiki.managers.pagemanager.PageManager;
-import org.bukkit.Bukkit;
-import org.bukkit.Keyed;
+import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Sound;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.inventory.*;
+import org.bukkit.inventory.FurnaceRecipe;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -30,24 +30,47 @@ public class CustomItem implements GuiItem {
     private final GunGaleWiki gunGaleWiki = GunGaleWiki.getInstance();
     private final String item;
     private final ItemStack itemStack;
-    private final PluginData pluginData;
+    private final UserData userData;
     private final CreatedGui fromGui;
     private final int pos;
+    private List<Component> lore = new ArrayList<>();
 
-    public CustomItem(@NotNull String item, int pos, @NotNull PluginData pluginData, @NotNull CreatedGui fromGui) {
+    public CustomItem(@NotNull String item, int pos, @NotNull UserData userData, @NotNull CreatedGui fromGui) {
         this.itemStack = CustomStack.getInstance(item).getItemStack();
         this.item = item;
         this.pos = pos;
-        this.pluginData = pluginData;
+        this.userData = userData;
         this.fromGui = fromGui;
     }
 
-    public CustomItem(@NotNull CustomStack customStack, int pos, @NotNull PluginData pluginData, @NotNull CreatedGui fromGui) {
+    public CustomItem(@NotNull String item, int pos, @NotNull UserData userData, @NotNull CreatedGui fromGui, @NotNull List<Component> beforeLore) {
+        this.itemStack = CustomStack.getInstance(item).getItemStack();
+        this.item = item;
+        this.pos = pos;
+        this.userData = userData;
+        this.fromGui = fromGui;
+        this.lore = beforeLore;
+    }
+
+    public CustomItem(@NotNull String item, int pos, int amount, @NotNull UserData userData, @NotNull CreatedGui fromGui) {
+        this.itemStack = CustomStack.getInstance(item).getItemStack();
+        this.itemStack.setAmount(amount);
+        this.item = item;
+        this.pos = pos;
+        this.userData = userData;
+        this.fromGui = fromGui;
+    }
+
+    public CustomItem(@NotNull CustomStack customStack, int pos, @NotNull UserData userData, @NotNull CreatedGui fromGui) {
         this.itemStack = customStack.getItemStack();
         this.item = customStack.getNamespacedID();
         this.pos = pos;
-        this.pluginData = pluginData;
+        this.userData = userData;
         this.fromGui = fromGui;
+    }
+
+    public void setAmount(int amount) {
+        this.itemStack.setAmount(amount);
     }
 
     @Override
@@ -57,29 +80,40 @@ public class CustomItem implements GuiItem {
 
     @Override
     public @NotNull ItemStack itemStack() {
+        var meta = itemStack.getItemMeta();
+        if (meta != null) {
+            var locale = gunGaleWiki.getGunGaleAPI().getPlayerLocales().getLocale(userData.getPlayer());
+            lore.addAll(gunGaleWiki.getMessages().getComponentList(locale, item));
+            var addLore = this.lore;
+            addLore.addAll(gunGaleWiki.getMessages().getComponentList(locale, Message.DESCRIPTION));
+            meta.lore(addLore);
+            itemStack.setItemMeta(meta);
+        }
         return itemStack;
-    }
-
-    @Override
-    public @NotNull String name() {
-        return itemStack.getDisplayName();
     }
 
     @Override
     public @NotNull GuiAction action() {
         return (clickType, player) -> {
             var config = gunGaleWiki.getConfiguration();
-            if (clickType == ClickType.SHIFT_LEFT) {
+            if (clickType == ClickType.SHIFT_LEFT || clickType == ClickType.SHIFT_RIGHT) {
                 var messages = new DarkMessagesUtils(gunGaleWiki);
-                if (pluginData.hasPlayerItemInBookmarks(player, item)) {
-                    pluginData.removeFromPlayerBookmarks(player, item);
+                if (userData.hasItemInBookmarks(item)) {
+                    userData.removeFromBookmarks(item);
                     DarkPlayerUtils.playSound(player, Sound.valueOf(config.getString(Config.BOOKMARK_REMOVED_SOUND)));
-                    messages.sendMessage(player, Message.BOOKMARK_REMOVED, Replace.ITEM, CustomStack.getInstance(item).getItemStack().getDisplayName());
+                    messages.sendMessage(player,
+                                         Message.BOOKMARK_REMOVED,
+                                         Replace.ITEM,
+                                         GuiUtils.getNameByItemStack(CustomStack.getInstance(item).getItemStack()));
                 } else {
-                    pluginData.addToPlayerBookmarks(player, item);
+                    userData.addToBookmarks(item);
                     DarkPlayerUtils.playSound(player, Sound.valueOf(config.getString(Config.BOOKMARK_ADDED_SOUND)));
-                    messages.sendMessage(player, Message.BOOKMARK_ADDED, Replace.ITEM, CustomStack.getInstance(item).getItemStack().getDisplayName());
+                    messages.sendMessage(player,
+                                         Message.BOOKMARK_ADDED,
+                                         Replace.ITEM,
+                                         GuiUtils.getNameByItemStack(CustomStack.getInstance(item).getItemStack()));
                 }
+                gunGaleWiki.getPluginData().saveData(userData);
                 if (fromGui instanceof BookMarksGUI || fromGui instanceof WorkBenchGUI || fromGui instanceof FurnaceGUI) {
                     fromGui.delete();
                     assert fromGui.getPageManager() != null;
@@ -96,12 +130,39 @@ public class CustomItem implements GuiItem {
                 return;
             }
             if (clickType == ClickType.LEFT) {
-                var pages = new PageManager(PageType.CRAFT).setRecipes(getRecipes(item));
-                if (pages.hasPage(1)) {
+                var oresData = gunGaleWiki.getOresData();
+                var parsedItem = item;
+                if (item.contains(":")) {
+                    var split = item.split(":");
+                    if (split[0].equalsIgnoreCase("boss_item")) {
+                        return;
+                    }
+                    parsedItem = split[1];
+                }
+                if (oresData.hasOre(parsedItem)) return;
+                if (oresData.hasDrop(parsedItem)) {
+                    var pages = new PageManager(PageType.DROP).setOreItems(oresData.getOresByDrop(parsedItem));
+                    if (pages.hasPage(0)) {
+                        fromGui.delete();
+                        new GuiBuilder(player)
+                                .setItem(parsedItem)
+                                .setPage(0)
+                                .getGui(Gui.ORE)
+                                .setLastGui(fromGui)
+                                .setPageManager(pages)
+                                .setStringItem(parsedItem)
+                                .setName(config.getString(Config.MENU_ORES_NAME))
+                                .open(player);
+                    }
+                    return;
+                }
+
+                var pages = new PageManager(PageType.CRAFT).setRecipes(GuiUtils.getRecipes(item));
+                if (pages.hasPage(0)) {
                     fromGui.delete();
-                    var isFurnace = pages.getPageRecipe(1) instanceof FurnaceRecipe;
+                    var isFurnace = pages.getPageRecipe(0) instanceof FurnaceRecipe;
                     new GuiBuilder(player)
-                            .setPage(1)
+                            .setPage(0)
                             .getGui(isFurnace ? Gui.FURNACE : Gui.WORKBENCH)
                             .setLastGui(fromGui)
                             .setPageManager(pages)
@@ -111,83 +172,17 @@ public class CustomItem implements GuiItem {
                 }
             }
             if (clickType == ClickType.RIGHT) {
-                var pages = new PageManager(PageType.CRAFT).setStackItems(getItemsFromThis(item));
                 fromGui.delete();
                 new GuiBuilder(player)
-                        .setPage(1)
+                        .setPage(0)
                         .setItem(item)
-                        .getGui(Gui.FROM_THIS_ITEM_CRAFT)
+                        .getGui(Gui.FROMITEM)
                         .setLastGui(fromGui)
-                        .setPageManager(pages)
+                        .setPageManager(new PageManager(PageType.CRAFT).setStackItems(GuiUtils.getItemsFromThis(item)))
                         .setStringItem(item)
                         .setName(config.getString(Config.MENU_FROMITEM_NAME))
                         .open(player);
             }
         };
-    }
-
-    private @NotNull List<ItemStack> getItemsFromThis(@NotNull String item) {
-        var cacheName = item.split(":");
-        var itemName = cacheName[cacheName.length-1];
-        var result = new ArrayList<ItemStack>();
-        var iterator = Bukkit.getServer().recipeIterator();
-        while (iterator.hasNext()) {
-            var recipe = iterator.next();
-            if (recipe instanceof Keyed keyed) {
-                if (ItemsAdder.isCustomRecipe(keyed.getKey()) && !result.contains(recipe.getResult())) {
-                    if (recipe instanceof ShapelessRecipe shapelessRecipe) {
-                        if (hasItemInRecipe(shapelessRecipe, itemName)) result.add(recipe.getResult());
-                    } else if (recipe instanceof ShapedRecipe shapedRecipe) {
-                        if (hasItemInRecipe(shapedRecipe, itemName)) result.add(recipe.getResult());
-                    } else if (recipe instanceof FurnaceRecipe furnaceRecipe) {
-                        if (hasItemInRecipe(furnaceRecipe, itemName)) result.add(recipe.getResult());
-                    }
-                }
-            }
-        }
-        return result;
-    }
-
-    private boolean hasItemInRecipe(@NotNull ShapelessRecipe recipe, @NotNull String itemName) {
-        for (var ingredient : recipe.getIngredientList()) {
-            var custom = CustomStack.byItemStack(ingredient);
-            if (custom != null && custom.getId().equalsIgnoreCase(itemName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean hasItemInRecipe(@NotNull ShapedRecipe recipe, @NotNull String itemName) {
-        for (var ingredient : recipe.getIngredientMap().values()) {
-            var custom = CustomStack.byItemStack(ingredient);
-            if (custom != null && custom.getId().equalsIgnoreCase(itemName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean hasItemInRecipe(@NotNull FurnaceRecipe recipe, @NotNull String itemName) {
-        var custom = CustomStack.byItemStack(recipe.getInput());
-        return custom != null && custom.getId().equalsIgnoreCase(itemName);
-    }
-
-
-    private @NotNull List<Recipe> getRecipes(@NotNull String item) {
-        var result = new ArrayList<Recipe>();
-        var cacheName = item.split(":");
-        var itemName = cacheName[cacheName.length-1];
-
-        for (var recipe : Bukkit.getServer().getRecipesFor(CustomStack.getInstance(item).getItemStack())) {
-
-            var custom = CustomStack.byItemStack(recipe.getResult());
-
-            if (recipe instanceof Keyed keyed && custom != null && custom.getId().equalsIgnoreCase(itemName) && ItemsAdder.isCustomRecipe(keyed.getKey())) {
-                    result.add(recipe);
-            }
-
-        }
-        return result;
     }
 }

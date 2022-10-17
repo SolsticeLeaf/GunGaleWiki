@@ -1,16 +1,17 @@
 package kiinse.plugins.ggo.gungalewiki.gui.builder;
 
 import kiinse.plugins.ggo.gungalewiki.enums.Gui;
+import kiinse.plugins.ggo.gungalewiki.gui.builder.interfaces.WikiGuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.menus.MainGUI;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class GuiBuilder {
+public class GuiBuilder implements WikiGuiBuilder {
 
     private final Player player;
-    private int page = 1;
+    private int page = 0;
 
     private String item;
 
@@ -18,15 +19,18 @@ public class GuiBuilder {
         this.player = player;
     }
 
+    @Override
     public @Nullable String getItem() {
         return item;
     }
 
+    @Override
     public @NotNull GuiBuilder setItem(@Nullable String item) {
         this.item = item;
         return this;
     }
 
+    @Override
     public @NotNull CreatedGui getGui(@NotNull Gui gui) {
         try {
             var result = gui.get().getDeclaredConstructor().newInstance();
@@ -41,15 +45,18 @@ public class GuiBuilder {
         }
     }
 
+    @Override
     public int getPage() {
         return page;
     }
 
+    @Override
     public @NotNull GuiBuilder setPage(int page) {
         this.page = page;
         return this;
     }
 
+    @Override
     public @NotNull Player getPlayer() {
         return player;
     }

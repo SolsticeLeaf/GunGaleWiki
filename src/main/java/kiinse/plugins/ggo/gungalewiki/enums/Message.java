@@ -3,14 +3,14 @@ package kiinse.plugins.ggo.gungalewiki.enums;
 import kiinse.plugins.ggo.gungaleapi.api.files.messages.MessagesKeys;
 
 public enum Message implements MessagesKeys {
+    DESCRIPTION,
+    ORE_DROP,
     BUTTON_BACK_NAME,
     BUTTON_BACK_LORE,
     BUTTON_LAST_CRAFTS_NAME,
     BUTTON_LAST_CRAFTS_LORE,
     BUTTON_BOOKMARKS_NAME,
     BUTTON_BOOKMARKS_LORE,
-    BUTTON_CATEGORIES_NAME,
-    BUTTON_CATEGORIES_LORE,
     BUTTON_NEXT_PAGE_NAME,
     BUTTON_NEXT_PAGE_LORE,
     BUTTON_PREV_PAGE_NAME,

@@ -22,7 +22,7 @@ public class FiltersButtonImpl implements FiltersButton {
     private final int cmd;
     private final Material material;
     private final List<String> items;
-    private String name;
+    private Component name;
     private List<Component> lore;
 
     public FiltersButtonImpl(@NotNull YamlConfiguration yamlConfiguration) {
@@ -34,7 +34,7 @@ public class FiltersButtonImpl implements FiltersButton {
 
     public @NotNull FiltersButton get(@NotNull GunGaleJavaPlugin plugin, @NotNull Button button, @NotNull PlayerLocale playerLocale) {
         var messages = plugin.getMessages();
-        this.name = messages.getStringMessage(playerLocale, Message.valueOf("BUTTON_FILTER_" + button + "_NAME"));
+        this.name = messages.getComponentMessage(playerLocale, Message.valueOf("BUTTON_FILTER_" + button + "_NAME"));
         this.lore = messages.getComponentList(playerLocale, Message.valueOf("BUTTON_FILTER_" + button + "_LORE"));
         return this;
     }
@@ -52,7 +52,7 @@ public class FiltersButtonImpl implements FiltersButton {
     }
 
     @Override
-    public @NotNull String getName() {
+    public @NotNull Component getName() {
         return name;
     }
 

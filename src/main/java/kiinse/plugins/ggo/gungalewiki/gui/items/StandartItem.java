@@ -4,7 +4,6 @@ import kiinse.plugins.ggo.gungaleapi.api.gui.GuiAction;
 import kiinse.plugins.ggo.gungaleapi.api.gui.GuiItem;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class StandartItem implements GuiItem {
 
@@ -24,11 +23,6 @@ public class StandartItem implements GuiItem {
     @Override
     public @NotNull ItemStack itemStack() {
         return itemStack;
-    }
-
-    @Override
-    public @Nullable String name() {
-        return null;
     }
 
     @Override

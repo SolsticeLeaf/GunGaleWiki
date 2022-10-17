@@ -5,6 +5,7 @@ import kiinse.plugins.ggo.gungaleapi.api.gui.GuiItem;
 import kiinse.plugins.ggo.gungaleapi.core.utilities.DarkPlayerUtils;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.enums.Config;
+import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -28,12 +29,8 @@ public class PlayerHead implements GuiItem {
         return ggw.getItemStackUtils().getPlayerHead(usedPlayer, skullMeta -> {
             var cmd = ggw.getConfiguration().getInt(Config.PLAYER_HEAD_CMD);
             if (cmd != 0) skullMeta.setCustomModelData(cmd);
+            skullMeta.displayName(Component.text(DarkPlayerUtils.getPlayerName(usedPlayer)));
         });
-    }
-
-    @Override
-    public @NotNull String name() {
-        return DarkPlayerUtils.getPlayerName(usedPlayer);
     }
 
     @Override
