@@ -6,7 +6,7 @@ import kiinse.plugins.ggo.gungaleapi.api.files.filemanager.YamlFile;
 import kiinse.plugins.ggo.gungaleapi.api.files.locale.PlayerLocale;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.enums.Config;
-import kiinse.plugins.ggo.gungalewiki.enums.Gui;
+import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.items.NextPageButton;

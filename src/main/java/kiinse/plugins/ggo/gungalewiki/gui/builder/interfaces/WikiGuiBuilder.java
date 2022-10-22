@@ -1,6 +1,6 @@
 package kiinse.plugins.ggo.gungalewiki.gui.builder.interfaces;
 
-import kiinse.plugins.ggo.gungalewiki.enums.Gui;
+import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import org.bukkit.entity.Player;

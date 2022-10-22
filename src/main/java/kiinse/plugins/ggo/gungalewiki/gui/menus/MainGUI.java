@@ -1,7 +1,7 @@
 package kiinse.plugins.ggo.gungalewiki.gui.menus;
 
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
-import kiinse.plugins.ggo.gungalewiki.enums.Button;
+import kiinse.plugins.ggo.gungalewiki.files.buttons.Button;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.interfaces.FiltersButtons;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.items.BookMarkButton;

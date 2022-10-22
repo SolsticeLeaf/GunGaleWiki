@@ -4,7 +4,7 @@ import kiinse.plugins.ggo.gungaleapi.api.GunGaleJavaPlugin;
 import kiinse.plugins.ggo.gungaleapi.api.gui.GuiItem;
 import kiinse.plugins.ggo.gungaleapi.core.gui.DarkGUI;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
-import kiinse.plugins.ggo.gungalewiki.enums.Gui;
+import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.interfaces.WikiPageManager;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

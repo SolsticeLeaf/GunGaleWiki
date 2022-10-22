@@ -7,14 +7,15 @@ import com.github.danirod12.gungalecore.api.user.PlayerStat;
 import kiinse.plugins.ggo.gungaleapi.core.utilities.DarkPlayerUtils;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.data.interfaces.UserData;
-import kiinse.plugins.ggo.gungalewiki.enums.Button;
 import kiinse.plugins.ggo.gungalewiki.enums.Config;
-import kiinse.plugins.ggo.gungalewiki.enums.Gui;
-import kiinse.plugins.ggo.gungalewiki.enums.PageType;
+import kiinse.plugins.ggo.gungalewiki.files.buttons.Button;
 import kiinse.plugins.ggo.gungalewiki.gui.GuiUtils;
+import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
+import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
+import kiinse.plugins.ggo.gungalewiki.pagemanager.interfaces.WikiPageManager;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -81,17 +82,31 @@ public class CoreUserData implements UserData {
     public @NotNull CreatedGui getLastGui() {
         var last = vpWikiData.getLastGui();
         var type = Gui.valueOf(last.getType());
+        try {
+            var gunGaleWiki = GunGaleWiki.getInstance();
+            var button = Button.valueOf(last.getItem().toUpperCase());
+            var filterButton = gunGaleWiki.getFilterButtons().getButton(button, gunGaleWiki.getGunGaleAPI().getPlayerLocales().getLocale(player));
+            return new GuiBuilder(player)
+                    .setItem(button.toString())
+                    .getGui(Gui.ITEMS)
+                    .setPageManager(new PageManager(PageType.ITEMS).setItems(filterButton.getItems()))
+                    .setPage(0)
+                    .setLastGui(GuiUtils.getMainGui(player))
+                    .setGuiName(filterButton.getMenuName());
+        } catch (Exception ignored) {
+        }
         return new GuiBuilder(player)
                 .setItem(last.getItem())
                 .setPage(last.getPage())
                 .getGui(type)
+                .setType(type)
                 .setLastGui(GuiUtils.getMainGui(player))
                 .setStringItem(last.getItem())
-                .setGuiName(GunGaleWiki.getInstance().getConfiguration().getString(Config.valueOf("MENU_" + last.getType() + "_NAME")))
-                .setPageManager(getPageManager(type, last.getItem()));
+                .setPageManager(getPageManager(type, last.getItem()))
+                .setGuiName(GunGaleWiki.getInstance().getConfiguration().getString(Config.valueOf("MENU_" + type + "_NAME")));
     }
 
-    private @NotNull PageManager getPageManager(@NotNull Gui gui, @NotNull String item) {
+    private @NotNull WikiPageManager getPageManager(@NotNull Gui gui, @NotNull String item) {
         var gunGaleWiki = GunGaleWiki.getInstance();
         switch (gui) {
             case FURNACE, WORKBENCH -> {

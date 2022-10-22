@@ -4,7 +4,6 @@ import kiinse.plugins.ggo.gungaleapi.api.GunGaleJavaPlugin;
 import kiinse.plugins.ggo.gungaleapi.api.files.locale.PlayerLocale;
 import kiinse.plugins.ggo.gungaleapi.core.utilities.DarkItemUtils;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
-import kiinse.plugins.ggo.gungalewiki.enums.Button;
 import kiinse.plugins.ggo.gungalewiki.enums.Message;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.interfaces.FiltersButton;
 import net.kyori.adventure.text.Component;

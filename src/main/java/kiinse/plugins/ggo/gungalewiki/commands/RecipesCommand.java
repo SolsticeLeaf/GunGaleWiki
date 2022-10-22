@@ -6,6 +6,7 @@ import kiinse.plugins.ggo.gungaleapi.api.commands.CommandContext;
 import kiinse.plugins.ggo.gungaleapi.api.commands.DarkCommand;
 import kiinse.plugins.ggo.gungaleapi.core.utilities.DarkPlayerUtils;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
+import kiinse.plugins.ggo.gungalewiki.gui.GuiUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.logging.Level;
@@ -24,6 +25,7 @@ public class RecipesCommand extends DarkCommand {
             GunGaleWiki.getInstance().getPluginData().getUserData(DarkPlayerUtils.getPlayer(context.getSender())).getLastGui().open(context.getSender());
         } catch (Exception e) {
             getPlugin().sendLog(Level.WARNING, "Error on gui open: " + e.getMessage());
+            GuiUtils.getMainGui(DarkPlayerUtils.getPlayer(context.getSender())).open(context.getSender());
         }
     }
 }

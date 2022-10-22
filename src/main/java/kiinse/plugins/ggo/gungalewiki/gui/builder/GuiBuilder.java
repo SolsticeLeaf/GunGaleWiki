@@ -1,6 +1,5 @@
 package kiinse.plugins.ggo.gungalewiki.gui.builder;
 
-import kiinse.plugins.ggo.gungalewiki.enums.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.interfaces.WikiGuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.menus.MainGUI;

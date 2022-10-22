@@ -1,15 +1,12 @@
 package kiinse.plugins.ggo.gungalewiki.gui.menus;
 
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
-import kiinse.plugins.ggo.gungalewiki.enums.Gui;
-import kiinse.plugins.ggo.gungalewiki.enums.PageType;
+import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
-import kiinse.plugins.ggo.gungalewiki.gui.items.BackButton;
-import kiinse.plugins.ggo.gungalewiki.gui.items.CustomItem;
-import kiinse.plugins.ggo.gungalewiki.gui.items.NextPageButton;
-import kiinse.plugins.ggo.gungalewiki.gui.items.PrevPageButton;
+import kiinse.plugins.ggo.gungalewiki.gui.items.*;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
+import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import org.jetbrains.annotations.NotNull;
 
 public class ItemsGUI extends CreatedGui {
@@ -41,7 +38,7 @@ public class ItemsGUI extends CreatedGui {
                     .setName(getName())
                     .open(player);
         })));
-        setCreatedItem(new BackButton(getPlayerLocale(), gunGaleWiki, 49, this));
+        setCreatedItem(new HomeButton(getPlayerLocale(), gunGaleWiki, 49, this));
         setCreatedItem(new PrevPageButton(getPageManager().hasPage(getPage() - 1), getPlayerLocale(), gunGaleWiki, 48, ((clickType, player) -> {
             delete();
             new GuiBuilder(player)
@@ -52,5 +49,9 @@ public class ItemsGUI extends CreatedGui {
                     .setName(getName())
                     .open(player);
         })));
+
+        for (var j : new int[]{45, 46}) {
+            setCreatedItem(new BackButton(getPlayerLocale(), gunGaleWiki, j, this));
+        }
     }
 }

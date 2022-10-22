@@ -3,11 +3,15 @@ package kiinse.plugins.ggo.gungalewiki.gui.menus;
 import dev.lone.itemsadder.api.CustomStack;
 import kiinse.plugins.ggo.gungaleapi.core.utilities.DarkUtils;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
-import kiinse.plugins.ggo.gungalewiki.enums.*;
+import kiinse.plugins.ggo.gungalewiki.enums.Config;
+import kiinse.plugins.ggo.gungalewiki.enums.Message;
+import kiinse.plugins.ggo.gungalewiki.enums.Replace;
+import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.items.*;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
+import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.jetbrains.annotations.NotNull;
@@ -52,7 +56,7 @@ public class OreGUI extends CreatedGui {
             delete();
             new GuiBuilder(player)
                     .setPage(getPage() + 1)
-                    .getGui(Gui.ORE)
+                    .getGui(Gui.ORES)
                     .setLastGui(getLastGui())
                     .setPageManager(getPageManager())
                     .setStringItem(getItem())
@@ -66,7 +70,7 @@ public class OreGUI extends CreatedGui {
             delete();
             new GuiBuilder(player)
                     .setPage(getPage() - 1)
-                    .getGui(Gui.ORE)
+                    .getGui(Gui.ORES)
                     .setLastGui(getLastGui())
                     .setPageManager(getPageManager())
                     .setStringItem(getItem())

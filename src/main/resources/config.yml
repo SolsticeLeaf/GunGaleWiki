@@ -1,52 +1,50 @@
-player.head.cmd: 0 # CustomModelData головы на главной странице
+player.head.cmd: 10 # CustomModelData головы на главной странице
 
-button.back.material: YELLOW_STAINED_GLASS_PANE # Материал кнопки назад
-button.back.cmd: 0 # CustomModelData кнопки назад
+button.back.material: LEAD # Материал кнопки назад
+button.back.cmd: 17 # CustomModelData кнопки назад
 
-button.lastcrafts.material: GREEN_STAINED_GLASS_PANE # Материал кнопки последних просмотренных крафтов
-button.lastcrafts.cmd: 0 # CustomModelData кнопки последних просмотренных крафтов
+button.lastcrafts.material: LEAD # Материал кнопки последних просмотренных крафтов
+button.lastcrafts.cmd: 17 # CustomModelData кнопки последних просмотренных крафтов
 
-button.add.bookmarks.material: GREEN_STAINED_GLASS_PANE # Материал кнопки закладок (Добавление в меню крафта)
-button.add.bookmarks.cmd: 0 # CustomModelData кнопки закладок (Добавление в меню крафта)
+button.add.bookmarks.material: LEAD # Материал кнопки закладок (Добавление в меню крафта)
+button.add.bookmarks.cmd: 100 # CustomModelData кнопки закладок (Добавление в меню крафта)
 
-button.remove.bookmarks.material: RED_STAINED_GLASS_PANE # Материал кнопки закладок (Убирание в меню крафта)
-button.remove.bookmarks.cmd: 0 # CustomModelData кнопки закладок (Убирание в меню крафта)
+button.remove.bookmarks.material: LEAD # Материал кнопки закладок (Убирание в меню крафта)
+button.remove.bookmarks.cmd: 101 # CustomModelData кнопки закладок (Убирание в меню крафта)
 
-button.bookmarks.material: GREEN_STAINED_GLASS_PANE # Материал кнопки закладок
-button.bookmarks.cmd: 0 # CustomModelData кнопки закладок
+button.bookmarks.material: LEAD # Материал кнопки закладок
+button.bookmarks.cmd: 17 # CustomModelData кнопки закладок
 
-button.nextpage.allow.material: BLUE_STAINED_GLASS_PANE # Материал кнопки следующей страницы (Когда кнопка доступна)
-button.nextpage.allow.cmd: 0 # CustomModelData кнопки следующей страницы (Когда кнопка доступна)
+button.nextpage.allow.material: LEAD # Материал кнопки следующей страницы (Когда кнопка доступна)
+button.nextpage.allow.cmd: 103 # CustomModelData кнопки следующей страницы (Когда кнопка доступна)
 
-button.nextpage.disallow.material: BLUE_STAINED_GLASS_PANE # Материал кнопки следующей страницы (Когда кнопка недоступна)
-button.nextpage.disallow.cmd: 0 # CustomModelData кнопки следующей страницы (Когда кнопка недоступна)
+button.nextpage.disallow.material: LEAD # Материал кнопки следующей страницы (Когда кнопка недоступна)
+button.nextpage.disallow.cmd: 102 # CustomModelData кнопки следующей страницы (Когда кнопка недоступна)
 
-button.prevpage.allow.material: BLUE_STAINED_GLASS_PANE # Материал кнопки предыдущей страницы (Когда кнопка доступна)
-button.prevpage.allow.cmd: 0 # CustomModelData кнопки предыдущей страницы (Когда кнопка доступна)
+button.prevpage.allow.material: LEAD # Материал кнопки предыдущей страницы (Когда кнопка доступна)
+button.prevpage.allow.cmd: 105 # CustomModelData кнопки предыдущей страницы (Когда кнопка доступна)
 
-button.prevpage.disallow.material: BLUE_STAINED_GLASS_PANE # Материал кнопки предыдущей страницы (Когда кнопка недоступна)
-button.prevpage.disallow.cmd: 0 # CustomModelData кнопки предыдущей страницы (Когда кнопка недоступна)
+button.prevpage.disallow.material: LEAD # Материал кнопки предыдущей страницы (Когда кнопка недоступна)
+button.prevpage.disallow.cmd: 104 # CustomModelData кнопки предыдущей страницы (Когда кнопка недоступна)
 
-button.home.material: RED_STAINED_GLASS_PANE # Материал кнопки домой
-button.home.cmd: 0 # CustomModelData кнопки домой
+button.home.material: LEAD # Материал кнопки домой
+button.home.cmd: 17 # CustomModelData кнопки домой
 
 furnace.coal.material: COAL # Материал угля в печке
-furnace.coal.cmd: 0 # CustomModelData угля в печке
+furnace.coal.cmd: 17 # CustomModelData угля в печке
 furnace.fire.material: CAMPFIRE # Материал огонька в печке
-furnace.fire.cmd: 0 # CustomModelData огонька в печке
+furnace.fire.cmd: 17 # CustomModelData огонька в печке
 
-menu.ores.name: Drop from ore # Название меню с рудами
-menu.lastseen.name: last crafts # Название меню с последними крафтами
-menu.home.name: Main # Название главного меню
-menu.fromitem.name: Crafts from this item # Название меню с просмотром того, что делается из выбранного предмета
-menu.workbench.name: WorkBench # Название меню с крафтом выбранного предмета в верстаке
-menu.furnace.name: Furnace # Название меню с крафтом выбранного предмета в печке
-menu.bookmarks.name: Bookmarks # Название меню закладок
+menu.ores.name: &f❄ # Название меню с рудами
+menu.lastseen.name: &f✳ # Название меню с последними крафтами
+menu.home.name: &f✴ # Название главного меню
+menu.fromitem.name: &f✸ # Название меню с просмотром того, что делается из выбранного предмета
+menu.workbench.name: &f✵ # Название меню с крафтом выбранного предмета в верстаке
+menu.furnace.name: &f✶ # Название меню с крафтом выбранного предмета в печке
+menu.bookmarks.name: &f✲ # Название меню закладок
 
 bookmark.added.sound: BLOCK_AMETHYST_BLOCK_CHIME # Sound Когда предмет добавлен в закладки
 bookmark.removed.sound: BLOCK_AMETHYST_BLOCK_HIT # Sound Когда предмет убран из закладок
 
-ggcore.use: false  # Использование GGCore
-
 # Версия конфига, не трогать, моё!
-config.version: 3
+config.version: 5

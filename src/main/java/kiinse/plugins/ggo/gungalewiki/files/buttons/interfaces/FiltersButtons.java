@@ -1,7 +1,7 @@
 package kiinse.plugins.ggo.gungalewiki.files.buttons.interfaces;
 
 import kiinse.plugins.ggo.gungaleapi.api.files.locale.PlayerLocale;
-import kiinse.plugins.ggo.gungalewiki.enums.Button;
+import kiinse.plugins.ggo.gungalewiki.files.buttons.Button;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.jetbrains.annotations.NotNull;
 

@@ -7,7 +7,6 @@ import kiinse.plugins.ggo.gungalewiki.data.GGWikiDataImpl;
 import kiinse.plugins.ggo.gungalewiki.data.Ores;
 import kiinse.plugins.ggo.gungalewiki.data.interfaces.GGWikiData;
 import kiinse.plugins.ggo.gungalewiki.data.interfaces.OresData;
-import kiinse.plugins.ggo.gungalewiki.enums.Config;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.ButtonsData;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.interfaces.FiltersButtons;
 import kiinse.plugins.ggo.gungalewiki.initialize.RegisterCommands;
@@ -28,7 +27,7 @@ public final class GunGaleWiki extends GunGaleJavaPlugin {
     @Override
     public void onStart() throws Exception {
         instance = this;
-        this.wikiData = new GGWikiDataImpl(getConfiguration().getBoolean(Config.GGCORE_USE));
+        this.wikiData = new GGWikiDataImpl(getServer().getPluginManager().getPlugin("GunGaleCore") != null);
         buttons = new ButtonsData(this).load();
         itemStackUtils = new DarkItemUtils(this);
         this.oresData = new Ores(this);

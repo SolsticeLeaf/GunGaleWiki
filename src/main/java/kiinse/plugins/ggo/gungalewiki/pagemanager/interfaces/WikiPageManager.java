@@ -1,6 +1,5 @@
 package kiinse.plugins.ggo.gungalewiki.pagemanager.interfaces;
 
-import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.jetbrains.annotations.NotNull;
@@ -10,13 +9,13 @@ import java.util.List;
 
 public interface WikiPageManager {
 
-    @NotNull PageManager setStackItems(@NotNull List<ItemStack> items);
+    @NotNull WikiPageManager setStackItems(@NotNull List<ItemStack> items);
 
-    @NotNull PageManager setOreItems(@NotNull List<String> items);
+    @NotNull WikiPageManager setOreItems(@NotNull List<String> items);
 
-    @NotNull PageManager setItems(@NotNull List<String> items);
+    @NotNull WikiPageManager setItems(@NotNull List<String> items);
 
-    @NotNull PageManager setRecipes(@NotNull List<Recipe> recipes);
+    @NotNull WikiPageManager setRecipes(@NotNull List<Recipe> recipes);
 
     boolean hasPage(int page);
 

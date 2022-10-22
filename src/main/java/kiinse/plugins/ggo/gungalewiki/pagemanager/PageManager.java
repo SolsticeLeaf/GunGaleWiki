@@ -1,6 +1,5 @@
 package kiinse.plugins.ggo.gungalewiki.pagemanager;
 
-import kiinse.plugins.ggo.gungalewiki.enums.PageType;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.interfaces.WikiPageManager;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -20,18 +19,20 @@ public class PageManager implements WikiPageManager {
     private HashMap<Integer, List<ItemStack>> pagesItemsItemstack = new HashMap<>();
     private HashMap<Integer, List<String>> pagesItems = new HashMap<>();
 
+    // TODO: Убрать это недоразумение и заменить на Map<?, ?> map = new HashMap<>();
+
     public PageManager(@NotNull PageType pageType) {
         this.pageType = pageType;
     }
 
     @Override
-    public @NotNull PageManager setStackItems(@NotNull List<ItemStack> items) {
+    public @NotNull WikiPageManager setStackItems(@NotNull List<ItemStack> items) {
         pagesItemsItemstack = createPageStack(items);
         return this;
     }
 
     @Override
-    public @NotNull PageManager setOreItems(@NotNull List<String> items) {
+    public @NotNull WikiPageManager setOreItems(@NotNull List<String> items) {
         int i = 0;
         for (var item : items) {
             dropItems.put(i, item);
@@ -41,13 +42,13 @@ public class PageManager implements WikiPageManager {
     }
 
     @Override
-    public @NotNull PageManager setItems(@NotNull List<String> items) {
+    public @NotNull WikiPageManager setItems(@NotNull List<String> items) {
         pagesItems = createPageString(items);
         return this;
     }
 
     @Override
-    public @NotNull PageManager setRecipes(@NotNull List<Recipe> recipes) {
+    public @NotNull WikiPageManager setRecipes(@NotNull List<Recipe> recipes) {
         int i = 0;
         for (var recipe : recipes) {
             pagesRecipes.put(i, recipe);

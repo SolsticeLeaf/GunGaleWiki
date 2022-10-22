@@ -5,6 +5,7 @@ import kiinse.plugins.ggo.gungaleapi.api.exceptions.CommandException;
 import kiinse.plugins.ggo.gungaleapi.core.commands.CommandManager;
 import kiinse.plugins.ggo.gungalewiki.commands.CraftCommand;
 import kiinse.plugins.ggo.gungalewiki.commands.CraftsCommand;
+import kiinse.plugins.ggo.gungalewiki.commands.RecipeCommand;
 import kiinse.plugins.ggo.gungalewiki.commands.RecipesCommand;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,7 +16,8 @@ public class RegisterCommands {
         new CommandManager(plugin)
                 .registerCommand(new CraftCommand(plugin))
                 .registerCommand(new CraftsCommand(plugin))
-                .registerCommand(new RecipesCommand(plugin));
+                .registerCommand(new RecipesCommand(plugin))
+                .registerCommand(new RecipeCommand(plugin));
         plugin.sendLog("Commands registered");
     }
 }

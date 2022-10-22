@@ -1,4 +1,4 @@
-package kiinse.plugins.ggo.gungalewiki.enums;
+package kiinse.plugins.ggo.gungalewiki.gui.builder;
 
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.menus.*;
@@ -11,7 +11,7 @@ public enum Gui {
     LASTSEEN(LastCraftsGUI.class),
     ITEMS(ItemsGUI.class),
     FROMITEM(FromThisItemCraftGUI.class),
-    ORE(OreGUI.class),
+    ORES(OreGUI.class),
     BOOKMARKS(BookMarksGUI.class);
 
     private final Class<? extends CreatedGui> darkGUI;

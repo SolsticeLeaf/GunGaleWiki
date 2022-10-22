@@ -2,11 +2,11 @@ package kiinse.plugins.ggo.gungalewiki.gui.menus;
 
 import dev.lone.itemsadder.api.CustomStack;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
-import kiinse.plugins.ggo.gungalewiki.enums.PageType;
 import kiinse.plugins.ggo.gungalewiki.gui.GuiUtils;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.items.*;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
+import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.jetbrains.annotations.NotNull;
 

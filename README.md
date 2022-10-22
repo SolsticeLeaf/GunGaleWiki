@@ -4,6 +4,6 @@
 
 #### API: https://github.com/kiinse/GunGaleAPI
 
-#### Команды: /crafts, /craft, /recipes
+#### Команды: /crafts, /craft, /recipes, /recipe
 
 #### Права: gungalewiki.menu

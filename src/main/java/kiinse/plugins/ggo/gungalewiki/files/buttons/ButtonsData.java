@@ -3,7 +3,6 @@ package kiinse.plugins.ggo.gungalewiki.files.buttons;
 import kiinse.plugins.ggo.gungaleapi.api.GunGaleJavaPlugin;
 import kiinse.plugins.ggo.gungaleapi.api.files.filemanager.FilesManager;
 import kiinse.plugins.ggo.gungaleapi.api.files.locale.PlayerLocale;
-import kiinse.plugins.ggo.gungalewiki.enums.Button;
 import kiinse.plugins.ggo.gungalewiki.enums.Directory;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.interfaces.FiltersButton;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.interfaces.FiltersButtons;

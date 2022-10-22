@@ -2,13 +2,13 @@ package kiinse.plugins.ggo.gungalewiki.gui.items;
 
 import kiinse.plugins.ggo.gungaleapi.api.gui.GuiAction;
 import kiinse.plugins.ggo.gungaleapi.api.gui.GuiItem;
-import kiinse.plugins.ggo.gungalewiki.enums.Button;
-import kiinse.plugins.ggo.gungalewiki.enums.Gui;
-import kiinse.plugins.ggo.gungalewiki.enums.PageType;
+import kiinse.plugins.ggo.gungalewiki.files.buttons.Button;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.interfaces.FiltersButton;
+import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
+import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -53,6 +53,7 @@ public class FilterButton implements GuiItem {
                     .setPageManager(new PageManager(PageType.ITEMS).setItems(items))
                     .setPage(0)
                     .setLastGui(lastGui)
+                    .setStringItem(button.toString())
                     .setName(menuName)
                     .open(player);
         });

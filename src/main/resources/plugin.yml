@@ -4,10 +4,15 @@ main: kiinse.plugins.ggo.gungalewiki.GunGaleWiki
 api-version: 1.19
 prefix: GGW
 depend: [ GunGaleAPI, ItemsAdder ]
+softdepend: [ GunGaleCore ]
 authors: [ kiinse ]
 website: https://kiinse.me
 commands:
   recipes:
+    description: Opens recipes menu
+    permission: gungalewiki.menu
+    usage: /<command>
+  recipe:
     description: Opens recipes menu
     permission: gungalewiki.menu
     usage: /<command>
@@ -21,7 +26,7 @@ commands:
     usage: /<command>
 permissions:
   gungalewiki.menu:
-    description: Allows /recipes, /craft, /crafts commands
+    description: Allows /recipes, /recipe, /craft, /crafts commands
     default: op
   gungalewiki.*:
     description: All perms

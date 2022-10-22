@@ -7,14 +7,15 @@ import kiinse.plugins.ggo.gungaleapi.core.files.messages.DarkMessagesUtils;
 import kiinse.plugins.ggo.gungaleapi.core.utilities.DarkPlayerUtils;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.data.interfaces.UserData;
-import kiinse.plugins.ggo.gungalewiki.enums.*;
+import kiinse.plugins.ggo.gungalewiki.enums.Config;
+import kiinse.plugins.ggo.gungalewiki.enums.Message;
+import kiinse.plugins.ggo.gungalewiki.enums.Replace;
 import kiinse.plugins.ggo.gungalewiki.gui.GuiUtils;
+import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
-import kiinse.plugins.ggo.gungalewiki.gui.menus.BookMarksGUI;
-import kiinse.plugins.ggo.gungalewiki.gui.menus.FurnaceGUI;
-import kiinse.plugins.ggo.gungalewiki.gui.menus.WorkBenchGUI;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
+import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Sound;
 import org.bukkit.event.inventory.ClickType;
@@ -114,19 +115,17 @@ public class CustomItem implements GuiItem {
                                          GuiUtils.getNameByItemStack(CustomStack.getInstance(item).getItemStack()));
                 }
                 gunGaleWiki.getPluginData().saveData(userData);
-                if (fromGui instanceof BookMarksGUI || fromGui instanceof WorkBenchGUI || fromGui instanceof FurnaceGUI) {
-                    fromGui.delete();
-                    assert fromGui.getPageManager() != null;
-                    new GuiBuilder(player)
-                            .setPage(fromGui.getPage())
-                            .setItem(fromGui.getItem())
-                            .getGui(fromGui.getType())
-                            .setPageManager(fromGui.getPageManager())
-                            .setLastGui(fromGui.getLastGui())
-                            .setStringItem(fromGui.getItem())
-                            .setGuiName(fromGui.getName())
-                            .open(player);
-                }
+                fromGui.delete();
+                assert fromGui.getPageManager() != null;
+                new GuiBuilder(player)
+                        .setPage(fromGui.getPage())
+                        .setItem(fromGui.getItem())
+                        .getGui(fromGui.getType())
+                        .setPageManager(fromGui.getPageManager())
+                        .setLastGui(fromGui.getLastGui())
+                        .setStringItem(fromGui.getItem())
+                        .setGuiName(fromGui.getName())
+                        .open(player);
                 return;
             }
             if (clickType == ClickType.LEFT) {
@@ -147,7 +146,7 @@ public class CustomItem implements GuiItem {
                         new GuiBuilder(player)
                                 .setItem(parsedItem)
                                 .setPage(0)
-                                .getGui(Gui.ORE)
+                                .getGui(Gui.ORES)
                                 .setLastGui(fromGui)
                                 .setPageManager(pages)
                                 .setStringItem(parsedItem)

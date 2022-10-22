@@ -1,6 +1,6 @@
 button.material: BLUE_STAINED_GLASS_PANE # Материал кнопки
 button.cmd: 0 # CustomModelData кнопки
-menu.name: Хлорофитовые # Название меню фильтра
+menu.name: &f✷ # Название меню фильтра
 
 # Предметы фильтра
 button.items:

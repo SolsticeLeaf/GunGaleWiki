@@ -1,11 +1,11 @@
 package kiinse.plugins.ggo.gungalewiki.gui.menus;
 
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
-import kiinse.plugins.ggo.gungalewiki.enums.PageType;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.items.BackButton;
 import kiinse.plugins.ggo.gungalewiki.gui.items.CustomItem;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
+import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;

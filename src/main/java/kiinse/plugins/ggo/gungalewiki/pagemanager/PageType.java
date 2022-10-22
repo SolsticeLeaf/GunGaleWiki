@@ -1,4 +1,4 @@
-package kiinse.plugins.ggo.gungalewiki.enums;
+package kiinse.plugins.ggo.gungalewiki.pagemanager;
 
 public enum PageType {
     CRAFT,

@@ -1,4 +1,4 @@
-package kiinse.plugins.ggo.gungalewiki.enums;
+package kiinse.plugins.ggo.gungalewiki.files.buttons;
 
 public enum Button {
     BUTTON1,

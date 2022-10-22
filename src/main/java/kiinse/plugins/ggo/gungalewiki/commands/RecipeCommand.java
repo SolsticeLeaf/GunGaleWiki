@@ -11,14 +11,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.logging.Level;
 
-public class CraftsCommand extends DarkCommand {
+public class RecipeCommand extends DarkCommand {
 
-    public CraftsCommand(@NotNull GunGaleJavaPlugin plugin) {
+    public RecipeCommand(@NotNull GunGaleJavaPlugin plugin) {
         super(plugin);
     }
 
-
-    @Command(command = "crafts",
+    @Command(command = "recipe",
              disallowNonPlayer = true,
              permission = "gungalewiki.menu")
     public void recipes(@NotNull CommandContext context) {
@@ -29,5 +28,4 @@ public class CraftsCommand extends DarkCommand {
             GuiUtils.getMainGui(DarkPlayerUtils.getPlayer(context.getSender())).open(context.getSender());
         }
     }
-
 }
