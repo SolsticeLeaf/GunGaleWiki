@@ -6,7 +6,6 @@ import kiinse.plugins.ggo.gungalewiki.gui.GuiUtils;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.items.*;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
-import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,7 +19,7 @@ public class FurnaceGUI extends CreatedGui {
     public void onOpenInventory(@NotNull GunGaleWiki gunGaleWiki) {
         assert getItem() != null;
         if (getPageManager() == null) {
-            setPageManager(new PageManager(PageType.CRAFT).setRecipes(GuiUtils.getRecipes(getItem())));
+            setPageManager(new PageManager().setRecipes(GuiUtils.getRecipes(getItem())));
         }
 
         var pluginData = gunGaleWiki.getPluginData();

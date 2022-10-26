@@ -5,7 +5,6 @@ import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.items.BackButton;
 import kiinse.plugins.ggo.gungalewiki.gui.items.CustomItem;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
-import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -20,7 +19,7 @@ public class LastCraftsGUI extends CreatedGui {
     public void onOpenInventory(@NotNull GunGaleWiki gunGaleWiki) {
         var userData = gunGaleWiki.getPluginData().getUserData(getPlayer());
         if (getPageManager() == null) {
-            setPageManager(new PageManager(PageType.BOOKMARK).setItems(userData.getLastSeen()));
+            setPageManager(new PageManager().setItems(userData.getLastSeen()));
         }
         setCreatedItem(new BackButton(getPlayerLocale(), gunGaleWiki, 49, this));
         var list = userData.getLastSeen();

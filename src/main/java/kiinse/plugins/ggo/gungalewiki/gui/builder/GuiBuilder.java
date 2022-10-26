@@ -30,7 +30,7 @@ public class GuiBuilder implements WikiGuiBuilder {
     }
 
     @Override
-    public @NotNull CreatedGui getGui(@NotNull Gui gui) {
+    public @NotNull CreatedGui setGui(@NotNull Gui gui) {
         try {
             var result = gui.get().getDeclaredConstructor().newInstance();
             if (getItem() != null) result.setStringItem(result.getItem());

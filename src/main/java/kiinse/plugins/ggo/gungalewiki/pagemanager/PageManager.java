@@ -12,48 +12,41 @@ import java.util.List;
 
 public class PageManager implements WikiPageManager {
 
-
-    private final PageType pageType;
-    private final HashMap<Integer, Recipe> pagesRecipes = new HashMap<>();
-    private final HashMap<Integer, String> dropItems = new HashMap<>();
-    private HashMap<Integer, List<ItemStack>> pagesItemsItemstack = new HashMap<>();
-    private HashMap<Integer, List<String>> pagesItems = new HashMap<>();
-
-    // TODO: Убрать это недоразумение и заменить на Map<?, ?> map = new HashMap<>();
-
-    public PageManager(@NotNull PageType pageType) {
-        this.pageType = pageType;
-    }
+    private HashMap<Integer, ?> hashMap = new HashMap<>();
 
     @Override
     public @NotNull WikiPageManager setStackItems(@NotNull List<ItemStack> items) {
-        pagesItemsItemstack = createPageStack(items);
+        hashMap = createPageStack(items);
         return this;
     }
 
     @Override
     public @NotNull WikiPageManager setOreItems(@NotNull List<String> items) {
+        var map = new HashMap<Integer, String>();
         int i = 0;
         for (var item : items) {
-            dropItems.put(i, item);
+            map.put(i, item);
             i++;
         }
+        this.hashMap = map;
         return this;
     }
 
     @Override
     public @NotNull WikiPageManager setItems(@NotNull List<String> items) {
-        pagesItems = createPageString(items);
+        hashMap = createPageString(items);
         return this;
     }
 
     @Override
     public @NotNull WikiPageManager setRecipes(@NotNull List<Recipe> recipes) {
+        var map = new HashMap<Integer, Recipe>();
         int i = 0;
         for (var recipe : recipes) {
-            pagesRecipes.put(i, recipe);
+            map.put(i, recipe);
             i++;
         }
+        this.hashMap = map;
         return this;
     }
 
@@ -95,32 +88,31 @@ public class PageManager implements WikiPageManager {
 
     @Override
     public boolean hasPage(int page) {
-        if (pageType == PageType.FROM_THIS_ITEM) return pagesItemsItemstack.containsKey(page);
-        if (pageType == PageType.CRAFT) return pagesRecipes.containsKey(page);
-        if (pageType == PageType.DROP) return dropItems.containsKey(page);
-        return pagesItems.containsKey(page);
+        return hashMap.containsKey(page);
     }
 
     @Override
     public @Nullable Recipe getPageRecipe(int page) {
-        return pagesRecipes.get(page);
+        return (Recipe) hashMap.get(page);
     }
 
     @Override
     public @NotNull String getItem(int page) {
-        return dropItems.get(page);
+        return (String) hashMap.get(page);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public @NotNull List<ItemStack> getPageItemStackList(int page) {
-        var result = pagesItemsItemstack.get(page);
+        var result = (List<ItemStack>) hashMap.get(page);
         if (result != null) return result;
         return new ArrayList<>();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public @NotNull List<String> getPageList(int page) {
-        var result = pagesItems.get(page);
+        var result = (List<String>) hashMap.get(page);
         if (result != null) return result;
         return new ArrayList<>();
     }

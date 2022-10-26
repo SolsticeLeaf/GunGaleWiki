@@ -31,7 +31,7 @@ public class GuiUtils {
     public static @NotNull CreatedGui getMainGui(@NotNull Player player) {
         return new GuiBuilder(player)
                 .setPage(0)
-                .getGui(Gui.HOME)
+                .setGui(Gui.HOME)
                 .setGuiName(GunGaleWiki.getInstance().getConfiguration().getString(Config.MENU_HOME_NAME));
     }
 
@@ -116,7 +116,7 @@ public class GuiUtils {
             fromGui.delete();
             new GuiBuilder(player)
                     .setPage(page - 1)
-                    .getGui(isFurnace ? Gui.FURNACE : Gui.WORKBENCH)
+                    .setGui(isFurnace ? Gui.FURNACE : Gui.WORKBENCH)
                     .setLastGui(fromGui.getLastGui())
                     .setPageManager(pageManager)
                     .setStringItem(fromGui.getItem())
@@ -133,7 +133,7 @@ public class GuiUtils {
             fromGui.delete();
             new GuiBuilder(player)
                     .setPage(page + 1)
-                    .getGui(isFurnace ? Gui.FURNACE : Gui.WORKBENCH)
+                    .setGui(isFurnace ? Gui.FURNACE : Gui.WORKBENCH)
                     .setLastGui(fromGui.getLastGui())
                     .setPageManager(pageManager)
                     .setStringItem(fromGui.getItem())

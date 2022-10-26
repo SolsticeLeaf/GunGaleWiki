@@ -9,7 +9,6 @@ import kiinse.plugins.ggo.gungalewiki.gui.items.CustomItem;
 import kiinse.plugins.ggo.gungalewiki.gui.items.NextPageButton;
 import kiinse.plugins.ggo.gungalewiki.gui.items.PrevPageButton;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
-import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -26,7 +25,7 @@ public class BookMarksGUI extends CreatedGui {
         if (getPageManager() == null) {
             var bookmarks = userData.getBookmarks();
             Collections.reverse(bookmarks);
-            setPageManager(new PageManager(PageType.BOOKMARK).setItems(bookmarks));
+            setPageManager(new PageManager().setItems(bookmarks));
         }
 
         int pos = 9;
@@ -39,7 +38,7 @@ public class BookMarksGUI extends CreatedGui {
             delete();
             new GuiBuilder(player)
                     .setPage(getPage() + 1)
-                    .getGui(Gui.BOOKMARKS)
+                    .setGui(Gui.BOOKMARKS)
                     .setLastGui(getLastGui())
                     .setPageManager(getPageManager())
                     .setName(getName())
@@ -50,7 +49,7 @@ public class BookMarksGUI extends CreatedGui {
             delete();
             new GuiBuilder(player)
                     .setPage(getPage() - 1)
-                    .getGui(Gui.BOOKMARKS)
+                    .setGui(Gui.BOOKMARKS)
                     .setLastGui(getLastGui())
                     .setPageManager(getPageManager())
                     .setName(getName())

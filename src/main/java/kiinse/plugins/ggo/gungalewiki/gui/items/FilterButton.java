@@ -8,7 +8,6 @@ import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
-import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,8 +48,8 @@ public class FilterButton implements GuiItem {
             lastGui.delete();
             new GuiBuilder(player)
                     .setItem(button.toString())
-                    .getGui(Gui.ITEMS)
-                    .setPageManager(new PageManager(PageType.ITEMS).setItems(items))
+                    .setGui(Gui.ITEMS)
+                    .setPageManager(new PageManager().setItems(items))
                     .setPage(0)
                     .setLastGui(lastGui)
                     .setStringItem(button.toString())

@@ -11,7 +11,6 @@ import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.items.*;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
-import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +29,7 @@ public class OreGUI extends CreatedGui {
         var oresData = gunGaleWiki.getOresData();
         var config = gunGaleWiki.getConfiguration();
         if (getPageManager() == null) {
-            setPageManager(new PageManager(PageType.DROP).setOreItems(oresData.getOresByDrop(getItem())));
+            setPageManager(new PageManager().setOreItems(oresData.getOresByDrop(getItem())));
         }
 
         var pluginData = gunGaleWiki.getPluginData();
@@ -56,7 +55,7 @@ public class OreGUI extends CreatedGui {
             delete();
             new GuiBuilder(player)
                     .setPage(getPage() + 1)
-                    .getGui(Gui.ORES)
+                    .setGui(Gui.ORES)
                     .setLastGui(getLastGui())
                     .setPageManager(getPageManager())
                     .setStringItem(getItem())
@@ -70,7 +69,7 @@ public class OreGUI extends CreatedGui {
             delete();
             new GuiBuilder(player)
                     .setPage(getPage() - 1)
-                    .getGui(Gui.ORES)
+                    .setGui(Gui.ORES)
                     .setLastGui(getLastGui())
                     .setPageManager(getPageManager())
                     .setStringItem(getItem())

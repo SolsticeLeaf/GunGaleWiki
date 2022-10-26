@@ -11,7 +11,6 @@ import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
-import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -64,9 +63,9 @@ public class BookMarkButton implements GuiItem {
             lastGui.delete();
             new GuiBuilder(player)
                     .setPage(0)
-                    .getGui(Gui.BOOKMARKS)
+                    .setGui(Gui.BOOKMARKS)
                     .setLastGui(lastGui)
-                    .setPageManager(new PageManager(PageType.BOOKMARK).setItems(bookmarks))
+                    .setPageManager(new PageManager().setItems(bookmarks))
                     .setName(gunGaleWiki.getConfiguration().getString(Config.MENU_BOOKMARKS_NAME))
                     .open(player);
         });

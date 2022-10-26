@@ -15,7 +15,6 @@ import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
-import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Sound;
 import org.bukkit.event.inventory.ClickType;
@@ -120,7 +119,7 @@ public class CustomItem implements GuiItem {
                 new GuiBuilder(player)
                         .setPage(fromGui.getPage())
                         .setItem(fromGui.getItem())
-                        .getGui(fromGui.getType())
+                        .setGui(fromGui.getType())
                         .setPageManager(fromGui.getPageManager())
                         .setLastGui(fromGui.getLastGui())
                         .setStringItem(fromGui.getItem())
@@ -140,13 +139,13 @@ public class CustomItem implements GuiItem {
                 }
                 if (oresData.hasOre(parsedItem)) return;
                 if (oresData.hasDrop(parsedItem)) {
-                    var pages = new PageManager(PageType.DROP).setOreItems(oresData.getOresByDrop(parsedItem));
+                    var pages = new PageManager().setOreItems(oresData.getOresByDrop(parsedItem));
                     if (pages.hasPage(0)) {
                         fromGui.delete();
                         new GuiBuilder(player)
                                 .setItem(parsedItem)
                                 .setPage(0)
-                                .getGui(Gui.ORES)
+                                .setGui(Gui.ORES)
                                 .setLastGui(fromGui)
                                 .setPageManager(pages)
                                 .setStringItem(parsedItem)
@@ -156,13 +155,13 @@ public class CustomItem implements GuiItem {
                     return;
                 }
 
-                var pages = new PageManager(PageType.CRAFT).setRecipes(GuiUtils.getRecipes(item));
+                var pages = new PageManager().setRecipes(GuiUtils.getRecipes(item));
                 if (pages.hasPage(0)) {
                     fromGui.delete();
                     var isFurnace = pages.getPageRecipe(0) instanceof FurnaceRecipe;
                     new GuiBuilder(player)
                             .setPage(0)
-                            .getGui(isFurnace ? Gui.FURNACE : Gui.WORKBENCH)
+                            .setGui(isFurnace ? Gui.FURNACE : Gui.WORKBENCH)
                             .setLastGui(fromGui)
                             .setPageManager(pages)
                             .setStringItem(item)
@@ -175,9 +174,9 @@ public class CustomItem implements GuiItem {
                 new GuiBuilder(player)
                         .setPage(0)
                         .setItem(item)
-                        .getGui(Gui.FROMITEM)
+                        .setGui(Gui.FROMITEM)
                         .setLastGui(fromGui)
-                        .setPageManager(new PageManager(PageType.CRAFT).setStackItems(GuiUtils.getItemsFromThis(item)))
+                        .setPageManager(new PageManager().setStackItems(GuiUtils.getItemsFromThis(item)))
                         .setStringItem(item)
                         .setName(config.getString(Config.MENU_FROMITEM_NAME))
                         .open(player);

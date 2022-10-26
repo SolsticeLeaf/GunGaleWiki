@@ -93,7 +93,7 @@ public class AddToBookMarkButton implements GuiItem {
             new GuiBuilder(player)
                     .setPage(fromGui.getPage())
                     .setItem(fromGui.getItem())
-                    .getGui(fromGui.getType())
+                    .setGui(fromGui.getType())
                     .setPageManager(fromGui.getPageManager())
                     .setLastGui(fromGui.getLastGui())
                     .setStringItem(fromGui.getItem())

@@ -1,12 +1,12 @@
 package kiinse.plugins.ggo.gungalewiki.gui.menus;
 
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
+import kiinse.plugins.ggo.gungalewiki.files.buttons.Button;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.items.*;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
-import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import org.jetbrains.annotations.NotNull;
 
 public class ItemsGUI extends CreatedGui {
@@ -18,7 +18,10 @@ public class ItemsGUI extends CreatedGui {
     @Override
     public void onOpenInventory(@NotNull GunGaleWiki gunGaleWiki) {
         if (getPageManager() == null) {
-            setPageManager(new PageManager(PageType.ITEMS));
+            assert getItem() != null;
+            setPageManager(new PageManager().setItems(gunGaleWiki.getFilterButtons().getButton(Button.valueOf(getItem().toUpperCase()),
+                                                                                               gunGaleWiki.getGunGaleAPI().getPlayerLocales().getLocale(
+                                                                                                       getPlayer())).getItems()));
         }
 
         var userData = gunGaleWiki.getPluginData().getUserData(getPlayer());
@@ -32,8 +35,11 @@ public class ItemsGUI extends CreatedGui {
             delete();
             new GuiBuilder(player)
                     .setPage(getPage() + 1)
-                    .getGui(Gui.ITEMS)
+                    .setItem(getItem())
+                    .setGui(Gui.ITEMS)
+                    .setType(getType())
                     .setLastGui(getLastGui())
+                    .setStringItem(getItem())
                     .setPageManager(getPageManager())
                     .setName(getName())
                     .open(player);
@@ -43,8 +49,11 @@ public class ItemsGUI extends CreatedGui {
             delete();
             new GuiBuilder(player)
                     .setPage(getPage() - 1)
-                    .getGui(Gui.ITEMS)
+                    .setItem(getItem())
+                    .setGui(Gui.ITEMS)
+                    .setType(getType())
                     .setLastGui(getLastGui())
+                    .setStringItem(getItem())
                     .setPageManager(getPageManager())
                     .setName(getName())
                     .open(player);

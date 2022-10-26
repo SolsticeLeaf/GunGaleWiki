@@ -11,7 +11,6 @@ import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
-import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -60,8 +59,8 @@ public class LastCraftsButton implements GuiItem {
             lastGui.delete();
             new GuiBuilder(player)
                     .setPage(0)
-                    .getGui(Gui.LASTSEEN)
-                    .setPageManager(new PageManager(PageType.LAST_SEEN).setItems(gunGaleWiki.getPluginData().getUserData(player).getLastSeen()))
+                    .setGui(Gui.LASTSEEN)
+                    .setPageManager(new PageManager().setItems(gunGaleWiki.getPluginData().getUserData(player).getLastSeen()))
                     .setLastGui(lastGui)
                     .setName(gunGaleWiki.getConfiguration().getString(Config.MENU_LASTSEEN_NAME))
                     .open(player);

@@ -61,7 +61,7 @@ public class BackButton implements GuiItem {
                 new GuiBuilder(player)
                         .setItem(lastGui.getItem())
                         .setPage(lastGui.getPage())
-                        .getGui(lastGui.getType())
+                        .setGui(lastGui.getType())
                         .setLastGui(lastGui.getLastGui())
                         .setPageManager(lastGui.getPageManager())
                         .setStringItem(lastGui.getItem())

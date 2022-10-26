@@ -9,7 +9,6 @@ import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
-import kiinse.plugins.ggo.gungalewiki.pagemanager.PageType;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.interfaces.WikiPageManager;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -95,9 +94,11 @@ public class NotCoreUserData implements UserData {
             var filterButton = gunGaleWiki.getFilterButtons().getButton(button, gunGaleWiki.getGunGaleAPI().getPlayerLocales().getLocale(player));
             return new GuiBuilder(player)
                     .setItem(button.toString())
-                    .getGui(Gui.ITEMS)
-                    .setPageManager(new PageManager(PageType.ITEMS).setItems(filterButton.getItems()))
-                    .setPage(0)
+                    .setPage(lastGuiPage)
+                    .setGui(Gui.ITEMS)
+                    .setType(type)
+                    .setStringItem(button.toString())
+                    .setPageManager(new PageManager().setItems(filterButton.getItems()))
                     .setLastGui(GuiUtils.getMainGui(player))
                     .setGuiName(filterButton.getMenuName());
         } catch (Exception ignored) {
@@ -105,7 +106,7 @@ public class NotCoreUserData implements UserData {
         return new GuiBuilder(player)
                 .setItem(lastGuiItem)
                 .setPage(lastGuiPage)
-                .getGui(type)
+                .setGui(type)
                 .setType(type)
                 .setLastGui(GuiUtils.getMainGui(player))
                 .setStringItem(lastGuiItem)
@@ -117,23 +118,23 @@ public class NotCoreUserData implements UserData {
         var gunGaleWiki = GunGaleWiki.getInstance();
         switch (gui) {
             case FURNACE, WORKBENCH -> {
-                return new PageManager(PageType.CRAFT).setRecipes(GuiUtils.getRecipes(item));
+                return new PageManager().setRecipes(GuiUtils.getRecipes(item));
             }
             case ITEMS -> {
                 var filtersButtons = gunGaleWiki.getFilterButtons();
-                return new PageManager(PageType.ITEMS).setItems(
+                return new PageManager().setItems(
                         filtersButtons.getButton(Button.valueOf(item), gunGaleWiki.getGunGaleAPI().getPlayerLocales().getLocale(player)).getItems());
             }
             case FROMITEM -> {
-                return new PageManager(PageType.CRAFT).setStackItems(GuiUtils.getItemsFromThis(item));
+                return new PageManager().setStackItems(GuiUtils.getItemsFromThis(item));
             }
             case BOOKMARKS -> {
                 var bookmarks = gunGaleWiki.getPluginData().getUserData(player).getBookmarks();
                 Collections.reverse(bookmarks);
-                return new PageManager(PageType.BOOKMARK).setItems(getBookmarks());
+                return new PageManager().setItems(getBookmarks());
             }
             default -> {
-                return new PageManager(PageType.LAST_SEEN).setItems(getLastSeen());
+                return new PageManager().setItems(getLastSeen());
             }
         }
     }

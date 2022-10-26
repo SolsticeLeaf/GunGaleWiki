@@ -13,7 +13,7 @@ public interface WikiGuiBuilder {
 
     @NotNull GuiBuilder setItem(@Nullable String item);
 
-    @NotNull CreatedGui getGui(@NotNull Gui gui);
+    @NotNull CreatedGui setGui(@NotNull Gui gui);
 
     int getPage();
 
