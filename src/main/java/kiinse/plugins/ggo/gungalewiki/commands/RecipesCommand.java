@@ -25,9 +25,9 @@ public class RecipesCommand extends DarkCommand {
             GunGaleWiki.getInstance().getPluginData().getUserData(DarkPlayerUtils.getPlayer(context.getSender())).getLastGui().open(context.getSender());
         } catch (Exception e) {
             var message = e.getMessage();
+            GuiUtils.getMainGui(DarkPlayerUtils.getPlayer(context.getSender())).open(context.getSender());
             if (message != null && !message.contains("Name is null")) {
                 getPlugin().sendLog(Level.WARNING, "Error on gui open: " + e.getMessage());
-                GuiUtils.getMainGui(DarkPlayerUtils.getPlayer(context.getSender())).open(context.getSender());
             }
         }
     }

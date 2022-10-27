@@ -87,6 +87,9 @@ public class NotCoreUserData implements UserData {
 
     @Override
     public @NotNull CreatedGui getLastGui() {
+        if (lastGuiType == null) {
+            return GuiUtils.getMainGui(player);
+        }
         var type = Gui.valueOf(lastGuiType);
         try {
             var gunGaleWiki = GunGaleWiki.getInstance();
