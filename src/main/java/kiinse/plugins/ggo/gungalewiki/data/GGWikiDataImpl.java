@@ -22,21 +22,34 @@ public class GGWikiDataImpl implements GGWikiData {
 
     @Override
     public @NotNull UserData getUserData(@NotNull Player player) {
-        if (isCoreEnabled) return new CoreUserData(player);
         var uuid = player.getUniqueId();
         if (userDataHashMap.containsKey(uuid)) return userDataHashMap.get(uuid);
-        return new NotCoreUserData(player);
+        return isCoreEnabled ? new CoreUserData(player) : new NotCoreUserData(player);
     }
 
     @Override
     public @NotNull GGWikiData saveData(@NotNull UserData userData) {
-        if (isCoreEnabled) {
-            userData.save();
-            return this;
-        }
         var uuid = userData.getPlayer().getUniqueId();
         userDataHashMap.remove(uuid);
         userDataHashMap.put(uuid, userData);
         return this;
+    }
+
+    @Override
+    public @NotNull GGWikiData save(@NotNull Player player) {
+        var uuid = player.getUniqueId();
+        if (userDataHashMap.containsKey(uuid)) {
+            userDataHashMap.get(uuid).save();
+            userDataHashMap.remove(uuid);
+        }
+        return this;
+    }
+
+
+    @Override
+    public void saveAll() {
+        for (var data : userDataHashMap.values()) {
+            data.save();
+        }
     }
 }

@@ -9,4 +9,8 @@ public interface GGWikiData {
 
     @NotNull GGWikiData saveData(@NotNull UserData userData);
 
+    @NotNull GGWikiData save(@NotNull Player player);
+
+    void saveAll();
+
 }
