@@ -5,6 +5,8 @@ import kiinse.plugins.ggo.gungaleapi.api.gui.GuiAction;
 import kiinse.plugins.ggo.gungaleapi.api.gui.GuiItem;
 import kiinse.plugins.ggo.gungaleapi.core.files.messages.DarkMessagesUtils;
 import kiinse.plugins.ggo.gungaleapi.core.utilities.DarkPlayerUtils;
+import kiinse.plugins.ggo.gungalemythicmobs.GunGaleMythicMobs;
+import kiinse.plugins.ggo.gungalemythicmobs.utils.TotemUtils;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.data.interfaces.UserData;
 import kiinse.plugins.ggo.gungalewiki.enums.Config;
@@ -128,7 +130,6 @@ public class CustomItem implements GuiItem {
                 return;
             }
             if (clickType == ClickType.LEFT) {
-                var oresData = gunGaleWiki.getOresData();
                 var parsedItem = item;
                 if (item.contains(":")) {
                     var split = item.split(":");
@@ -137,6 +138,8 @@ public class CustomItem implements GuiItem {
                     }
                     parsedItem = split[1];
                 }
+
+                var oresData = gunGaleWiki.getOresData();
                 if (oresData.hasOre(parsedItem)) return;
                 if (oresData.hasDrop(parsedItem)) {
                     var pages = new PageManager().setOreItems(oresData.getOresByDrop(parsedItem));
@@ -154,6 +157,16 @@ public class CustomItem implements GuiItem {
                     }
                     return;
                 }
+
+                var totemsData = gunGaleWiki.getTotemsData();
+                if (totemsData.hasItem(parsedItem)) {
+                    var totem = GunGaleMythicMobs.getInstance().getTotems().getSchematicByTotemName(totemsData.getTotem(parsedItem));
+                    if (totem != null) TotemUtils.setTotemProjection(gunGaleWiki, totem, player, totemsData.getDelay());
+                    fromGui.delete();
+                    player.closeInventory();
+                    return;
+                }
+
 
                 var pages = new PageManager().setRecipes(GuiUtils.getRecipes(item));
                 if (pages.hasPage(0)) {

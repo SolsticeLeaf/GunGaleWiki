@@ -32,7 +32,6 @@ public class FurnaceGUI extends CreatedGui {
         if (recipe != null) {
             var input = ((FurnaceRecipe) recipe).getInput();
             var custom = CustomStack.byItemStack(input);
-
             if (custom != null) {
                 setCreatedItem(new CustomItem(custom, 11, userData, this));
             } else {

@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'kiinse.plugins.ggo.gungalewiki'
-version = '1.0.13'
+version = '1.0.14'
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -14,6 +14,7 @@ repositories {
     maven { url = uri('https://repo.maven.apache.org/maven2/') }
     maven { url = uri('https://repo.purpurmc.org/snapshots') }
     maven { url = uri('https://jitpack.io') }
+    maven { url = uri('https://maven.enginehub.org/repo/') }
     maven { url = uri('https://s01.oss.sonatype.org/content/repositories/snapshots/') }
 }
 
@@ -21,12 +22,14 @@ dependencies {
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.8'
     implementation 'org.json:json:20220924'
     implementation 'org.jetbrains:annotations:23.0.0'
-    implementation 'com.google.code.gson:gson:2.9.1'
+    implementation 'com.google.code.gson:gson:2.10'
     implementation 'net.kyori:adventure-text-minimessage:4.11.0'
 
     compileOnly files('libs/GGCoreAPI-1.4.3.jar')
+    compileOnly files('libs/GunGaleMythicMobs-1.0.6.jar')
     compileOnly 'com.github.LoneDev6:api-itemsadder:3.2.3-r8'
-    compileOnly 'kiinse.plugins.ggo.gungaleapi:gungale-core:3.1.15'
+    compileOnly 'com.sk89q.worldedit:worldedit-bukkit:7.2.9'
+    compileOnly 'kiinse.plugins.ggo.gungaleapi:gungale-core:3.1.20'
     compileOnly 'org.purpurmc.purpur:purpur-api:1.19.2-R0.1-SNAPSHOT'
 }
 

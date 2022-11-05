@@ -9,8 +9,6 @@ import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.gui.GuiUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.logging.Level;
-
 public class RecipesCommand extends DarkCommand {
 
     public RecipesCommand(@NotNull GunGaleJavaPlugin plugin) {
@@ -27,7 +25,7 @@ public class RecipesCommand extends DarkCommand {
             var message = e.getMessage();
             GuiUtils.getMainGui(DarkPlayerUtils.getPlayer(context.getSender())).open(context.getSender());
             if (message != null && !message.contains("Name is null")) {
-                getPlugin().sendLog(Level.WARNING, "Error on gui open: " + e.getMessage());
+                getPlugin().sendLog("Error on gui open:", e);
             }
         }
     }

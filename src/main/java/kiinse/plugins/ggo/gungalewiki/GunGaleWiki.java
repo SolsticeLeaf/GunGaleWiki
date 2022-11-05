@@ -6,8 +6,10 @@ import kiinse.plugins.ggo.gungaleapi.core.gui.DarkGUI;
 import kiinse.plugins.ggo.gungaleapi.core.utilities.DarkItemUtils;
 import kiinse.plugins.ggo.gungalewiki.data.GGWikiDataImpl;
 import kiinse.plugins.ggo.gungalewiki.data.Ores;
+import kiinse.plugins.ggo.gungalewiki.data.Totems;
 import kiinse.plugins.ggo.gungalewiki.data.interfaces.GGWikiData;
 import kiinse.plugins.ggo.gungalewiki.data.interfaces.OresData;
+import kiinse.plugins.ggo.gungalewiki.data.interfaces.TotemsData;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.ButtonsData;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.interfaces.FiltersButtons;
 import kiinse.plugins.ggo.gungalewiki.initialize.RegisterCommands;
@@ -20,6 +22,7 @@ public final class GunGaleWiki extends GunGaleJavaPlugin {
     private GGWikiData wikiData;
     private FiltersButtons buttons;
     private OresData oresData;
+    private TotemsData totemsData;
     private ItemStackUtils itemStackUtils;
 
     public static @NotNull GunGaleWiki getInstance() {
@@ -33,6 +36,7 @@ public final class GunGaleWiki extends GunGaleJavaPlugin {
         buttons = new ButtonsData(this).load();
         itemStackUtils = new DarkItemUtils(this);
         this.oresData = new Ores(this);
+        this.totemsData = new Totems(this);
         getServer().getPluginManager().registerEvents(new OnQuitListener(), this);
         new RegisterCommands(this);
     }
@@ -60,5 +64,9 @@ public final class GunGaleWiki extends GunGaleJavaPlugin {
 
     public @NotNull OresData getOresData() {
         return oresData;
+    }
+
+    public @NotNull TotemsData getTotemsData() {
+        return totemsData;
     }
 }

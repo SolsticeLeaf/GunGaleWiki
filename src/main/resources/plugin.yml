@@ -3,7 +3,7 @@ version: '${version}'
 main: kiinse.plugins.ggo.gungalewiki.GunGaleWiki
 api-version: 1.19
 prefix: GGW
-depend: [ GunGaleAPI, ItemsAdder ]
+depend: [ GunGaleAPI, ItemsAdder, GunGaleMythicMobs, WorldEdit ]
 softdepend: [ GunGaleCore ]
 authors: [ kiinse ]
 website: https://kiinse.me

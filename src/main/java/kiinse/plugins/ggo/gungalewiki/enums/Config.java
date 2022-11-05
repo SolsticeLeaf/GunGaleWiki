@@ -31,6 +31,8 @@ public enum Config implements YamlKeys {
     MENU_LASTSEEN_NAME,
     MENU_ORES_NAME,
     ORES,
+    TOTEMS_LIST,
+    TOTEMS_DELAY,
     MENU_HOME_NAME,
     MENU_FROMITEM_NAME,
     MENU_WORKBENCH_NAME,
