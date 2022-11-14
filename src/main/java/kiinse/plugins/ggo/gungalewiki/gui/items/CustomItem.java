@@ -71,10 +71,6 @@ public class CustomItem implements GuiItem {
         this.fromGui = fromGui;
     }
 
-    public void setAmount(int amount) {
-        this.itemStack.setAmount(amount);
-    }
-
     @Override
     public int slot() {
         return pos;
@@ -160,8 +156,8 @@ public class CustomItem implements GuiItem {
 
                 var totemsData = gunGaleWiki.getTotemsData();
                 if (totemsData.hasItem(parsedItem)) {
-                    var totem = GunGaleMythicMobs.getInstance().getTotems().getSchematicByTotemName(totemsData.getTotem(parsedItem));
-                    if (totem != null) TotemUtils.setTotemProjection(gunGaleWiki, totem, player, totemsData.getDelay());
+                    var totem = GunGaleMythicMobs.Companion.getInstance().getTotems().getSchematicByTotemName(totemsData.getTotem(parsedItem));
+                    if (totem != null) TotemUtils.INSTANCE.setTotemProjection(gunGaleWiki, totem, player, totemsData.getDelay());
                     fromGui.delete();
                     player.closeInventory();
                     return;

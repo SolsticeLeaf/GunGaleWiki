@@ -3,12 +3,11 @@ plugins {
 }
 
 group = 'kiinse.plugins.ggo.gungalewiki'
-version = '1.0.14'
+version = '1.0.15'
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
-    maven { url = uri('https://repo.kiinse.me/releases') }
     maven { url = uri('https://oss.sonatype.org/content/groups/public/') }
     maven { url = uri('https://repo.extendedclip.com/content/repositories/placeholderapi/') }
     maven { url = uri('https://repo.maven.apache.org/maven2/') }
@@ -26,10 +25,10 @@ dependencies {
     implementation 'net.kyori:adventure-text-minimessage:4.11.0'
 
     compileOnly files('libs/GGCoreAPI-1.4.3.jar')
-    compileOnly files('libs/GunGaleMythicMobs-1.0.6.jar')
+    compileOnly files('libs/GunGaleAPI-3.1.20.jar')
+    compileOnly files('libs/GunGaleMythicMobs-1.1.1.jar')
     compileOnly 'com.github.LoneDev6:api-itemsadder:3.2.3-r8'
     compileOnly 'com.sk89q.worldedit:worldedit-bukkit:7.2.9'
-    compileOnly 'kiinse.plugins.ggo.gungaleapi:gungale-core:3.1.20'
     compileOnly 'org.purpurmc.purpur:purpur-api:1.19.2-R0.1-SNAPSHOT'
 }
 
