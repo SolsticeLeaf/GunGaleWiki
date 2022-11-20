@@ -56,14 +56,14 @@ public class PageManager implements WikiPageManager {
         int itemsCount = 0;
         int pageNum = 0;
         for (var item : fullList) {
+            itemsCount++;
             tmpList.add(item);
             result.put(pageNum, new ArrayList<>(tmpList));
-            if (itemsCount == 35) {
+            if (itemsCount == 36) {
                 pageNum++;
                 itemsCount = 0;
                 tmpList.clear();
             }
-            itemsCount++;
         }
         return result;
     }
@@ -74,14 +74,14 @@ public class PageManager implements WikiPageManager {
         int itemsCount = 0;
         int pageNum = 0;
         for (var item : fullList) {
+            itemsCount++;
             tmpList.add(item);
             result.put(pageNum, new ArrayList<>(tmpList));
-            if (itemsCount == 35) {
+            if (itemsCount == 36) {
                 pageNum++;
                 itemsCount = 0;
                 tmpList.clear();
             }
-            itemsCount++;
         }
         return result;
     }
