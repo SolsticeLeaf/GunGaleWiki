@@ -179,8 +179,7 @@ public class CustomItem implements GuiItem {
                 }
             }
             if (clickType == ClickType.RIGHT) {
-                var pages = new PageManager().setStackItems(GuiUtils.getItemsFromThis(item));
-                var list = pages.getPageItemStackList(0);
+                var list = GuiUtils.getItemsFromThis(item);
                 if (!list.isEmpty()) {
                     fromGui.delete();
                     if (list.size() == 1) {
@@ -189,14 +188,14 @@ public class CustomItem implements GuiItem {
                         var oresData = gunGaleWiki.getOresData();
                         if (oresData.hasOre(resultItem)) return;
                         if (oresData.hasDrop(resultItem)) {
-                            var pgs = new PageManager().setOreItems(oresData.getOresByDrop(resultItem));
-                            if (pgs.hasPage(0)) {
+                            var pages = new PageManager().setOreItems(oresData.getOresByDrop(resultItem));
+                            if (pages.hasPage(0)) {
                                 new GuiBuilder(player)
                                         .setItem(resultItem)
                                         .setPage(0)
                                         .setGui(Gui.ORES)
                                         .setLastGui(fromGui)
-                                        .setPageManager(pgs)
+                                        .setPageManager(pages)
                                         .setStringItem(resultItem)
                                         .setName(config.getString(Config.MENU_ORES_NAME))
                                         .open(player);
@@ -204,14 +203,14 @@ public class CustomItem implements GuiItem {
                             return;
                         }
 
-                        var pgs = new PageManager().setRecipes(GuiUtils.getRecipes(resultItem));
-                        if (pgs.hasPage(0)) {
-                            var isFurnace = pgs.getPageRecipe(0) instanceof FurnaceRecipe;
+                        var pages = new PageManager().setRecipes(GuiUtils.getRecipes(resultItem));
+                        if (pages.hasPage(0)) {
+                            var isFurnace = pages.getPageRecipe(0) instanceof FurnaceRecipe;
                             new GuiBuilder(player)
                                     .setPage(0)
                                     .setGui(isFurnace ? Gui.FURNACE : Gui.WORKBENCH)
                                     .setLastGui(fromGui)
-                                    .setPageManager(pgs)
+                                    .setPageManager(pages)
                                     .setStringItem(resultItem)
                                     .setName(config.getString(isFurnace ? Config.MENU_FURNACE_NAME : Config.MENU_WORKBENCH_NAME))
                                     .open(player);
@@ -222,7 +221,7 @@ public class CustomItem implements GuiItem {
                                 .setItem(item)
                                 .setGui(Gui.FROMITEM)
                                 .setLastGui(fromGui)
-                                .setPageManager(new PageManager().setStackItems(GuiUtils.getItemsFromThis(item)))
+                                .setPageManager(new PageManager().setStackItems(list))
                                 .setStringItem(item)
                                 .setName(config.getString(Config.MENU_FROMITEM_NAME))
                                 .open(player);

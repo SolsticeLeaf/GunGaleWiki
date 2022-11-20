@@ -104,8 +104,7 @@ public class NotCoreUserData implements UserData {
                     .setPageManager(new PageManager().setItems(filterButton.getItems()))
                     .setLastGui(GuiUtils.getMainGui(player))
                     .setGuiName(filterButton.getMenuName());
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
         return new GuiBuilder(player)
                 .setItem(lastGuiItem)
                 .setPage(lastGuiPage)
@@ -126,7 +125,9 @@ public class NotCoreUserData implements UserData {
             case ITEMS -> {
                 var filtersButtons = gunGaleWiki.getFilterButtons();
                 return new PageManager().setItems(
-                        filtersButtons.getButton(Button.valueOf(item), gunGaleWiki.getGunGaleAPI().getPlayerLocales().getLocale(player)).getItems());
+                        filtersButtons.getButton(
+                                Button.valueOf(item),
+                                gunGaleWiki.getGunGaleAPI().getPlayerLocales().getLocale(player)).getItems());
             }
             case FROMITEM -> {
                 return new PageManager().setStackItems(GuiUtils.getItemsFromThis(item));
@@ -135,6 +136,9 @@ public class NotCoreUserData implements UserData {
                 var bookmarks = gunGaleWiki.getPluginData().getUserData(player).getBookmarks();
                 Collections.reverse(bookmarks);
                 return new PageManager().setItems(getBookmarks());
+            }
+            case ORES -> {
+                return new PageManager().setOreItems(gunGaleWiki.getOresData().getOresByDrop(item));
             }
             default -> {
                 return new PageManager().setItems(getLastSeen());

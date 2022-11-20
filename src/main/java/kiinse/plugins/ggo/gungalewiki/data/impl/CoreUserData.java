@@ -94,8 +94,7 @@ public class CoreUserData implements UserData {
                     .setPageManager(new PageManager().setItems(filterButton.getItems()))
                     .setLastGui(GuiUtils.getMainGui(player))
                     .setGuiName(filterButton.getMenuName());
-        } catch (Exception ignored) {
-        }
+        } catch (Exception ignored) {}
         return new GuiBuilder(player)
                 .setItem(last.getItem())
                 .setPage(last.getPage())
@@ -125,6 +124,9 @@ public class CoreUserData implements UserData {
                 var bookmarks = gunGaleWiki.getPluginData().getUserData(player).getBookmarks();
                 Collections.reverse(bookmarks);
                 return new PageManager().setItems(getBookmarks());
+            }
+            case ORES -> {
+                return new PageManager().setOreItems(gunGaleWiki.getOresData().getOresByDrop(item));
             }
             default -> {
                 return new PageManager().setItems(getLastSeen());
