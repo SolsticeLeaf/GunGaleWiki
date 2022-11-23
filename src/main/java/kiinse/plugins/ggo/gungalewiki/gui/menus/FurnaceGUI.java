@@ -10,6 +10,8 @@ import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.Recipe;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 public class FurnaceGUI extends CreatedGui {
 
     public FurnaceGUI() {
@@ -18,9 +20,11 @@ public class FurnaceGUI extends CreatedGui {
 
     @Override
     public void onOpenInventory(@NotNull GunGaleWiki gunGaleWiki) {
-        assert getItem() != null;
+        if (getItem() == null) {
+            return;
+        }
         if (getPageManager() == null) {
-            setPageManager(new PageManager().setItems(GuiUtils.getRecipes(getItem())));
+            setPageManager(new PageManager().setItems(GuiUtils.getRecipes(getItem()), 1));
         }
 
         var pluginData = gunGaleWiki.getPluginData();
@@ -29,8 +33,8 @@ public class FurnaceGUI extends CreatedGui {
         pluginData.saveData(userData);
         var config = gunGaleWiki.getConfiguration();
 
-        if (getPageManager().get(getPage()) instanceof Recipe recipe) {
-            var input = ((FurnaceRecipe) recipe).getInput();
+        if (getPageManager().get(getPage(), new ArrayList<Recipe>()).get(0) instanceof FurnaceRecipe recipe) {
+            var input = (recipe).getInput();
             var custom = CustomStack.byItemStack(input);
             if (custom != null) {
                 setCreatedItem(new CustomItem(custom, 11, userData, this));

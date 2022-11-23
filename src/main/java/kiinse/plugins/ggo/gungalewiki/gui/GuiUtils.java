@@ -116,7 +116,7 @@ public class GuiUtils {
                                                               @NotNull GunGaleWiki gunGaleWiki, @NotNull CreatedGui fromGui,
                                                               @NotNull YamlFile config) {
         return new PrevPageButton(pageManager.hasPage(page - 1), playerLocale, gunGaleWiki, 50, ((clickType, player) -> {
-            var isFurnace = pageManager.get(page - 1) instanceof FurnaceRecipe;
+            var isFurnace = pageManager.get(page - 1, new ArrayList<Recipe>()).get(0) instanceof FurnaceRecipe;
             fromGui.delete();
             new GuiBuilder(player)
                     .setPage(page - 1)
@@ -134,7 +134,7 @@ public class GuiUtils {
                                                               @NotNull GunGaleWiki gunGaleWiki, @NotNull CreatedGui fromGui,
                                                               @NotNull YamlFile config) {
         return new NextPageButton(pageManager.hasPage(page + 1), playerLocale, gunGaleWiki, 52, ((clickType, player) -> {
-            var isFurnace = pageManager.get(page + 1) instanceof FurnaceRecipe;
+            var isFurnace = pageManager.get(page + 1, new ArrayList<Recipe>()).get(0)  instanceof FurnaceRecipe;
             fromGui.delete();
             new GuiBuilder(player)
                     .setPage(page + 1)

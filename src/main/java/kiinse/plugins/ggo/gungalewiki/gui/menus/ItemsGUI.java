@@ -21,8 +21,8 @@ public class ItemsGUI extends CreatedGui {
     public void onOpenInventory(@NotNull GunGaleWiki gunGaleWiki) {
         if (getPageManager() == null) {
             assert getItem() != null;
-            setPageManager(new PageManager().setItemsList(gunGaleWiki.getFilterButtons().getButton(Button.valueOf(getItem().toUpperCase()),
-                                                                                                   gunGaleWiki.getGunGaleAPI().getPlayerLocales().getLocale(getPlayer())).getItems()));
+            setPageManager(new PageManager().setItems(gunGaleWiki.getFilterButtons().getButton(Button.valueOf(getItem().toUpperCase()),
+                                                                                                   gunGaleWiki.getGunGaleAPI().getPlayerLocales().getLocale(getPlayer())).getItems(), 36));
         }
 
         var userData = gunGaleWiki.getPluginData().getUserData(getPlayer());

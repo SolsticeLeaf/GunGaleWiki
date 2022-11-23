@@ -19,7 +19,10 @@ import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.FurnaceRecipe;
+import org.bukkit.inventory.Recipe;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 public class ItemsUtils {
 
@@ -70,7 +73,7 @@ public class ItemsUtils {
                         .setItem(item)
                         .setGui(Gui.FROMITEM)
                         .setLastGui(fromGui)
-                        .setPageManager(new PageManager().setItemsList(list))
+                        .setPageManager(new PageManager().setItems(list, 36))
                         .setStringItem(item)
                         .setName(config.getString(Config.MENU_FROMITEM_NAME))
                         .open(player);
@@ -89,7 +92,7 @@ public class ItemsUtils {
         var oresData = gunGaleWiki.getOresData();
         if (oresData.hasOre(parsedItem)) return;
         if (oresData.hasDrop(parsedItem)) {
-            var pages = new PageManager().setItems(oresData.getOresByDrop(parsedItem));
+            var pages = new PageManager().setItems(oresData.getOresByDrop(parsedItem), 1);
             if (pages.hasPage(0)) {
                 fromGui.delete();
                 new GuiBuilder(player)
@@ -114,10 +117,10 @@ public class ItemsUtils {
             return;
         }
 
-        var pages = new PageManager().setItems(GuiUtils.getRecipes(item));
+        var pages = new PageManager().setItems(GuiUtils.getRecipes(item), 1);
         if (pages.hasPage(0)) {
             fromGui.delete();
-            var isFurnace = pages.get(0) instanceof FurnaceRecipe;
+            var isFurnace = pages.get(0, new ArrayList<Recipe>()).get(0)  instanceof FurnaceRecipe;
             new GuiBuilder(player)
                     .setPage(0)
                     .setGui(isFurnace ? Gui.FURNACE : Gui.WORKBENCH)

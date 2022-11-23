@@ -100,7 +100,7 @@ public class NotCoreUserData implements UserData {
                     .setGui(Gui.ITEMS)
                     .setType(type)
                     .setStringItem(button.toString())
-                    .setPageManager(new PageManager().setItemsList(filterButton.getItems()))
+                    .setPageManager(new PageManager().setItems(filterButton.getItems(), 36))
                     .setLastGui(GuiUtils.getMainGui(player))
                     .setGuiName(filterButton.getMenuName());
         } catch (Exception ignored) {

@@ -6,61 +6,61 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+/**
+ * Класс реализующий менеджер страниц для различных меню
+ */
 public class PageManager implements WikiPageManager {
 
-    private HashMap<Integer, ?> hashMap = new HashMap<>();
+    private final Map<Integer, List<?>> map = new HashMap<>();
 
+    /**
+     * Метод, высчитывающий по N предметов на каждую страницу.
+     * @param items Список всех предметов
+     * @param amount Количество предметов на каждой странице
+     */
     @Override
-    public @NotNull <T> WikiPageManager setItemsList(@NotNull List<T> items) {
-        var result = new HashMap<Integer, ArrayList<T>>();
-        var tmpList = new ArrayList<T>();
+    public @NotNull <T> WikiPageManager setItems(@NotNull List<T> items, int amount) {
+        var tmpList = new ArrayList<>();
         int itemsCount = 0;
         int pageNum = 0;
         for (var item : items) {
             itemsCount++;
             tmpList.add(item);
-            result.put(pageNum, new ArrayList<>(tmpList));
-            if (itemsCount == 36) {
+            map.put(pageNum, new ArrayList<>(tmpList));
+            if (itemsCount == amount) {
                 pageNum++;
                 itemsCount = 0;
                 tmpList.clear();
             }
         }
-        hashMap = result;
         return this;
     }
 
-    @Override
-    public @NotNull <T> WikiPageManager setItems(@NotNull List<T> items) {
-        var map = new HashMap<Integer, T>();
-        int i = 0;
-        for (var item : items) {
-            map.put(i, item);
-            i++;
-        }
-        this.hashMap = map;
-        return this;
-    }
-
+    /**
+     * Возвращает true если на указанной странице есть предметы
+     * @param page Номер страницы
+     * @return true если на указанной странице есть предметы
+     */
     @Override
     public boolean hasPage(int page) {
-        return hashMap.containsKey(page);
+        return map.containsKey(page);
     }
 
-    @Override
-    public @NotNull Object get(int page) {
-        return hashMap.get(page);
-    }
-
-
+    /**
+     * Метод, возвращающий предметы на странице
+     * @param page Номер страницы
+     * @param type Тип возвращаемого объекта и по совместительству default значение
+     * @return Предметы на странице или default значение в случае ошибки
+     */
     @SuppressWarnings("unchecked")
     @Override
-    public @NotNull <T> T get(int page, T type) {
-        if (!hashMap.containsKey(page)) return type;
-        T result;
+    public @NotNull <T> List<T> get(int page, @NotNull List<T> type) {
+        if (!map.containsKey(page)) return type;
+        List<T> result;
         try {
-            result = (T) hashMap.get(page);
+            result = (List<T>) map.get(page);
         } catch (Exception ignored) {
             result = type;
         }

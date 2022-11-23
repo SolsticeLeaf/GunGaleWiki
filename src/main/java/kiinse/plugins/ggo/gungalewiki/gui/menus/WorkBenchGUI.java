@@ -14,6 +14,8 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 
 public class WorkBenchGUI extends CreatedGui {
 
@@ -23,9 +25,11 @@ public class WorkBenchGUI extends CreatedGui {
 
     @Override
     public void onOpenInventory(@NotNull GunGaleWiki gunGaleWiki) {
-        assert getItem() != null;
+        if (getItem() == null) {
+            return;
+        }
         if (getPageManager() == null) {
-            setPageManager(new PageManager().setItems(GuiUtils.getRecipes(getItem())));
+            setPageManager(new PageManager().setItems(GuiUtils.getRecipes(getItem()), 1));
         }
 
         var pluginData = gunGaleWiki.getPluginData();
@@ -35,12 +39,11 @@ public class WorkBenchGUI extends CreatedGui {
 
         var config = gunGaleWiki.getConfiguration();
 
-        if (getPageManager().get(getPage()) instanceof Recipe recipe) {
-            if (recipe instanceof ShapedRecipe rec) {
-                shapedRecipe(rec, userData);
-            } else if (recipe instanceof ShapelessRecipe rec) {
-                shapelessRecipe(rec, userData);
-            }
+        var recipe = getPageManager().get(getPage(), new ArrayList<Recipe>()).get(0);
+        if (recipe instanceof ShapedRecipe rec) {
+            shapedRecipe(rec, userData);
+        } else if (recipe instanceof ShapelessRecipe rec) {
+            shapelessRecipe(rec, userData);
         }
 
         setCreatedItem(new RecipeResultItem(getItem(), 24, userData, this));

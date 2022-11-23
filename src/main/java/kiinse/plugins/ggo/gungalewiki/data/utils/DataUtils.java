@@ -21,25 +21,24 @@ public class DataUtils {
         var gunGaleWiki = GunGaleWiki.getInstance();
         switch (gui) {
             case FURNACE, WORKBENCH -> {
-                return new PageManager().setItems(GuiUtils.getRecipes(item));
+                return new PageManager().setItems(GuiUtils.getRecipes(item), 1);
             }
             case ITEMS -> {
                 var filtersButtons = gunGaleWiki.getFilterButtons();
-                return new PageManager().setItemsList(
-                        filtersButtons.getButton(Button.valueOf(item), gunGaleWiki.getGunGaleAPI().getPlayerLocales().getLocale(player)).getItems());
+                return new PageManager().setItems(filtersButtons.getButton(Button.valueOf(item), gunGaleWiki.getGunGaleAPI().getPlayerLocales().getLocale(player)).getItems(), 36);
             }
             case FROMITEM -> {
-                return new PageManager().setItemsList(GuiUtils.getItemsFromThis(item));
+                return new PageManager().setItems(GuiUtils.getItemsFromThis(item), 36);
             }
             case BOOKMARKS -> {
                 Collections.reverse(bookmarks);
-                return new PageManager().setItemsList(bookmarks);
+                return new PageManager().setItems(bookmarks, 36);
             }
             case ORES -> {
-                return new PageManager().setItems(gunGaleWiki.getOresData().getOresByDrop(item));
+                return new PageManager().setItems(gunGaleWiki.getOresData().getOresByDrop(item), 1);
             }
             default -> {
-                return new PageManager().setItemsList(lastSeen);
+                return new PageManager().setItems(lastSeen, 36);
             }
         }
     }

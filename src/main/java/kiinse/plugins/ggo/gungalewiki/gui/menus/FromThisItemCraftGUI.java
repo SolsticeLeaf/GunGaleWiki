@@ -23,7 +23,7 @@ public class FromThisItemCraftGUI extends CreatedGui {
     public void onOpenInventory(@NotNull GunGaleWiki gunGaleWiki) {
         if (getItem() == null) return;
         if (getPageManager() == null) {
-            setPageManager(new PageManager().setItemsList(GuiUtils.getItemsFromThis(getItem())));
+            setPageManager(new PageManager().setItems(GuiUtils.getItemsFromThis(getItem()), 36));
         }
 
         var userData = gunGaleWiki.getPluginData().getUserData(getPlayer());

@@ -26,7 +26,7 @@ public class BookMarksGUI extends CreatedGui {
         if (getPageManager() == null) {
             var bookmarks = userData.getBookmarks();
             Collections.reverse(bookmarks);
-            setPageManager(new PageManager().setItemsList(bookmarks));
+            setPageManager(new PageManager().setItems(bookmarks, 36));
         }
 
         int pos = 9;

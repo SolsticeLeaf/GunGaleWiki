@@ -49,7 +49,7 @@ public class FilterButton implements GuiItem {
             new GuiBuilder(player)
                     .setItem(button.toString())
                     .setGui(Gui.ITEMS)
-                    .setPageManager(new PageManager().setItemsList(items))
+                    .setPageManager(new PageManager().setItems(items, 36))
                     .setPage(0)
                     .setLastGui(lastGui)
                     .setStringItem(button.toString())
