@@ -5,7 +5,6 @@ import kiinse.plugins.ggo.gungaleapi.api.gui.GuiAction;
 import kiinse.plugins.ggo.gungaleapi.api.gui.GuiItem;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.data.interfaces.UserData;
-import kiinse.plugins.ggo.gungalewiki.enums.Message;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.items.utils.ItemsUtils;
 import net.kyori.adventure.text.Component;
@@ -16,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomItem implements GuiItem {
+public class RecipeResultItem implements GuiItem {
 
     private final GunGaleWiki gunGaleWiki = GunGaleWiki.getInstance();
     private final String item;
@@ -26,7 +25,7 @@ public class CustomItem implements GuiItem {
     private final int pos;
     private List<Component> lore = new ArrayList<>();
 
-    public CustomItem(@NotNull String item, int pos, @NotNull UserData userData, @NotNull CreatedGui fromGui) {
+    public RecipeResultItem(@NotNull String item, int pos, @NotNull UserData userData, @NotNull CreatedGui fromGui) {
         this.itemStack = CustomStack.getInstance(item).getItemStack();
         this.item = item;
         this.pos = pos;
@@ -34,21 +33,13 @@ public class CustomItem implements GuiItem {
         this.fromGui = fromGui;
     }
 
-    public CustomItem(@NotNull String item, int pos, @NotNull UserData userData, @NotNull CreatedGui fromGui, @NotNull List<Component> beforeLore) {
+    public RecipeResultItem(@NotNull String item, int pos, @NotNull UserData userData, @NotNull CreatedGui fromGui, @NotNull List<Component> beforeLore) {
         this.itemStack = CustomStack.getInstance(item).getItemStack();
         this.item = item;
         this.pos = pos;
         this.userData = userData;
         this.fromGui = fromGui;
         this.lore = beforeLore;
-    }
-
-    public CustomItem(@NotNull CustomStack customStack, int pos, @NotNull UserData userData, @NotNull CreatedGui fromGui) {
-        this.itemStack = customStack.getItemStack();
-        this.item = customStack.getNamespacedID();
-        this.pos = pos;
-        this.userData = userData;
-        this.fromGui = fromGui;
     }
 
     @Override
@@ -63,7 +54,7 @@ public class CustomItem implements GuiItem {
             var locale = gunGaleWiki.getGunGaleAPI().getPlayerLocales().getLocale(userData.getPlayer());
             lore.addAll(gunGaleWiki.getMessages().getComponentList(locale, item));
             var addLore = this.lore;
-            addLore.addAll(gunGaleWiki.getMessages().getComponentList(locale, Message.DESCRIPTION));
+            addLore.addAll(gunGaleWiki.getMessages().getComponentList(locale, "description_" + fromGui.getType().toString().toLowerCase()));
             meta.lore(addLore);
             itemStack.setItemMeta(meta);
         }
@@ -78,8 +69,9 @@ public class CustomItem implements GuiItem {
                 ItemsUtils.addToBookmarks(player, config, gunGaleWiki, fromGui, userData, item);
                 return;
             }
-            if (clickType == ClickType.LEFT) ItemsUtils.leftMouse(player, config, gunGaleWiki, fromGui, item);
-            if (clickType == ClickType.RIGHT) ItemsUtils.rightMouse(player, config, gunGaleWiki, fromGui, item);
+            if (clickType == ClickType.RIGHT || clickType == ClickType.LEFT) {
+                ItemsUtils.rightMouse(player, config, gunGaleWiki, fromGui, item);
+            }
         };
     }
 }

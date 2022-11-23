@@ -1,121 +1,35 @@
 {
-  "prefix": "<gold>[<cyan>Wiki<gold>]<white>:</white> ",
-  "bookmark_added": "<gold>Предмет <aqua>{ITEM} <gold>был <green>добавлен <gold>в закладки!",
-  "bookmark_removed": "<gold>Предмет <aqua>{ITEM} <gold>был <red>убран <gold>из закладок!",
-  "ore_drop": "<gradient:gold:yellow>Выпадает в размере: <green>{AMOUNT}",
+  "prefix": "<italic:false><gold>[<cyan>Wiki<gold>]<white>:</white> ",
+  "bookmark_added": "<italic:false><gold>Предмет <aqua>{ITEM} <gold>был <green>добавлен <gold>в закладки!",
+  "bookmark_removed": "<italic:false><gold>Предмет <aqua>{ITEM} <gold>был <red>убран <gold>из закладок!",
+  "ore_drop": "<italic:false><gradient:gold:yellow>Выпадает в размере: <green>{AMOUNT}",
+  "description_furnace": [
+    "<italic:false><white>≣ ≦ <gray>Посмотреть рецепты"
+  ],
+  "description_workbench": [
+    "<italic:false><white>≣ ≦ <gray>Посмотреть рецепты"
+  ],
+  "description_ores": [
+    "<italic:false><white>≣ ≦ <gray>Посмотреть рецепты"
+  ],
   "description": [
-    "<gradient:green:dark_green>ЛКМ <gradient:gold:yellow> - Посмотреть крафт этого предмета",
-    "<gradient:green:dark_green>ПКМ <gradient:gold:yellow> - Посмотреть крафт из этого предмета"
+    "<italic:false><white>≣ <gray>Посмотреть крафт",
+    "<italic:false><white>≦ <gray>Посмотреть рецепты"
   ],
-  "button_back_name": "<gradient:red:dark_red>Назад",
-  "button_back_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "button_last_crafts_name": "<gradient:gold:yellow>Последние крафты",
-  "button_last_crafts_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "button_bookmarks_name": "<gradient:gold:yellow>Закладки",
-  "button_bookmarks_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "button_next_page_name": "<gradient:green:dark_green>Следующая страница",
-  "button_next_page_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "button_prev_page_name": "<gradient:green:dark_green>Предыдущая страница",
-  "button_prev_page_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "button_add_bookmarks_name": "<gradient:green:dark_green>Добавить в закладки",
-  "button_add_bookmarks_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "button_remove_bookmarks_name": "<gradient:red:dark_red>Убрать из закладок",
-  "button_remove_bookmarks_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "button_home_name": "<gradient:gold:yellow>Главная страница",
-  "button_home_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "furnace_coal_name": "<gradient:white:gray>Уголь",
-  "furnace_coal_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "furnace_fire_name": "<gradient:red:dark_red>Огонь",
-  "furnace_fire_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "button_filter_button1_name": "Фильтр 1 | Хлорофитовые",
-  "button_filter_button1_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "button_filter_button2_name": "Фильтр 2 | Стальные",
-  "button_filter_button2_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "button_filter_button3_name": "Фильтр 3 | Платиновые",
-  "button_filter_button3_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "button_filter_button4_name": "Фильтр 4 | Мистериумные",
-  "button_filter_button4_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "button_filter_button5_name": "Фильтр 5 | Ледяные, Киянки, Медные, Звёздные, алмазное",
-  "button_filter_button5_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "button_filter_button6_name": "Фильтр 6 | Алмазные 2",
-  "button_filter_button6_lore": [
-    "Строка описания 1",
-    "Строка описания 2",
-    "Строка описания 3"
-  ],
-  "hlor_sword": [
-    "<gradient:red:gold>Тест1"
-  ],
-  "hlor_axe": [
-    "<gradient:green:blue>Тест2"
-  ],
-  "hlor_hoe": [
-    "<gradient:red:gold>Тест3"
-  ],
-  "hlor_pickaxe": [
-    "<gradient:green:blue>Тест4"
-  ],
-  "hlor_shovel": [
-    "<gradient:red:gold>Тест5"
-  ]
+  "button_back_name": "<italic:false><gradient:red:dark_red>Назад",
+  "button_last_crafts_name": "<italic:false><gradient:gold:yellow>Последние крафты",
+  "button_bookmarks_name": "<italic:false><gradient:gold:yellow>Закладки",
+  "button_next_page_name": "<italic:false><gradient:green:dark_green>Следующая страница",
+  "button_prev_page_name": "<italic:false><gradient:green:dark_green>Предыдущая страница",
+  "button_add_bookmarks_name": "<italic:false><gradient:green:dark_green>Добавить в закладки",
+  "button_remove_bookmarks_name": "<italic:false><gradient:red:dark_red>Убрать из закладок",
+  "button_home_name": "<italic:false><gradient:gold:yellow>Главная страница",
+  "furnace_coal_name": "<italic:false><gradient:white:gray>Уголь",
+  "furnace_fire_name": "<italic:false><gradient:red:dark_red>Огонь",
+  "button_filter_button1_name": "<italic:false><white>Блоки",
+  "button_filter_button2_name": "<italic:false><white>Оружие",
+  "button_filter_button3_name": "<italic:false><white>Декор",
+  "button_filter_button4_name": "<italic:false><white>Инструменты",
+  "button_filter_button5_name": "<italic:false><white>Остальное",
+  "button_filter_button6_name": "<italic:false><white>Земледелие"
 }

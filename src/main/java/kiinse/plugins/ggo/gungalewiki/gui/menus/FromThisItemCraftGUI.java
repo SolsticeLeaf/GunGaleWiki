@@ -2,11 +2,16 @@ package kiinse.plugins.ggo.gungalewiki.gui.menus;
 
 import dev.lone.itemsadder.api.CustomStack;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
+import kiinse.plugins.ggo.gungalewiki.gui.GuiUtils;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.gui.items.*;
+import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 public class FromThisItemCraftGUI extends CreatedGui {
 
@@ -16,14 +21,16 @@ public class FromThisItemCraftGUI extends CreatedGui {
 
     @Override
     public void onOpenInventory(@NotNull GunGaleWiki gunGaleWiki) {
-        assert getItem() != null;
-        assert getPageManager() != null;
+        if (getItem() == null) return;
+        if (getPageManager() == null) {
+            setPageManager(new PageManager().setItemsList(GuiUtils.getItemsFromThis(getItem())));
+        }
 
         var userData = gunGaleWiki.getPluginData().getUserData(getPlayer());
         setCreatedItem(new CustomItem(getItem(), 4, userData, this));
 
         var i = 9;
-        for (var item : getPageManager().getPageItemStackList(getPage())) {
+        for (var item : getPageManager().get(getPage(), new ArrayList<ItemStack>())) {
             var custom = CustomStack.byItemStack(item);
             if (custom != null) {
                 setCreatedItem(new CustomItem(custom, i, userData, this));

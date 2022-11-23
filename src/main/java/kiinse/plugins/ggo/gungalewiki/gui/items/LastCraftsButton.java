@@ -60,7 +60,7 @@ public class LastCraftsButton implements GuiItem {
             new GuiBuilder(player)
                     .setPage(0)
                     .setGui(Gui.LASTSEEN)
-                    .setPageManager(new PageManager().setItems(gunGaleWiki.getPluginData().getUserData(player).getLastSeen()))
+                    .setPageManager(new PageManager().setItemsList(gunGaleWiki.getPluginData().getUserData(player).getLastSeen()))
                     .setLastGui(lastGui)
                     .setName(gunGaleWiki.getConfiguration().getString(Config.MENU_LASTSEEN_NAME))
                     .open(player);

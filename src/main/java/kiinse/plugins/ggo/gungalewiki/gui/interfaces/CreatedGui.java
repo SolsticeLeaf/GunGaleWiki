@@ -95,8 +95,6 @@ public abstract class CreatedGui extends DarkGUI {
         return this;
     }
 
-    public void onDelete() {}
-
     @Override
     protected void inventory(@NotNull GunGaleJavaPlugin gunGaleJavaPlugin) {
         var pluginData = gunGaleWiki.getPluginData();

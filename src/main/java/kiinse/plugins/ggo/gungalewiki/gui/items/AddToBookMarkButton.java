@@ -1,21 +1,15 @@
 package kiinse.plugins.ggo.gungalewiki.gui.items;
 
-import dev.lone.itemsadder.api.CustomStack;
 import kiinse.plugins.ggo.gungaleapi.api.files.locale.PlayerLocale;
 import kiinse.plugins.ggo.gungaleapi.api.gui.GuiAction;
 import kiinse.plugins.ggo.gungaleapi.api.gui.GuiItem;
-import kiinse.plugins.ggo.gungaleapi.core.files.messages.DarkMessagesUtils;
-import kiinse.plugins.ggo.gungaleapi.core.utilities.DarkPlayerUtils;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.data.interfaces.UserData;
 import kiinse.plugins.ggo.gungalewiki.enums.Config;
 import kiinse.plugins.ggo.gungalewiki.enums.Message;
-import kiinse.plugins.ggo.gungalewiki.enums.Replace;
-import kiinse.plugins.ggo.gungalewiki.gui.GuiUtils;
-import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
+import kiinse.plugins.ggo.gungalewiki.gui.items.utils.ItemsUtils;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -70,35 +64,7 @@ public class AddToBookMarkButton implements GuiItem {
     @Override
     public @NotNull GuiAction action() {
         return ((clickType, player) -> {
-            var config = gunGaleWiki.getConfiguration();
-            var messages = new DarkMessagesUtils(gunGaleWiki);
-            if (userData.hasItemInBookmarks(item)) {
-                userData.removeFromBookmarks(item);
-                DarkPlayerUtils.playSound(player, Sound.valueOf(config.getString(Config.BOOKMARK_REMOVED_SOUND)));
-                messages.sendMessage(player,
-                                     Message.BOOKMARK_REMOVED,
-                                     Replace.ITEM,
-                                     GuiUtils.getNameByItemStack(CustomStack.getInstance(item).getItemStack()));
-            } else {
-                userData.addToBookmarks(item);
-                DarkPlayerUtils.playSound(player, Sound.valueOf(config.getString(Config.BOOKMARK_ADDED_SOUND)));
-                messages.sendMessage(player,
-                                     Message.BOOKMARK_ADDED,
-                                     Replace.ITEM,
-                                     GuiUtils.getNameByItemStack(CustomStack.getInstance(item).getItemStack()));
-            }
-            gunGaleWiki.getPluginData().saveData(userData);
-            fromGui.delete();
-            assert fromGui.getPageManager() != null;
-            new GuiBuilder(player)
-                    .setPage(fromGui.getPage())
-                    .setItem(fromGui.getItem())
-                    .setGui(fromGui.getType())
-                    .setPageManager(fromGui.getPageManager())
-                    .setLastGui(fromGui.getLastGui())
-                    .setStringItem(fromGui.getItem())
-                    .setGuiName(fromGui.getName())
-                    .open(player);
+            ItemsUtils.addToBookmarks(player, gunGaleWiki.getConfiguration(), gunGaleWiki, fromGui, userData, item);
         });
     }
 }

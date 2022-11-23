@@ -16,10 +16,10 @@ public class Totems extends YamlFile implements TotemsData {
 
     public Totems(@NotNull GunGaleJavaPlugin plugin) {
         super(plugin, File.TOTEMS_YML);
-        for (var obj : getStringList(Config.TOTEMS_LIST)) {
-            var arr = obj.split(":");
+        getStringList(Config.TOTEMS_LIST).forEach(str -> {
+            var arr = str.split(":");
             data.put(arr[0], arr[1]);
-        }
+        });
         delay = getInt(Config.TOTEMS_DELAY);
     }
 

@@ -45,10 +45,8 @@ public class GuiUtils {
         var cacheName = item.split(":");
         var itemName = cacheName[cacheName.length - 1];
         var result = new ArrayList<ItemStack>();
-        var iterator = Bukkit.getServer().recipeIterator();
         var oresData = GunGaleWiki.getInstance().getOresData();
-        while (iterator.hasNext()) {
-            var recipe = iterator.next();
+        Bukkit.getServer().recipeIterator().forEachRemaining(recipe -> {
             if ((recipe instanceof Keyed keyed)) {
                 if (ItemsAdder.isCustomRecipe(keyed.getKey()) && !result.contains(recipe.getResult())) {
                     if (recipe instanceof ShapelessRecipe shapelessRecipe) {
@@ -57,14 +55,14 @@ public class GuiUtils {
                         if (hasItemInRecipe(shapedRecipe, itemName)) result.add(recipe.getResult());
                     } else if (recipe instanceof FurnaceRecipe furnaceRecipe) {
                         if (hasItemInRecipe(furnaceRecipe, itemName)) result.add(recipe.getResult());
+                    } else if (recipe instanceof BlastingRecipe blastingRecipe) {
+                        if (hasItemInRecipe(blastingRecipe, itemName)) result.add(recipe.getResult());
                     }
                 }
             }
-        }
+        });
         var drop = CustomStack.getInstance(oresData.getDropByOre(itemName));
-        if (drop != null) {
-            result.add(drop.getItemStack());
-        }
+        if (drop != null) result.add(drop.getItemStack());
         return result;
     }
 
@@ -89,16 +87,21 @@ public class GuiUtils {
         return custom != null && custom.getId().equalsIgnoreCase(itemName);
     }
 
+    private static boolean hasItemInRecipe(@NotNull BlastingRecipe recipe, @NotNull String itemName) {
+        var custom = CustomStack.byItemStack(recipe.getInput());
+        return custom != null && custom.getId().equalsIgnoreCase(itemName);
+    }
+
 
     public static @NotNull List<Recipe> getRecipes(@NotNull String item) {
         var result = new ArrayList<Recipe>();
         var cacheName = item.split(":");
         var itemName = cacheName[cacheName.length - 1];
-        for (var recipe : Bukkit.getServer().getRecipesFor(CustomStack.getInstance(item).getItemStack())) {
+        Bukkit.getServer().getRecipesFor(CustomStack.getInstance(item).getItemStack()).forEach(recipe -> {
             var custom = CustomStack.byItemStack(recipe.getResult());
             if (isRecipeNotEmpty(recipe) && recipe instanceof Keyed keyed && custom != null && custom.getId().equalsIgnoreCase(itemName) && ItemsAdder.isCustomRecipe(
                     keyed.getKey())) result.add(recipe);
-        }
+        });
         return result;
     }
 
@@ -108,11 +111,12 @@ public class GuiUtils {
         return recipe instanceof FurnaceRecipe;
     }
 
-    public static @NotNull PrevPageButton prevCraftPageButton(@Nullable WikiPageManager pageManager, int page, @NotNull PlayerLocale playerLocale,
+    public static @NotNull PrevPageButton prevCraftPageButton(@NotNull WikiPageManager pageManager, int page,
+                                                              @NotNull PlayerLocale playerLocale,
                                                               @NotNull GunGaleWiki gunGaleWiki, @NotNull CreatedGui fromGui,
                                                               @NotNull YamlFile config) {
         return new PrevPageButton(pageManager.hasPage(page - 1), playerLocale, gunGaleWiki, 50, ((clickType, player) -> {
-            var isFurnace = pageManager.getPageRecipe(page - 1) instanceof FurnaceRecipe;
+            var isFurnace = pageManager.get(page - 1) instanceof FurnaceRecipe;
             fromGui.delete();
             new GuiBuilder(player)
                     .setPage(page - 1)
@@ -125,11 +129,12 @@ public class GuiUtils {
         }));
     }
 
-    public static @NotNull NextPageButton nextCraftPageButton(@Nullable WikiPageManager pageManager, int page, @NotNull PlayerLocale playerLocale,
+    public static @NotNull NextPageButton nextCraftPageButton(@NotNull WikiPageManager pageManager, int page,
+                                                              @NotNull PlayerLocale playerLocale,
                                                               @NotNull GunGaleWiki gunGaleWiki, @NotNull CreatedGui fromGui,
                                                               @NotNull YamlFile config) {
         return new NextPageButton(pageManager.hasPage(page + 1), playerLocale, gunGaleWiki, 52, ((clickType, player) -> {
-            var isFurnace = pageManager.getPageRecipe(page + 1) instanceof FurnaceRecipe;
+            var isFurnace = pageManager.get(page + 1) instanceof FurnaceRecipe;
             fromGui.delete();
             new GuiBuilder(player)
                     .setPage(page + 1)

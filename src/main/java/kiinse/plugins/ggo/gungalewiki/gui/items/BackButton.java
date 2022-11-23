@@ -24,7 +24,6 @@ public class BackButton implements GuiItem {
                       @NotNull GunGaleWiki gunGaleWiki, int slot, @NotNull CreatedGui gui) {
         this.gui = gui;
         this.slot = slot;
-
         var config = gunGaleWiki.getConfiguration();
         var messages = gunGaleWiki.getMessages();
         this.itemStack = gunGaleWiki.getItemStackUtils()

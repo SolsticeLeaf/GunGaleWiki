@@ -25,11 +25,10 @@ public class OreGUI extends CreatedGui {
 
     @Override
     public void onOpenInventory(@NotNull GunGaleWiki gunGaleWiki) {
-        assert getItem() != null;
+        if (getItem() == null) return;
         var oresData = gunGaleWiki.getOresData();
-        var config = gunGaleWiki.getConfiguration();
         if (getPageManager() == null) {
-            setPageManager(new PageManager().setOreItems(oresData.getOresByDrop(getItem())));
+            setPageManager(new PageManager().setItems(oresData.getOresByDrop(getItem())));
         }
 
         var pluginData = gunGaleWiki.getPluginData();
@@ -37,20 +36,18 @@ public class OreGUI extends CreatedGui {
         userData.addToLastSeen(getItem());
         pluginData.saveData(userData);
 
-        var ore = CustomStack.getInstance(getPageManager().getItem(getPage()));
+        var ore = CustomStack.getInstance((String) getPageManager().get(getPage()));
         var text = DarkUtils.replaceWord(gunGaleWiki.getMessages().getStringMessage(getPlayerLocale(), Message.ORE_DROP),
                                          Replace.AMOUNT,
-                                         oresData.getAmountByOre(getPageManager().getItem(getPage())));
+                                         oresData.getAmountByOre((String) getPageManager().get(getPage())));
 
         var beforeLore = new ArrayList<Component>();
         beforeLore.add(MiniMessage.miniMessage().deserialize(text));
-        setCreatedItem(new CustomItem(getItem(), 24, userData, this, beforeLore));
+        setCreatedItem(new RecipeResultItem(getItem(), 24, userData, this, beforeLore));
 
+        if (ore != null) setCreatedItem(new CustomItem(ore, 20, userData, this));
 
-        if (ore != null) {
-            setCreatedItem(new CustomItem(ore, 20, userData, this));
-        }
-
+        var config = gunGaleWiki.getConfiguration();
         setCreatedItem(new NextPageButton(getPageManager().hasPage(getPage() + 1), getPlayerLocale(), gunGaleWiki, 52, ((clickType, player) -> {
             delete();
             new GuiBuilder(player)

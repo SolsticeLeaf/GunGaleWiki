@@ -5,14 +5,14 @@ import kiinse.plugins.ggo.gungalewiki.gui.menus.*;
 import org.jetbrains.annotations.NotNull;
 
 public enum Gui {
-    FURNACE(FurnaceGUI.class),
-    WORKBENCH(WorkBenchGUI.class),
-    HOME(MainGUI.class),
-    LASTSEEN(LastCraftsGUI.class),
-    ITEMS(ItemsGUI.class),
-    FROMITEM(FromThisItemCraftGUI.class),
-    ORES(OreGUI.class),
-    BOOKMARKS(BookMarksGUI.class);
+    FURNACE(FurnaceGUI.class), // Рецепт в печке
+    WORKBENCH(WorkBenchGUI.class), // Рецепт в верстаке
+    HOME(MainGUI.class), // Домашнее меню
+    LASTSEEN(LastCraftsGUI.class), // Последние просмотренные
+    ITEMS(ItemsGUI.class), // Список предметов (В фильтрах)
+    FROMITEM(FromThisItemCraftGUI.class), // Список крафтов из предмета
+    ORES(OreGUI.class), // Меню с рудой
+    BOOKMARKS(BookMarksGUI.class); // Меню с закладками
 
     private final Class<? extends CreatedGui> darkGUI;
 

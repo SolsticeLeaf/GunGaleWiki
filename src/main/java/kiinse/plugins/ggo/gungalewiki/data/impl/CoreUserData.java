@@ -7,6 +7,7 @@ import com.github.danirod12.gungalecore.api.user.PlayerStat;
 import kiinse.plugins.ggo.gungaleapi.core.utilities.DarkPlayerUtils;
 import kiinse.plugins.ggo.gungalewiki.GunGaleWiki;
 import kiinse.plugins.ggo.gungalewiki.data.interfaces.UserData;
+import kiinse.plugins.ggo.gungalewiki.data.utils.DataUtils;
 import kiinse.plugins.ggo.gungalewiki.enums.Config;
 import kiinse.plugins.ggo.gungalewiki.files.buttons.Button;
 import kiinse.plugins.ggo.gungalewiki.gui.GuiUtils;
@@ -14,11 +15,9 @@ import kiinse.plugins.ggo.gungalewiki.gui.builder.Gui;
 import kiinse.plugins.ggo.gungalewiki.gui.builder.GuiBuilder;
 import kiinse.plugins.ggo.gungalewiki.gui.interfaces.CreatedGui;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
-import kiinse.plugins.ggo.gungalewiki.pagemanager.interfaces.WikiPageManager;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 public class CoreUserData implements UserData {
@@ -91,10 +90,11 @@ public class CoreUserData implements UserData {
                     .setGui(Gui.ITEMS)
                     .setType(type)
                     .setStringItem(button.toString())
-                    .setPageManager(new PageManager().setItems(filterButton.getItems()))
+                    .setPageManager(new PageManager().setItemsList(filterButton.getItems()))
                     .setLastGui(GuiUtils.getMainGui(player))
                     .setGuiName(filterButton.getMenuName());
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
         return new GuiBuilder(player)
                 .setItem(last.getItem())
                 .setPage(last.getPage())
@@ -102,36 +102,8 @@ public class CoreUserData implements UserData {
                 .setType(type)
                 .setLastGui(GuiUtils.getMainGui(player))
                 .setStringItem(last.getItem())
-                .setPageManager(getPageManager(type, last.getItem()))
+                .setPageManager(DataUtils.getPageManager(type, last.getItem(), player, getBookmarks(), getLastSeen()))
                 .setGuiName(GunGaleWiki.getInstance().getConfiguration().getString(Config.valueOf("MENU_" + type + "_NAME")));
-    }
-
-    private @NotNull WikiPageManager getPageManager(@NotNull Gui gui, @NotNull String item) {
-        var gunGaleWiki = GunGaleWiki.getInstance();
-        switch (gui) {
-            case FURNACE, WORKBENCH -> {
-                return new PageManager().setRecipes(GuiUtils.getRecipes(item));
-            }
-            case ITEMS -> {
-                var filtersButtons = gunGaleWiki.getFilterButtons();
-                return new PageManager().setItems(
-                        filtersButtons.getButton(Button.valueOf(item), gunGaleWiki.getGunGaleAPI().getPlayerLocales().getLocale(player)).getItems());
-            }
-            case FROMITEM -> {
-                return new PageManager().setStackItems(GuiUtils.getItemsFromThis(item));
-            }
-            case BOOKMARKS -> {
-                var bookmarks = gunGaleWiki.getPluginData().getUserData(player).getBookmarks();
-                Collections.reverse(bookmarks);
-                return new PageManager().setItems(getBookmarks());
-            }
-            case ORES -> {
-                return new PageManager().setOreItems(gunGaleWiki.getOresData().getOresByDrop(item));
-            }
-            default -> {
-                return new PageManager().setItems(getLastSeen());
-            }
-        }
     }
 
     @Override

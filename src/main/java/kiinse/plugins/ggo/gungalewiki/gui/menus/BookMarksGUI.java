@@ -11,6 +11,7 @@ import kiinse.plugins.ggo.gungalewiki.gui.items.PrevPageButton;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 public class BookMarksGUI extends CreatedGui {
@@ -25,12 +26,12 @@ public class BookMarksGUI extends CreatedGui {
         if (getPageManager() == null) {
             var bookmarks = userData.getBookmarks();
             Collections.reverse(bookmarks);
-            setPageManager(new PageManager().setItems(bookmarks));
+            setPageManager(new PageManager().setItemsList(bookmarks));
         }
 
         int pos = 9;
-        for (var item : getPageManager().getPageList(getPage())) {
-            setCreatedItem(new CustomItem(item, pos, userData, this));
+        for (var str : getPageManager().get(getPage(), new ArrayList<String>())) {
+            setCreatedItem(new CustomItem(str, pos, userData, this));
             pos++;
         }
 

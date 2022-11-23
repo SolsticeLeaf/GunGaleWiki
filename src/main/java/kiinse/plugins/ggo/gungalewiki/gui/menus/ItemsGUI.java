@@ -9,6 +9,8 @@ import kiinse.plugins.ggo.gungalewiki.gui.items.*;
 import kiinse.plugins.ggo.gungalewiki.pagemanager.PageManager;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 public class ItemsGUI extends CreatedGui {
 
     public ItemsGUI() {
@@ -19,15 +21,15 @@ public class ItemsGUI extends CreatedGui {
     public void onOpenInventory(@NotNull GunGaleWiki gunGaleWiki) {
         if (getPageManager() == null) {
             assert getItem() != null;
-            setPageManager(new PageManager().setItems(gunGaleWiki.getFilterButtons().getButton(Button.valueOf(getItem().toUpperCase()),
-                                                                                               gunGaleWiki.getGunGaleAPI().getPlayerLocales().getLocale(
-                                                                                                       getPlayer())).getItems()));
+            setPageManager(new PageManager().setItemsList(gunGaleWiki.getFilterButtons().getButton(Button.valueOf(getItem().toUpperCase()),
+                                                                                                   gunGaleWiki.getGunGaleAPI().getPlayerLocales().getLocale(getPlayer())).getItems()));
         }
 
         var userData = gunGaleWiki.getPluginData().getUserData(getPlayer());
         var i = 9;
-        for (var item : getPageManager().getPageList(getPage())) {
-            setCreatedItem(new CustomItem(item, i, userData, this));
+
+        for (var str : getPageManager().get(getPage(), new ArrayList<String>())) {
+            setCreatedItem(new CustomItem(str, i, userData, this));
             i++;
         }
 

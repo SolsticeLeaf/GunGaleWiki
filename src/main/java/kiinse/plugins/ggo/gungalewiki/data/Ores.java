@@ -19,12 +19,11 @@ public class Ores extends YamlFile implements OresData {
 
     public Ores(@NotNull GunGaleJavaPlugin plugin) {
         super(plugin, File.ORES_YML);
-
-        for (var obj : getStringList(Config.ORES)) {
-            var arr = obj.split(":");
+        getStringList(Config.ORES).forEach(str -> {
+            var arr = str.split(":");
             oresAndDrops.put(arr[0], arr[1]);
             oresAndAmount.put(arr[0], arr[2]);
-        }
+        });
     }
 
     @Override
@@ -40,9 +39,9 @@ public class Ores extends YamlFile implements OresData {
     @Override
     public @NotNull List<String> getOresByDrop(@NotNull String drop) {
         var result = new ArrayList<String>();
-        for (var set : oresAndDrops.entrySet()) {
-            if (set.getValue().equals(drop)) result.add(set.getKey());
-        }
+        oresAndDrops.forEach((key, value) -> {
+            if (value.equals(drop)) result.add(key);
+        });
         return result;
     }
 

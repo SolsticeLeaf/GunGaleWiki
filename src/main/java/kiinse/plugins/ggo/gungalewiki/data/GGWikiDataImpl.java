@@ -48,8 +48,6 @@ public class GGWikiDataImpl implements GGWikiData {
 
     @Override
     public void saveAll() {
-        for (var data : userDataHashMap.values()) {
-            data.save();
-        }
+        userDataHashMap.forEach((uuid, userData) -> userData.save());
     }
 }

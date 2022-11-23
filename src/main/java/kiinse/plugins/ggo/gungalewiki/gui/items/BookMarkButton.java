@@ -65,7 +65,7 @@ public class BookMarkButton implements GuiItem {
                     .setPage(0)
                     .setGui(Gui.BOOKMARKS)
                     .setLastGui(lastGui)
-                    .setPageManager(new PageManager().setItems(bookmarks))
+                    .setPageManager(new PageManager().setItemsList(bookmarks))
                     .setName(gunGaleWiki.getConfiguration().getString(Config.MENU_BOOKMARKS_NAME))
                     .open(player);
         });

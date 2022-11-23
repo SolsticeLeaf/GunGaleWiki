@@ -44,10 +44,10 @@ public final class GunGaleWiki extends GunGaleJavaPlugin {
     @Override
     public void onStop() throws Exception {
         wikiData.saveAll();
-        for (var uuid : DarkGUI.getOpenInventories().values()) {
-            var inv = DarkGUI.getInventoriesByUUID().get(uuid);
+        DarkGUI.getOpenInventories().forEach((key, value) -> {
+            var inv = DarkGUI.getInventoriesByUUID().get(value);
             inv.delete();
-        }
+        });
     }
 
     public @NotNull GGWikiData getPluginData() {
