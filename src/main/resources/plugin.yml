@@ -12,18 +12,10 @@ commands:
     description: Opens recipes menu
     permission: gungalewiki.menu
     usage: /<command>
-  recipe:
-    description: Opens recipes menu
-    permission: gungalewiki.menu
-    usage: /<command>
-  craft:
-    description: Opens recipes menu
-    permission: gungalewiki.menu
-    usage: /<command>
-  crafts:
-    description: Opens recipes menu
-    permission: gungalewiki.menu
-    usage: /<command>
+    aliases:
+      - recipe
+      - craft
+      - crafts
 permissions:
   gungalewiki.menu:
     description: Allows /recipes, /recipe, /craft, /crafts commands

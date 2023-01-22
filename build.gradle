@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'kiinse.plugins.ggo.gungalewiki'
-version = '1.0.19'
+version = '1.0.20'
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
